@@ -1,0 +1,77 @@
+﻿@page "/{categoryUrl}"
+@page "/search/{searchText}/{page:int}"
+@using ASMC6P.Shared.Entities
+<br>
+<br>
+<br>
+<MudGrid>
+    @foreach (var product in list)
+    {
+        <MudItem xs="12" sm="6" md="4" lg="3" xl="2">
+            <MudCard>
+                <MudImage Src="@product.Image" Style="height: -webkit-fill-available;width: -webkit-fill-available; margin: 1vi;" />
+                <MudCardContent>
+                    <div class="text-center">
+                        <h4 class="mb-2" Value="@product.Id">@product.Name</h4>
+                        <h5 class="mb-2">$@product.OriginalPrice</h5>
+                        <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="@(() => AddToCart(product))">
+                            Add to Cart
+                        </MudButton>
+                    </div>
+                </MudCardContent>
+            </MudCard>
+        </MudItem>
+    }
+</MudGrid>
+<div class="d-flex flex-column align-center">
+    <MudPagination ShowFirstButton="true" BoundaryCount="1" MiddleCount="2" ShowLastButton="true" SelectedChanged="PageChanged" Count="@pageCount" Class="mt-4" />
+</div>
+@code {
+    [Parameter]
+    public string? categoryUrl { get; set; } = null;
+    List<ProductEntity> list { get; set; } = new List<ProductEntity>();
+    public int pageCount { get; set; } = 1;
+    public int CurrentPage { get; set; } = 1;
+    [Parameter]
+    public string? searchText { get; set; } = null;
+
+    [Parameter]
+    public int page { get; set; } = 1;
+    protected async override Task OnInitializedAsync()
+    {
+        list = await _productService.GetProducts();
+    }
+
+    protected async override Task OnParametersSetAsync()
+    {
+        if (searchText != null)
+        {
+            await _productService.SearchProducts(searchText, page);
+            list = _productService.Products;
+            pageCount = _productService.PageCount;
+            CurrentPage = _productService.CurrentPage;
+        }
+        else
+        {
+            list = await _productService.GetProducts(categoryUrl);
+        }
+
+    }
+    private async void PageChanged(int i)
+    {
+        await _productService.SearchProducts(searchText, i);
+        list = _productService.Products;
+        pageCount = _productService.PageCount;
+        CurrentPage = _productService.CurrentPage;
+    }
+    private async Task AddToCart(ProductEntity product)
+    {
+        if (! await _authentication.IsUserAuthenticated())  _navigationManager.NavigateTo("/login");
+
+        var cartItem = new CartItemEntity()
+        {
+                ProductId = product.Id
+        };
+        await _cartService.AddToCart(cartItem);
+    }
+}
