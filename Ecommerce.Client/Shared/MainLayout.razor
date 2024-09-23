@@ -1,7 +1,5 @@
 ﻿@using MudBlazor.Utilities
 @inherits LayoutComponentBase
-@using ASMC6P.Client.Pages
-@using ASMC6P.Shared.Dtos
 @using Microsoft.AspNetCore.Components.Authorization
 @using MudBlazor
 
@@ -11,7 +9,7 @@
 <MudSnackbarProvider />
 <MudLayout >
     <MudAppBar Elevation="24" Color="Color.Primary">
-        <MudIconButton Icon="@Icons.Material.Filled.Menu" Color="Color.Inherit" Edge="Edge.Start" OnClick="@((e) => DrawerToggle())" />
+       @*  <MudIconButton Icon="@Icons.Material.Filled.Menu" Color="Color.Inherit" Edge="Edge.Start" OnClick="@((e) => DrawerToggle())" />
         <Search></Search>
         <AuthorizeView>
             <Authorized>
@@ -25,8 +23,8 @@
             <NotAuthorized>
                 <MudSpacer />
                 <MudIconButton Icon="@Icons.Material.Outlined.Login" OnClick="Login" Edge="Edge.End">Login</MudIconButton>
-            </NotAuthorized>
-        </AuthorizeView>
+            </NotAuthorized> 
+        </AuthorizeView>     *@
         <MudToggleIconButton Toggled="@_isDarkMode" ToggledChanged="OnToggledChanged"
                              Icon="@Icons.Material.Outlined.LightMode" Color="@Color.Inherit" Title="Default"
                              ToggledIcon="@Icons.Material.Outlined.DarkMode" ToggledColor="@Color.Dark" ToggledTitle="Dark" Edge="Edge.End" />
@@ -44,7 +42,7 @@
     </MudMainContent>
 </MudLayout>
 @code {
-    UserDto userDto = new UserDto();
+    //UserDto userDto = new UserDto();
     bool _drawerOpen = true;
     bool openEnd = false;
     private bool _isDarkMode = false;
@@ -62,33 +60,33 @@
     //    //userDto = await _localStorage.GetItemAsync<UserDto>("user");
     //}
 
-    protected override async Task OnAfterRenderAsync(bool firstRender)
-    {
-        userDto = await _localStorage.GetItemAsync<UserDto>("user");
-        if (firstRender)
-        {
-            _isDarkMode = await _mudThemeProvider.GetSystemPreference();
-            StateHasChanged();
-        }
-    }
+    // protected override async Task OnAfterRenderAsync(bool firstRender)
+    // {
+    //     userDto = await _localStorage.GetItemAsync<UserDto>("user");
+    //     if (firstRender)
+    //     {
+    //         _isDarkMode = await _mudThemeProvider.GetSystemPreference();
+    //         StateHasChanged();
+    //     }
+    // }
 
 
-    void DrawerToggle()
-    {
-        _drawerOpen = !_drawerOpen;
-    }
-    void ToggleRightDrawer()
-    {
-        openEnd = !openEnd;
-    }
-    void Login()
-    {
-        _navigationManager.NavigateTo("/login");
-    }
+    // void DrawerToggle()
+    // {
+    //     _drawerOpen = !_drawerOpen;
+    // }
+    // void ToggleRightDrawer()
+    // {
+    //     openEnd = !openEnd;
+    // }
+    // void Login()
+    // {
+    //     _navigationManager.NavigateTo("/login");
+    // }
 
-    protected async void UnloadHandler()
-    {
-        await _jsRuntime.InvokeVoidAsync("beforunload");
+    // protected async void UnloadHandler()
+    // {
+    //     await _jsRuntime.InvokeVoidAsync("beforunload");
         
-    }
+    // }
 }

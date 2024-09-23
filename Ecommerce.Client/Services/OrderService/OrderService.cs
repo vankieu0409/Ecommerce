@@ -1,12 +1,11 @@
-﻿using ASMC6P.Shared.Dtos;
-using ASMC6P.Shared.ViewModels;
+﻿
 
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Authorization;
 
 using System.Net.Http.Json;
 
-namespace ASMC6P.Client.Services.OrderService
+namespace Ecommerce.Client.Services.OrderService
 {
     public class OrderService : IOrderService
     {
@@ -23,29 +22,29 @@ namespace ASMC6P.Client.Services.OrderService
             _navigationManager = navigationManager;
         }
 
-        public async Task<OrderDto> GetOrderDetails(Guid orderId)
-        {
-            var result = await _http.GetFromJsonAsync<OrderDto>($"api/order/{orderId}");
-            return result;
-        }
+        //public async Task<OrderDto> GetOrderDetails(Guid orderId)
+        //{
+        //    var result = await _http.GetFromJsonAsync<OrderDto>($"api/order/{orderId}");
+        //    return result;
+        //}
 
-        public async Task<List<OrderOverviewDto>> GetOrders()
-        {
-            var result = await _http.GetFromJsonAsync<List<OrderOverviewDto>>("api/order");
-            return result;
-        }
+        //public async Task<List<OrderOverviewDto>> GetOrders()
+        //{
+        //    var result = await _http.GetFromJsonAsync<List<OrderOverviewDto>>("api/order");
+        //    return result;
+        //}
 
-        public async Task<bool> PlaceOrder(CreateOrderViewModel products)
-        {
+        //public async Task<bool> PlaceOrder(CreateOrderViewModel products)
+        //{
 
-            var result = await _http.PostAsJsonAsync($"api/order", products);
+        //    var result = await _http.PostAsJsonAsync($"api/order", products);
 
-            return result.IsSuccessStatusCode;
+        //    return result.IsSuccessStatusCode;
 
-        }
-        private async Task<bool> IsUserAuthenticated()
-        {
-            return (await _authStateProvider.GetAuthenticationStateAsync()).User.Identity.IsAuthenticated;
-        }
+        //}
+        //private async Task<bool> IsUserAuthenticated()
+        //{
+        //    return (await _authStateProvider.GetAuthenticationStateAsync()).User.Identity.IsAuthenticated;
+        //}
     }
 }

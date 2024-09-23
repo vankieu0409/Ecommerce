@@ -10,11 +10,15 @@ public class ProductConfiguration : IEntityTypeConfiguration<Products>
     {
         builder.ToTable("PRODUCTS");
         builder.HasKey(e => e.Id);
-        builder.HasMany(c => c.Variants).WithOne(c => c.IdProductNavigation).HasForeignKey(c => c.IdProduct).OnDelete(DeleteBehavior.NoAction);
+        builder.HasMany(c => c.Variants).WithOne().HasForeignKey(c => c.IdProduct).OnDelete(DeleteBehavior.Cascade);
 
-        builder.HasIndex(c => new { c.ProductName, c.Id });
+        builder.HasIndex(c => new { c.Name, c.Id });
         builder.Property(c => c.Id).IsRequired();
-        builder.Property(c => c.ProductName).IsRequired();
+        builder.Property(c => c.Name).IsRequired();
         builder.Property(c => c.Description);
+        builder.Property(c => c.Images).HasConversion(
+            v => string.Join(',', v),
+            v => v.Split(',', StringSplitOptions.RemoveEmptyEntries).ToList()
+        ).HasColumnType("nvarchar(max)");
     }
 }

@@ -1,16 +1,16 @@
-﻿using ASMC6P.Client.Extensions.BackgoundServices;
-using ASMC6P.Client.Infrastructure.Authentication;
-using ASMC6P.Client.Services.Authentications;
-using ASMC6P.Client.Services.CartService;
-using ASMC6P.Client.Services.CategoryService;
-using ASMC6P.Client.Services.OrderService;
-using ASMC6P.Client.Services.ProductService;
+﻿
+using Ecommerce.Client.Services.Authentications;
+using Ecommerce.Client.Services.CartService;
+using Ecommerce.Client.Services.CategoryService;
+using Ecommerce.Client.Services.OrderService;
+using Ecommerce.Client.Services.ProductService;
 
 using Microsoft.AspNetCore.Components.Authorization;
 
 using System.Reflection;
+using Ecommerce.Client.Authentication;
 
-namespace ASMC6P.Client.Extensions.DependencyInjection;
+namespace Ecommerce.Client.Extensions.DependencyInjection;
 
 public static class ServiceCollection
 {
@@ -25,8 +25,6 @@ public static class ServiceCollection
         services.AddTransient<IProductService, ProductService>();
         //services.AddSingleton<IJSRuntime>(provider => provider.GetRequiredService<IJSRuntime>());
         services.AddScoped<AuthenticationStateProvider, CustomAuthenticationStateProvider>();
-        services.AddHttpContextAccessor();
-        services.AddHostedService<CallRefreshToken>();
 
         return services;
     }

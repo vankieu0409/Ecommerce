@@ -1,12 +1,13 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 
+
 namespace Ecommerce.Domain.Entities.Orders
 {
-    public class OrderItemEntity
+    public class OrderItem
     {
-        public OrderEntity Order { get; set; }
+        public Order Order { get; set; }
         public Guid OrderId { get; set; }
-        public ProductEntity Product { get; set; }
+        public Products.Products Product { get; set; }
         public Guid ProductId { get; set; }
         public int Quantity { get; set; }
         [Column(TypeName = "decimal(18,2)")]

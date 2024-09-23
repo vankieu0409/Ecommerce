@@ -13,7 +13,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ecommerce.Infrastructure", 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ecommerce.Application", "Ecommerce.Application\Ecommerce.Application.csproj", "{199DC206-CD26-4D41-B35F-9A92A75EBD98}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ecommerce.Client", "Ecommerce.Client\Ecommerce.Client.csproj", "{E09D7B26-A326-4065-8673-8E7F47FA2AE9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ecommerce.Client", "Ecommerce.Client\Ecommerce.Client.csproj", "{E09D7B26-A326-4065-8673-8E7F47FA2AE9}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Servers", "Servers", "{918011D0-17C4-41B7-A987-269AEF1E38DE}"
 EndProject

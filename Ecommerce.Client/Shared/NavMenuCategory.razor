@@ -1,4 +1,4 @@
-﻿@using ASMC6P.Shared.Entities
+﻿
 
 <MudNavMenu>
     <MudDrawerHeader LinkToIndex="true">
@@ -10,10 +10,10 @@
     </MudDrawerHeader>
     <MudDivider DividerType="DividerType.Middle" />
 
-    @foreach (var cate in collectionCategories)
+  @*   @foreach (var cate in collectionCategories)
     {
         <MudNavLink Href="@cate.Url" Match="NavLinkMatch.Prefix"> @cate.Name</MudNavLink>
-    }
+    } *@
 
     @* <MudNavLink Href="/" Icon="@Icons.Material.Filled.Dashboard" Match="NavLinkMatch.All"> Dashboard</MudNavLink>
     <MudNavLink Href="/servers" Icon="@Icons.Material.Filled.Science" Match="NavLinkMatch.Prefix"> Servers</MudNavLink>
@@ -25,13 +25,13 @@
 </MudNavMenu>
 @code
 {
-    List<CategoryEntity> collectionCategories { get; set; } = new List<CategoryEntity>();
-    List<ProductEntity> collectionProduct { get; set; } = new List<ProductEntity>();
+    // List<CategoryEntity> collectionCategories { get; set; } = new List<CategoryEntity>();
+    // List<ProductEntity> collectionProduct { get; set; } = new List<ProductEntity>();
 
-    protected async override Task OnInitializedAsync()
-    {
-        collectionCategories = await _categoryService.GetCategories();
-    }
+    // protected async override Task OnInitializedAsync()
+    // {
+    //     collectionCategories = await _categoryService.GetCategories();
+    // }
 
     //private async Task GetProductByCategory(string category)
     //{

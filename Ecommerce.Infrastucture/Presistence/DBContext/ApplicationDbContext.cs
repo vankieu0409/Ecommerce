@@ -20,9 +20,6 @@ public class ApplicationDbContext : DbContext
 
     public DbSet<Products> Products;
     public DbSet<Variants> Variants;
-    public DbSet<VariantDetail> VariantDetails;
-    public DbSet<Option> Options;
-    public DbSet<OptionValues> OptionValues;
 
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
