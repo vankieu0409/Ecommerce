@@ -1,9 +1,9 @@
 ﻿using System.Diagnostics.CodeAnalysis;
 using Ecommerce.Domain.Entities.Products;
-using Ecommerce.Infrastructure.Presistence.DBContext.Extensions;
+using Ecommerce.Infrastructure.Persistence.DBContext.Extensions;
 using Microsoft.EntityFrameworkCore;
 
-namespace Ecommerce.Infrastructure.Presistence.DBContext;
+namespace Ecommerce.Infrastructure.Persistence.DBContext;
 
 public class ApplicationDbContext : DbContext
 {
@@ -27,6 +27,6 @@ public class ApplicationDbContext : DbContext
         base.OnModelCreating(modelBuilder);
         //một phương thức mở rộng trong Entity Framework Core được sử dụng để tự động áp dụng tất cả các cấu hình thực thể từ một công cụ lắp ráp.
         modelBuilder.ApplyConfigurationsFromAssembly(typeof(ApplicationDbContext).Assembly);
-        modelBuilder.Seed();
+       // modelBuilder.Seed();
     }
 }

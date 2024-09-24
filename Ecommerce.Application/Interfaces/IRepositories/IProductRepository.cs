@@ -3,12 +3,12 @@ using Ecommerce.Shared.Domains.Interfaces;
 
 namespace Ecommerce.Application.Interfaces.IRepositories;
 
-public interface IProductRepository : IRepositoryBase<Products, long>
+public interface IProductRepository : IRepositoryBase<Products, Guid>
 {
     Task<IEnumerable<Products>> GetProductsAsync();
-    Task<Products> GetProductAsync(long id);
-    Task<Products> GetProductByNoAsync(string productNo);
+    Task<Products> GetProductByIdAsync(Guid id);
+    public Task<Products> GetProductByNameAsync(string name);
     Task CreateProductAsync(Products product);
     Task UpdateProductAsync(Products product);
-    Task DeleteProductAsync(long id);
+    Task DeleteProductAsync(Guid id);
 }

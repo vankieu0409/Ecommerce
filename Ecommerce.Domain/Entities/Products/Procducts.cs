@@ -4,9 +4,9 @@ using Ecommerce.Shared.Domains;
 
 namespace Ecommerce.Domain.Entities.Products
 {
-    public class Products : EntityAuditBase<long>
+    public class Products : EntityAuditBase<Guid>
     {
-        public int IdCategory { get; set; }
+        public Guid IdCategory { get; set; }
         public string Name { get; set; } // Tên của giày
         public string Description { get; set; } // Mô tả của giày
         public string Brand { get; set; } // Thương hiệu của giày

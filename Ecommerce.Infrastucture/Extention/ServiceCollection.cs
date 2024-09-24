@@ -1,16 +1,34 @@
 ﻿using System.Reflection;
-
+using Ecommerce.Infrastructure.Logging;
+using Ecommerce.Infrastructure.Persistence.DBContext;
 using Ecommerce.Infrastructure.Presistence.DBContext;
-
+using Ecommerce.Shared.Common.Repositories;
+using Ecommerce.Shared.Domains.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Ecommerce.Infrastructure.Extensions;
+namespace Ecommerce.Infrastructure.Extention;
 
 public static class ServiceCollection
 {
-    public static IServiceCollection AddApplication(this IServiceCollection services, ConfigurationManager configuration)
+    /// <summary>
+    ///  nơi viết các dependence injection cho các service
+    /// </summary>
+    /// <param name="services"></param>
+    /// <returns></returns>
+    public static IServiceCollection ConfigureServices(this IServiceCollection services) =>
+        services
+            //.AddScoped<IBasketRepository, BasketRepository>()
+              // viết ở đây
+            .AddTransient<LoggingDelegatingHandler>();
+
+
+
+
+
+
+    public static IServiceCollection AddConfigurationSettings(this IServiceCollection services, ConfigurationManager configuration)
     {
         var executingAssembly = Assembly.GetExecutingAssembly();
         var entryAssembly = Assembly.GetEntryAssembly();
@@ -85,26 +103,9 @@ public static class ServiceCollection
         //    });
 
         services.AddDbContext<ApplicationDbContext>(c => c.UseSqlServer(configuration.GetConnectionString("SQLConnection")));
-        //services.AddDbContext<ApplicationDbContext>(c => c.UseNpgsql(configuration.GetConnectionString("PostgreSQLConnection")));
-        //services.AddHttpContextAccessor();
-        //// services.AddScoped(typeof(IRepositoryAsync<>), typeof(RepositoryAsync<>)); //chỉ dùng cho class Gennerric
-        //services.AddTransient<ICategoryRepository, CategoryRepository>();
-        //services.AddTransient<IUserRepository, UserRepository>();
-        //services.AddTransient<IImageRepository, ImageRepository>();
-        //services.AddTransient<IRoleRepository, RoleRepository>();
-        //services.AddTransient<IRefreshTokenRepository, RefreshTokenRepository>();
-        //services.AddTransient<ICartRepository, CartRepository>();
-        //services.AddTransient<IOrdersRepository, OrdersRepository>();
-        //services.AddTransient<IProductRepository, ProductRepository>();
-        //services.AddTransient<UserManager<UserEntity>>();
-        //services.AddTransient<RoleManager<RoleEntity>>();
-        //services.AddTransient<SignInManager<UserEntity>>();
-
-        //services.AddTransient<IAuthenticationService, AuthenticationService>();
-        //services.AddTransient<ICartService, CartService>();
-        //services.AddTransient<ICategoryService, CategoryService>();
-        //services.AddTransient<IOrderService, OrderService>();
-        //services.AddTransient<IProductService, ProductService>();
+        services.AddHttpContextAccessor();
+        services.AddScoped(typeof(IRepositoryBase<,,>), typeof(RepositoryBase<,,>)); //chỉ dùng cho class Generic
+        services.AddScoped(typeof(IRepositoryQueryBase<,>), typeof(RepositoryQueryBase<,>)); //chỉ dùng cho class Generic
 
         return services;
 

@@ -1,5 +1,4 @@
-using Ecommerce.Infrastructure.Extensions;
-
+using Ecommerce.Infrastructure.Extention;
 using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -16,7 +15,8 @@ try
     builder.Services.AddRazorPages();
     builder.Services.AddEndpointsApiExplorer();
     builder.Services.AddSwaggerGen();
-    builder.Services.AddApplication(builder.Configuration);
+    builder.Services.AddConfigurationSettings(builder.Configuration);
+    builder.Services.ConfigureServices();
 
     var app = builder.Build();
     app.UseSwaggerUI();
