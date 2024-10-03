@@ -1,8 +1,9 @@
 ﻿using Ecommerce.Domain.Entities.Products;
+
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace Ecommerce.Infrastructure.Presistence.DBContext.ConfigurationEntities;
+namespace Ecommerce.Infrastructure.Persistence.DBContext.ConfigurationEntities;
 
 public class VariantConfiguration : IEntityTypeConfiguration<Variants>
 {
