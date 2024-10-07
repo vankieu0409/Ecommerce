@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Ecommerce.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20241007080801_kieunv")]
-    partial class kieunv
+    [Migration("20241007101835_IntializedDatabase")]
+    partial class IntializedDatabase
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -25,6 +25,56 @@ namespace Ecommerce.Infrastructure.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
+            modelBuilder.Entity("Ecommerce.Domain.Entities.Author.RefreshToken", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("Created")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("CreatedByIp")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<DateTime>("Expires")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("ReasonRevoked")
+                        .IsRequired()
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)");
+
+                    b.Property<string>("ReplacedByToken")
+                        .IsRequired()
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
+
+                    b.Property<DateTime?>("Revoked")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("RevokedByIp")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<string>("Token")
+                        .IsRequired()
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
+
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("REFRESH_TOKENS", (string)null);
+                });
+
             modelBuilder.Entity("Ecommerce.Domain.Entities.Author.RoleEntity", b =>
                 {
                     b.Property<Guid>("Id")
@@ -32,15 +82,21 @@ namespace Ecommerce.Infrastructure.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<bool>("IsDeleted")
-                        .HasColumnType("bit");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bit")
+                        .HasDefaultValue(false);
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
 
                     b.HasKey("Id");
 
-                    b.ToTable("RoleEntity");
+                    b.HasIndex("Name")
+                        .IsUnique();
+
+                    b.ToTable("ROLES", (string)null);
                 });
 
             modelBuilder.Entity("Ecommerce.Domain.Entities.Author.UserEntity", b =>
@@ -96,7 +152,7 @@ namespace Ecommerce.Infrastructure.Migrations
 
                     b.HasIndex("RoleId");
 
-                    b.ToTable("UserEntity");
+                    b.ToTable("USERS", (string)null);
                 });
 
             modelBuilder.Entity("Ecommerce.Domain.Entities.Orders.Order", b =>
@@ -257,6 +313,17 @@ namespace Ecommerce.Infrastructure.Migrations
                     b.HasIndex("IdProduct", "Id");
 
                     b.ToTable("VARIANTS", (string)null);
+                });
+
+            modelBuilder.Entity("Ecommerce.Domain.Entities.Author.RefreshToken", b =>
+                {
+                    b.HasOne("Ecommerce.Domain.Entities.Author.UserEntity", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("Ecommerce.Domain.Entities.Author.UserEntity", b =>

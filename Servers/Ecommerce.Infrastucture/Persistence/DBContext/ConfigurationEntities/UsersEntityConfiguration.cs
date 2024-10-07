@@ -9,6 +9,7 @@ public class UsersEntityConfiguration : IEntityTypeConfiguration<UserEntity>
 {
     public void Configure(EntityTypeBuilder<UserEntity> builder)
     {
+        builder.ToTable("USERS");
         builder.HasKey(u => u.Id);
 
         builder.Property(u => u.DisplayName)
@@ -42,7 +43,6 @@ public class UsersEntityConfiguration : IEntityTypeConfiguration<UserEntity>
         builder.HasOne(u => u.Role)
              .WithMany()
              .HasForeignKey(u => u.RoleId)
-             .IsRequired()
              .OnDelete(DeleteBehavior.Restrict);
     }
 }

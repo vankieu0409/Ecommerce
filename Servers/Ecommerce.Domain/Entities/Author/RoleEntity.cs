@@ -1,4 +1,5 @@
-﻿using Ecommerce.Shared.Domains;
+﻿using System.Collections.Generic;
+using Ecommerce.Shared.Domains;
 
 namespace Ecommerce.Domain.Entities.Author;
 
@@ -9,4 +10,9 @@ public class RoleEntity : EntityBase<Guid>
 
     // Navigation property
     public ICollection<UserEntity> Users { get; set; }
+
+    public RoleEntity()
+    {
+        Users = new HashSet<UserEntity>();
+    }
 }
