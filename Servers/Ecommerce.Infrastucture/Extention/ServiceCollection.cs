@@ -1,9 +1,10 @@
 ﻿using System.Reflection;
+
 using Ecommerce.Infrastructure.Logging;
 using Ecommerce.Infrastructure.Persistence.DBContext;
-using Ecommerce.Infrastructure.Presistence.DBContext;
 using Ecommerce.Shared.Common.Repositories;
 using Ecommerce.Shared.Domains.Interfaces;
+
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -20,7 +21,7 @@ public static class ServiceCollection
     public static IServiceCollection ConfigureServices(this IServiceCollection services) =>
         services
             //.AddScoped<IBasketRepository, BasketRepository>()
-              // viết ở đây
+            // viết ở đây
             .AddTransient<LoggingDelegatingHandler>();
 
 
