@@ -13,11 +13,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Ecommerce.Shared\Ecommerce.Shared.csproj" />
+    <Folder Include="ValuesObject\" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="ValuesObject\" />
+    <ProjectReference Include="..\..\Ecommerce.Shared\Ecommerce.Shared.csproj" />
   </ItemGroup>
 
 </Project>

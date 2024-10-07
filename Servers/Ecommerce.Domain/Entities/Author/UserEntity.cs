@@ -13,6 +13,7 @@ public class UserEntity : EntityBase<Guid>
     public string PasswordHash { get; set; }
     public string PhoneNumber { get; set; }
 
-    public Collection<RoleEntity> UserEntities { get; set; }
+        public Guid RoleId { get; set; }
+    public RoleEntity Role { get; set; }
 
 }

@@ -24,9 +24,9 @@
 	</ItemGroup>
 
 	<ItemGroup>
+		<ProjectReference Include="..\..\Ecommerce.Shared\Ecommerce.Shared.csproj" />
 		<ProjectReference Include="..\Ecommerce.Application\Ecommerce.Application.csproj" />
 		<ProjectReference Include="..\Ecommerce.Domain\Ecommerce.Domain.csproj" />
-		<ProjectReference Include="..\Ecommerce.Shared\Ecommerce.Shared.csproj" />
 	</ItemGroup>
 
 </Project>

@@ -1,4 +1,5 @@
 ﻿using Ecommerce.Domain.Entities.Orders;
+
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -10,7 +11,20 @@ public class OrderConfiguration : IEntityTypeConfiguration<Order>
     {
         builder.ToTable("ORDERS");
         builder.HasKey(c => c.Id);
-        builder.HasOne(c => c.User).WithMany().HasForeignKey(c => c.UserId).OnDelete(DeleteBehavior.Cascade);
-        //builder.Property
+        builder.Property(o => o.UserId).IsRequired();
+        builder.Property(o => o.OrderDate).IsRequired();
+        builder.Property(o => o.TotalPrice)
+            .HasColumnType("decimal(18,2)")
+            .IsRequired();
+
+        builder.HasMany(o => o.OrderItems)
+            .WithOne()
+            .HasForeignKey("OrderId")
+            .OnDelete(DeleteBehavior.Cascade);
+
+        builder.HasOne(o => o.User)
+            .WithMany()
+            .HasForeignKey(o => o.UserId)
+            .OnDelete(DeleteBehavior.Restrict);
     }
 }
