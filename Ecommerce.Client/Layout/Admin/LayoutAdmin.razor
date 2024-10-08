@@ -1,0 +1,44 @@
+﻿@inherits LayoutComponentBase
+
+<MudThemeProvider/>
+<MudPopoverProvider />
+<MudDialogProvider/>
+<MudSnackbarProvider/>
+
+<MudLayout>
+    <MudDrawer @bind-Open="_drawerOpen"  Color="Color.Default" ClipMode="DrawerClipMode.Always" Breakpoint="Breakpoint.Sm" Elevation="1" Variant="@DrawerVariant.Responsive" OpenMiniOnHover="false">
+        <MudDrawerHeader>
+            <MudText Typo="Typo.h6">Kaiadmin</MudText>
+        </MudDrawerHeader>
+        <SidebarAdmin></SidebarAdmin>
+    </MudDrawer>
+    
+
+     <MudAppBar Color="Color.Primary" Elevation="0" Class="app-bar">
+        <MudIconButton Icon="@Icons.Material.Filled.Menu" OnClick="_toggleDrawer" />
+        <MudSpacer />
+        <HeaderAdmin></HeaderAdmin>
+    </MudAppBar> 
+
+    <MudMainContent>
+        @Body
+        <Footer></Footer>
+    </MudMainContent>
+    
+
+</MudLayout>
+
+@code {
+    private bool _drawerOpen = true;
+
+    private void _toggleDrawer()
+    {
+        _drawerOpen = !_drawerOpen;
+    }
+}
+<style>
+   .app-bar {
+    background-color: #3f51b5; /* Primary color */
+    color: white; /* Text color */
+}
+</style>
