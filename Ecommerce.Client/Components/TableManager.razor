@@ -1,0 +1,92 @@
+﻿@page "/Admin/table"
+
+<MudCard>
+    <MudCardHeader>
+        <MudText Typo="Typo.h6">Add Row</MudText>
+        <MudSpacer />
+        <MudButton Color="Color.Primary" Variant="Variant.Filled" StartIcon="@Icons.Material.Filled.Add" OnClick="@(() => OpenDialog())">Add Row</MudButton>
+    </MudCardHeader>
+    <MudCardContent>
+        <MudTable Items="@Employees" Hover="true" Breakpoint="Breakpoint.Sm">
+            <HeaderContent>
+                <MudTh>Name</MudTh>
+                <MudTh>Position</MudTh>
+                <MudTh>Office</MudTh>
+                <MudTh>Actions</MudTh>
+            </HeaderContent>
+            <RowTemplate>
+                <MudTd DataLabel="Name">@context.Name</MudTd>
+                <MudTd DataLabel="Position">@context.Position</MudTd>
+                <MudTd DataLabel="Office">@context.Office</MudTd>
+                <MudTd DataLabel="Actions">
+                    <MudIconButton Icon="@Icons.Material.Filled.Edit" Color="Color.Primary" OnClick="@(() => EditEmployee(context))" />
+                    <MudIconButton Icon="@Icons.Material.Filled.Delete" Color="Color.Error" OnClick="@(() => DeleteEmployee(context))" />
+                </MudTd>
+            </RowTemplate>
+        </MudTable>
+    </MudCardContent>
+</MudCard>
+
+<MudDialog @bind-IsVisible="dialogVisible" Options="dialogOptions">
+    <TitleContent>
+        <MudText Typo="Typo.h6">
+            <MudIcon Icon="@Icons.Material.Filled.Add" Class="mr-3" /> Add New Employee
+        </MudText>
+    </TitleContent>
+    <DialogContent>
+        <MudTextField @bind-Value="newEmployee.Name" Label="Name" />
+        <MudTextField @bind-Value="newEmployee.Position" Label="Position" />
+        <MudTextField @bind-Value="newEmployee.Office" Label="Office" />
+    </DialogContent>
+    <DialogActions>
+        <MudButton OnClick="Cancel">Cancel</MudButton>
+        <MudButton Color="Color.Primary" OnClick="Submit">Add</MudButton>
+    </DialogActions>
+</MudDialog>
+
+@code {
+    private List<Employee> Employees = new List<Employee>
+    {
+        new Employee { Name = "Tiger Nixon", Position = "System Architect", Office = "Edinburgh" },
+        new Employee { Name = "Garrett Winters", Position = "Accountant", Office = "Tokyo" },
+        // Add more employees here...
+    };
+
+    private bool dialogVisible;
+    private DialogOptions dialogOptions = new() { FullWidth = true };
+    private Employee newEmployee = new Employee();
+
+    private void OpenDialog()
+    {
+        newEmployee = new Employee();
+        dialogVisible = true;
+    }
+
+    private void Cancel()
+    {
+        dialogVisible = false;
+    }
+
+    private void Submit()
+    {
+        Employees.Add(newEmployee);
+        dialogVisible = false;
+    }
+
+    private void EditEmployee(Employee employee)
+    {
+        // Implement edit logic
+    }
+
+    private void DeleteEmployee(Employee employee)
+    {
+        Employees.Remove(employee);
+    }
+
+    public class Employee
+    {
+        public string Name { get; set; }
+        public string Position { get; set; }
+        public string Office { get; set; }
+    }
+}

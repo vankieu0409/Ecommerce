@@ -1,4 +1,5 @@
 using Ecommerce.Infrastructure.Extention;
+
 using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -11,15 +12,16 @@ try
 
     builder.Services.AddControllersWithViews();
     // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
-    builder.Services.AddEndpointsApiExplorer();
+
     builder.Services.AddRazorPages();
     builder.Services.AddEndpointsApiExplorer();
+    builder.Services.AddServerSideBlazor();
     builder.Services.AddSwaggerGen();
     builder.Services.AddConfigurationSettings(builder.Configuration);
     builder.Services.ConfigureServices();
-
+    builder.Services.AddHealthChecks();
     var app = builder.Build();
-    app.UseSwaggerUI();
+    //app.UseSwaggerUI();
     // Configure the HTTP request pipeline.
     if (app.Environment.IsDevelopment())
     {
@@ -31,17 +33,19 @@ try
         app.UseHsts();
     }
 
+    app.UseRouting();
     app.UseHttpsRedirection();
     app.UseBlazorFrameworkFiles();
-
+    app.UseHealthChecks("/health");
     app.UseAuthorization();
+
 
     app.UseStaticFiles();
 
-    app.UseRouting();
 
     app.MapRazorPages();
     app.MapControllers();
+    app.MapBlazorHub();
     app.MapFallbackToFile("index.html");
 
     app.Run();
