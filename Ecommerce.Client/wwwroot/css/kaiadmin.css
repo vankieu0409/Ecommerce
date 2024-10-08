@@ -1,0 +1,65 @@
+﻿/* General styles */
+body {
+    margin: 0;
+    font-family: 'Public Sans', sans-serif;
+    background-color: #f1f1f1; /* Màu nền cho toàn bộ trang */
+}
+
+/* Sidebar styles */
+.mud-drawer {
+    background-color: #1a2035; /* Màu nền cho sidebar */
+    color: #ffffff; /* Màu chữ trong sidebar */
+    width: 250px; /* Chiều rộng của sidebar */
+}
+
+    .mud-drawer .mud-nav-link {
+        color: #ffffff; /* Màu chữ cho các link trong sidebar */
+    }
+
+        .mud-drawer .mud-nav-link:hover {
+            background-color: #2a2d3b; /* Màu nền khi hover */
+        }
+
+        .mud-drawer .mud-nav-link.active {
+            background-color: #3a3d4b; /* Màu nền cho link đang hoạt động */
+        }
+
+/* Top bar styles */
+.mud-appbar {
+    background-color: #ffffff; /* Màu nền cho top bar */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Đổ bóng cho top bar */
+}
+
+    .mud-appbar .mud-icon-button {
+        color: #333; /* Màu icon trong top bar */
+    }
+
+    .mud-appbar .mud-text {
+        color: #333; /* Màu chữ trong top bar */
+    }
+
+/* Footer styles */
+.mud-footer {
+    background-color: #ffffff; /* Màu nền cho footer */
+    padding: 10px 0; /* Padding cho footer */
+    text-align: center; /* Canh giữa nội dung trong footer */
+}
+
+    .mud-footer .mud-text {
+        color: #333; /* Màu chữ trong footer */
+    }
+
+/* Custom toggle settings */
+.custom-template {
+    position: fixed;
+    top: 50%;
+    right: 0;
+    transform: translateY(-50%);
+    background-color: #ffffff;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    padding: 20px;
+    z-index: 1000; /* Đảm bảo nó nằm trên các thành phần khác */
+}
+
+/* Add more styles as needed */

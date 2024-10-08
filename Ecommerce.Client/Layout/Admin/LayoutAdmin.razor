@@ -1,40 +1,44 @@
-﻿
-@inherits LayoutComponentBase
- 
-@page "/Admin"
+﻿@inherits LayoutComponentBase
 
-
-
-@* Required *@
-<MudThemeProvider />
+<MudThemeProvider/>
 <MudPopoverProvider />
+<MudDialogProvider/>
+<MudSnackbarProvider/>
 
-@* Needed for dialogs *@
-@* <MudDialogProvider /> *@
-
-@* Needed for snackbars *@
-<MudSnackbarProvider />
 <MudLayout>
-    <MudAppBar Elevation="1">
-        <MudIconButton Icon="@Icons.Material.Filled.Menu" Color="Color.Inherit" Edge="Edge.Start" OnClick="@((e) => DrawerToggle())" />
-        <MudImage Src="assets/img/kaiadmin/logo_light.svg" Height="20" Alt="logo" />
-        <MudSpacer />
-        <MudIconButton Icon="@Icons.Material.Filled.MoreVert" Color="Color.Inherit" Edge="Edge.End" />
-    </MudAppBar>
-    <MudDrawer @bind-Open="@_drawerOpen" ClipMode="DrawerClipMode.Always" Elevation="2">
-        <SidebarAdmin />
+    <MudDrawer @bind-Open="_drawerOpen"  Color="Color.Default" ClipMode="DrawerClipMode.Always" Breakpoint="Breakpoint.Sm" Elevation="1" Variant="@DrawerVariant.Responsive" OpenMiniOnHover="false">
+        <MudDrawerHeader>
+            <MudText Typo="Typo.h6">Kaiadmin</MudText>
+        </MudDrawerHeader>
+        <SidebarAdmin></SidebarAdmin>
     </MudDrawer>
+    
+
+     <MudAppBar Color="Color.Primary" Elevation="0" Class="app-bar">
+        <MudIconButton Icon="@Icons.Material.Filled.Menu" OnClick="_toggleDrawer" />
+        <MudSpacer />
+        <HeaderAdmin></HeaderAdmin>
+    </MudAppBar> 
+
     <MudMainContent>
-        <HeaderAdmin/>
         @Body
+        <Footer></Footer>
     </MudMainContent>
+    
+
 </MudLayout>
 
 @code {
-    bool _drawerOpen = true;
+    private bool _drawerOpen = true;
 
-    void DrawerToggle()
+    private void _toggleDrawer()
     {
         _drawerOpen = !_drawerOpen;
     }
 }
+<style>
+   .app-bar {
+    background-color: #3f51b5; /* Primary color */
+    color: white; /* Text color */
+}
+</style>

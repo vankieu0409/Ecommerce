@@ -5,10 +5,11 @@
 
 <Router AppAssembly="@typeof(App).Assembly">
     <Found Context="routeData">
-        <RouteView RouteData="@routeData" DefaultLayout="@GetLayoutType(routeData)" />
+        <></>
+        <RouteView RouteData="@routeData" DefaultLayout="@typeof(AdminLayout)"/>
     </Found>
     <NotFound>
-        <LayoutView Layout="@typeof(MainLayout)">
+        <LayoutView Layout="@typeof(AdminLayout)">
             <p>Sorry, there's nothing at this address.</p>
         </LayoutView>
     </NotFound>
@@ -17,9 +18,6 @@
 @code {
     private  Type GetLayoutType(RouteData routeData)
     {
-        Console.WriteLine(routeData.ToString());
-        _js.InvokeAsync<string>("console.log", routeData);
-
         return routeData.PageType.FullName.StartsWith("Ecommerce.Client.Admin")
             ? typeof(AdminLayout)
             : typeof(MainLayout);

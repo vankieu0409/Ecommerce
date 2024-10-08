@@ -1,8 +1,4 @@
-﻿
-
-
-
-<MudAppBar Color="Color.Transparent" Fixed="false" Dense="true">
+﻿<MudAppBar Color="Color.Transparent" Fixed="false" Dense="true" Class="header-admin">
     <MudHidden Breakpoint="Breakpoint.SmAndDown">
         <MudTextField T="string" Placeholder="Search ..." Adornment="Adornment.Start"
                       AdornmentIcon="@Icons.Material.Filled.Search" IconSize="Size.Medium" Class="mt-0 mb-0" />
@@ -37,3 +33,8 @@
 @code {
 
 }
+<style>
+  .header-admin {
+    display: flex;
+    align-items: center;}
+</style>
