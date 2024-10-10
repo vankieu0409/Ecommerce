@@ -1,0 +1,34 @@
+﻿@using AntDesign
+@using Blazored.LocalStorage
+@inject MessageService MessageService
+@inject ConfigProvider ConfigProviderService
+@inject ILocalStorageService LocalStorage
+
+<Switch CheckedChildren="🌜" UnCheckedChildren="🌞" @bind-Value="IsDark" />
+
+@code {
+    private bool IsDark
+    {
+        get => ConfigProviderService.Theme == GlobalTheme.Dark;
+        set
+        {
+            ConfigProviderService.Theme = value ? GlobalTheme.Dark : GlobalTheme.Light;
+            MessageService.Success($"Switch to {(value ? "dark" : "light")} theme");
+            _ = SaveThemePreference(value); // Để tránh blocking, nhưng có thể sử dụng await
+        }
+    }
+
+    protected override async Task OnInitializedAsync()
+    {
+        var savedTheme = await LocalStorage.GetItemAsync<string>("theme");
+        if (!string.IsNullOrEmpty(savedTheme))
+        {
+            IsDark = savedTheme == "dark";
+        }
+    }
+
+    private async Task SaveThemePreference(bool isDark)
+    {
+        await LocalStorage.SetItemAsync("theme", isDark ? "dark" : "light");
+    }
+}

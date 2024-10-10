@@ -1,6 +1,4 @@
-﻿
-
-<MudNavMenu>
+﻿@*<MudNavMenu>
     <MudDrawerHeader LinkToIndex="true">
         <div class="col"><MudIcon Icon="@Icons.Material.Filled.Category"></MudIcon></div>
         <div class="col">
@@ -10,7 +8,7 @@
     </MudDrawerHeader>
     <MudDivider DividerType="DividerType.Middle" />
 
-  @*   @foreach (var cate in collectionCategories)
+     @foreach (var cate in collectionCategories)
     {
         <MudNavLink Href="@cate.Url" Match="NavLinkMatch.Prefix"> @cate.Name</MudNavLink>
     } *@
@@ -21,8 +19,8 @@
     <MudNavLink Href="/users" Icon="@Icons.Material.Filled.EmojiPeople" Match="NavLinkMatch.Prefix"> Users</MudNavLink>
     <MudNavLink Href="/security" Icon="@Icons.Material.Filled.Security" Match="NavLinkMatch.Prefix"> Security</MudNavLink>
     </MudNavGroup>
-    <MudNavLink Href="/about" Icon="@Icons.Material.Sharp.Info" Match="NavLinkMatch.Prefix"> About</MudNavLink>*@
-</MudNavMenu>
+    <MudNavLink Href="/about" Icon="@Icons.Material.Sharp.Info" Match="NavLinkMatch.Prefix"> About</MudNavLink>
+</MudNavMenu>*@
 @code
 {
     // List<CategoryEntity> collectionCategories { get; set; } = new List<CategoryEntity>();

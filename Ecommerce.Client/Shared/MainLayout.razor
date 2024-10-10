@@ -1,4 +1,4 @@
-﻿@using MudBlazor.Utilities
+﻿@*@using MudBlazor.Utilities
 @inherits LayoutComponentBase
 @using Microsoft.AspNetCore.Components.Authorization
 @using MudBlazor
@@ -9,7 +9,7 @@
 <MudSnackbarProvider />
 <MudLayout >
     <MudAppBar Elevation="24" Color="Color.Primary">
-       @*  <MudIconButton Icon="@Icons.Material.Filled.Menu" Color="Color.Inherit" Edge="Edge.Start" OnClick="@((e) => DrawerToggle())" />
+         <MudIconButton Icon="@Icons.Material.Filled.Menu" Color="Color.Inherit" Edge="Edge.Start" OnClick="@((e) => DrawerToggle())" />
         <Search></Search>
         <AuthorizeView>
             <Authorized>
@@ -24,8 +24,8 @@
                 <MudSpacer />
                 <MudIconButton Icon="@Icons.Material.Outlined.Login" OnClick="Login" Edge="Edge.End">Login</MudIconButton>
             </NotAuthorized> 
-        </AuthorizeView>     *@
-        <MudToggleIconButton Toggled="@_isDarkMode" ToggledChanged="OnToggledChanged"
+        </AuthorizeView>    
+       @* <MudToggleIconButton Toggled="@_isDarkMode" ToggledChanged="OnToggledChanged"
                              Icon="@Icons.Material.Outlined.LightMode" Color="@Color.Inherit" Title="Default"
                              ToggledIcon="@Icons.Material.Outlined.DarkMode" ToggledColor="@Color.Dark" ToggledTitle="Dark" Edge="Edge.End" />
     </MudAppBar>
@@ -40,20 +40,95 @@
             @Body
         </MudContainer>
     </MudMainContent>
-</MudLayout>
+</MudLayout>   *@  
+
+<Layout>
+    <Sider @bind-Collapsed=@collapsed NoTrigger OnCollapse="OnCollapse">
+        <div class="logo" />
+        <Menu Theme="MenuTheme.Dark" Mode="MenuMode.Inline" DefaultSelectedKeys=@(new[]{"1"})>
+            <MenuItem Key="1">
+                <Icon Type="user" Theme="outline" />
+                <span>nav 1</span>
+            </MenuItem>
+            <MenuItem Key="2">
+                <Icon Type="video-camera" Theme="outline" />
+                <span>nav 2</span>
+            </MenuItem>
+            <MenuItem Key="3">
+                <Icon Type="upload" Theme="outline" />
+                <span>nav 3</span>
+            </MenuItem>
+        </Menu>
+    </Sider>
+    <Layout Class="site-layout">
+        <Header Class="site-layout-background" Style="padding: 0;">
+            @if (collapsed)
+            {
+                <Icon Type="menu-unfold" Theme="outline" Class="trigger" OnClick="toggle" />
+            }
+            else
+            {
+                <Icon Type="menu-fold" Theme="outline" Class="trigger" OnClick="toggle" />
+            }
+        </Header>
+        <Content Class="site-layout-background" Style="margin: 24px 16px;padding: 24px;min-height: 280px;">
+            Content
+        </Content>
+    </Layout>
+</Layout>
+
+<style>
+    #components-layout-demo-custom-trigger .trigger {
+        font-size: 18px;
+        line-height: 64px;
+        padding: 0 24px;
+        cursor: pointer;
+        transition: color 0.3s;
+    }
+
+        #components-layout-demo-custom-trigger .trigger:hover {
+            color: #1890ff;
+        }
+
+    #components-layout-demo-custom-trigger .logo {
+        height: 32px;
+        background: rgba(255, 255, 255, 0.2);
+        margin: 16px;
+    }
+
+    .site-layout .site-layout-background {
+        background: #fff;
+    }
+</style>
+
+
 @code {
-    //UserDto userDto = new UserDto();
-    bool _drawerOpen = true;
-    bool openEnd = false;
-    private bool _isDarkMode = false;
-    private MudThemeProvider _mudThemeProvider;
+    bool collapsed;
+
+    void toggle()
+    {
+        collapsed = !collapsed;
+    }
+
+    void OnCollapse(bool isCollapsed)
+    {
+        Console.WriteLine($"Collapsed: {isCollapsed}");
+    }
+
+}
+@code { 
+    // //UserDto userDto = new UserDto();
+    // bool _drawerOpen = true;
+    // bool openEnd = false;
+    // private bool _isDarkMode = false;
+    // private MudThemeProvider _mudThemeProvider;
     
 
-    public void OnToggledChanged(bool toggled)
-    {
-        // Because variable is not two-way bound, we need to update it ourself
-        _isDarkMode = toggled;
-    }
+    // public void OnToggledChanged(bool toggled)
+    // {
+    //     // Because variable is not two-way bound, we need to update it ourself
+    //     _isDarkMode = toggled;
+    // }
 
     //protected  override async void OnInitialized()
     //{
@@ -89,4 +164,4 @@
     //     await _jsRuntime.InvokeVoidAsync("beforunload");
         
     // }
-}
+ }

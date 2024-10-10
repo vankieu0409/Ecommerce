@@ -1,0 +1,24 @@
+﻿[data-theme="dark"] {
+    --ant-primary-color: #1890ff;
+    --ant-primary-color-hover: #40a9ff;
+    --ant-primary-color-active: #096dd9;
+    --ant-primary-color-outline: rgba(24, 144, 255, 0.2);
+    --ant-primary-1: #111d2c;
+    --ant-primary-2: #112a45;
+    --ant-primary-3: #15395b;
+    --ant-primary-4: #164c7e;
+    --ant-primary-5: #1765ad;
+    --ant-primary-6: #177ddc;
+    --ant-primary-7: #3c9ae8;
+    --ant-primary-8: #65b7f3;
+    --ant-primary-9: #8dcff8;
+    --ant-primary-10: #b7e3fa;
+    --ant-body-background: #141414;
+    --ant-component-background: #1f1f1f;
+    --ant-text-color: rgba(255, 255, 255, 0.85);
+    --ant-text-color-secondary: rgba(255, 255, 255, 0.45);
+    --ant-heading-color: rgba(255, 255, 255, 0.85);
+    --ant-border-color-base: #434343;
+    --ant-border-color-split: #303030;
+    --ant-background-color-base: #262626;
+}

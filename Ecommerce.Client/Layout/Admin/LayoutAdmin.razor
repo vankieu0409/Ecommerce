@@ -1,44 +1,76 @@
 ﻿@inherits LayoutComponentBase
 
-<MudThemeProvider/>
-<MudPopoverProvider />
-<MudDialogProvider/>
-<MudSnackbarProvider/>
+<Layout>
+    <Sider @bind-Collapsed=@collapsed NoTrigger OnCollapse="OnCollapse">
+        <div class="logo" />
+        <Menu Theme="MenuTheme.Dark" Mode="MenuMode.Inline" DefaultSelectedKeys=@(new[]{"1"})>
+            <MenuItem Key="1">
+                <Icon Type="user" Theme="outline" />
+                <span>nav 1</span>
+            </MenuItem>
+            <MenuItem Key="2">
+                <Icon Type="video-camera" Theme="outline" />
+                <span>nav 2</span>
+            </MenuItem>
+            <MenuItem Key="3">
+                <Icon Type="upload" Theme="outline" />
+                <span>nav 3</span>
+            </MenuItem>
+        </Menu>
+    </Sider>
+    <Layout Class="site-layout">
+        <Header Class="site-layout-background" Style="padding: 0;">
+            @if (collapsed)
+            {
+                <Icon Type="menu-unfold" Theme="outline" Class="trigger" OnClick="toggle" />
+            }
+            else
+            {
+                <Icon Type="menu-fold" Theme="outline" Class="trigger" OnClick="toggle" />
+            }
+        </Header>
+        <Content Class="site-layout-background" Style="margin: 24px 16px;padding: 24px;min-height: 280px;">
+            Content
+        </Content>
+    </Layout>
+</Layout>
 
-<MudLayout>
-    <MudDrawer @bind-Open="_drawerOpen"  Color="Color.Default" ClipMode="DrawerClipMode.Always" Breakpoint="Breakpoint.Sm" Elevation="1" Variant="@DrawerVariant.Responsive" OpenMiniOnHover="false">
-        <MudDrawerHeader>
-            <MudText Typo="Typo.h6">Kaiadmin</MudText>
-        </MudDrawerHeader>
-        <SidebarAdmin></SidebarAdmin>
-    </MudDrawer>
-    
+<style>
+    #components-layout-demo-custom-trigger .trigger {
+        font-size: 18px;
+        line-height: 64px;
+        padding: 0 24px;
+        cursor: pointer;
+        transition: color 0.3s;
+    }
 
-     <MudAppBar Color="Color.Primary" Elevation="0" Class="app-bar">
-        <MudIconButton Icon="@Icons.Material.Filled.Menu" OnClick="_toggleDrawer" />
-        <MudSpacer />
-        <HeaderAdmin></HeaderAdmin>
-    </MudAppBar> 
+        #components-layout-demo-custom-trigger .trigger:hover {
+            color: #1890ff;
+        }
 
-    <MudMainContent>
-        @Body
-        <Footer></Footer>
-    </MudMainContent>
-    
+    #components-layout-demo-custom-trigger .logo {
+        height: 32px;
+        background: rgba(255, 255, 255, 0.2);
+        margin: 16px;
+    }
 
-</MudLayout>
+    .site-layout .site-layout-background {
+        background: #fff;
+    }
+</style>
+
 
 @code {
-    private bool _drawerOpen = true;
+    bool collapsed;
 
-    private void _toggleDrawer()
+    void toggle()
     {
-        _drawerOpen = !_drawerOpen;
+        collapsed = !collapsed;
     }
+
+    void OnCollapse(bool isCollapsed)
+    {
+        Console.WriteLine($"Collapsed: {isCollapsed}");
+    }
+
 }
-<style>
-   .app-bar {
-    background-color: #3f51b5; /* Primary color */
-    color: white; /* Text color */
-}
-</style>
