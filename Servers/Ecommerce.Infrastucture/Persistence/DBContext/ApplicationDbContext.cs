@@ -30,7 +30,7 @@ public class ApplicationDbContext : DbContext
     public DbSet<Category> Categories;
     public DbSet<Order> Orders;
     public DbSet<OrderItem> OrderItems;
-    public DbSet<CartItem> CartItems;
+    public DbSet<CartItemEntity> CartItems;
 
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
