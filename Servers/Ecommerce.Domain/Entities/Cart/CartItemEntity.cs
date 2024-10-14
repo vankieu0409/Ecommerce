@@ -11,7 +11,7 @@ namespace Ecommerce.Domain.Entities.Cart
         public int Quantity { get; set; }
 
         // Navigation properties
-        public UserEntity User { get; set; }
+        public Customer Customer { get; set; }
         public Variants Variant { get; set; }
     }
 }

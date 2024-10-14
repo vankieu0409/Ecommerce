@@ -17,4 +17,5 @@ public class Customer : EntityAuditBase<Guid>
 
     public virtual RoleEntity Role { get; set; }
     public virtual ICollection<Order> Orders { get; set; }
+    public virtual ICollection<AddressOfCustomer> AddressOfCustomers { get; set; }
 }

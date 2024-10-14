@@ -24,7 +24,7 @@ public class Employee : EntityAuditBase<Guid>
     /// <summary>
     /// Giới tính của nhân viên
     /// </summary>
-    public string Gender { get; set; }
+    public Gender Gender { get; set; }
 
     /// <summary>
     /// Quê quán của nhân viên
@@ -70,6 +70,7 @@ public class Employee : EntityAuditBase<Guid>
     /// Địa chỉ email của nhân viên
     /// </summary>
     public string Email { get; set; }
+    public Guid IdRole { get; set; }
 
     //Navigation
     public virtual RoleEntity Role { get; set; }

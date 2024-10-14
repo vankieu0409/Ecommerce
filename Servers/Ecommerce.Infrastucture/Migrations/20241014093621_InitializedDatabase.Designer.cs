@@ -4,6 +4,7 @@ using Ecommerce.Infrastructure.Persistence.DBContext;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Ecommerce.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20241014093621_InitializedDatabase")]
+    partial class InitializedDatabase
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -296,35 +299,6 @@ namespace Ecommerce.Infrastructure.Migrations
                         .IsUnique();
 
                     b.ToTable("ROLES", (string)null);
-
-                    b.HasData(
-                        new
-                        {
-                            Id = new Guid("4531972f-838a-4c96-aca7-130b17255dec"),
-                            CreatedBy = new Guid("00000000-0000-0000-0000-000000000000"),
-                            CreatedTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            IsDeleted = false,
-                            ModifiedBy = new Guid("00000000-0000-0000-0000-000000000000"),
-                            Name = "Admin"
-                        },
-                        new
-                        {
-                            Id = new Guid("7f10cb1c-b7c8-41e0-9232-7a65b30f8bcf"),
-                            CreatedBy = new Guid("00000000-0000-0000-0000-000000000000"),
-                            CreatedTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            IsDeleted = false,
-                            ModifiedBy = new Guid("00000000-0000-0000-0000-000000000000"),
-                            Name = "Customer"
-                        },
-                        new
-                        {
-                            Id = new Guid("8e6b60eb-606f-4a12-a816-dde1241647da"),
-                            CreatedBy = new Guid("00000000-0000-0000-0000-000000000000"),
-                            CreatedTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            IsDeleted = false,
-                            ModifiedBy = new Guid("00000000-0000-0000-0000-000000000000"),
-                            Name = "Employee"
-                        });
                 });
 
             modelBuilder.Entity("Ecommerce.Domain.Entities.Orders.Order", b =>
@@ -336,7 +310,7 @@ namespace Ecommerce.Infrastructure.Migrations
                     b.Property<DateTime>("CreationDate")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2024, 10, 14, 16, 39, 21, 144, DateTimeKind.Local).AddTicks(1098));
+                        .HasDefaultValue(new DateTime(2024, 10, 14, 16, 36, 20, 918, DateTimeKind.Local).AddTicks(8629));
 
                     b.Property<Guid>("CustomerId")
                         .HasColumnType("uniqueidentifier");

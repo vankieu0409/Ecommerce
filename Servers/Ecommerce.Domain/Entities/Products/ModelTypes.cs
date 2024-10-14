@@ -4,9 +4,10 @@ using Ecommerce.Shared.Domains;
 
 namespace Ecommerce.Domain.Entities.Products;
 
-public class Category : EntityAuditBase<Guid>
+public class ModelTypes : EntityAuditBase<Guid>
 {
-    public string Name { get; set; }
-    public string? Description { get; set; }
+    public string ModelType { get; set; } // Loại Chất Liệu
+    public string Detail { get; set; } // Chi tiết
+
     public virtual Collection<Products> Products { get; set; }
 }
