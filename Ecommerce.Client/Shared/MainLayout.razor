@@ -2,91 +2,110 @@
 @inherits LayoutComponentBase
 @using Microsoft.AspNetCore.Components.Authorization
 @using MudBlazor
+<MudAppBar Elevation="0" Color="Color.Dark">
+    <MudContainer MaxWidth="MaxWidth.False" Class="header-container">
+        <!-- Top contact info -->
+        <MudGrid Class="contact-bar" Gutter="0">
+            <MudItem xs="6">
+                <MudText Class="contact-info">
+                    <MudIcon Icon="@Icons.Material.Filled.Phone" Style="color: red; margin-right: 0.5rem;" />
+                    +0357906234
+                    <MudIcon Icon="@Icons.Material.Filled.Email" Style="color: red; margin-left: 1rem; margin-right: 0.5rem;" />
+                    manhlntph19847@fpt.edu.vn
+                    <MudIcon Icon="@Icons.Material.Filled.Place" Style="color: red; margin-left: 1rem; margin-right: 0.5rem;" />
+                    193 Phú Diễn
+                </MudText>
+            </MudItem>
+            <MudItem xs="6" Class="text-right">
+                <MudText Class="currency-account">
+                    <span Style="margin-right: 0.5rem;">$ VND</span>
+                    <span Style="margin-right: 0.5rem;"> | </span>
+                    <MudLink Href="#" Class="account-link" Style="margin-right: 0.5rem">Tài khoản của tôi</MudLink>
+                </MudText>
+
+            </MudItem>
+        </MudGrid>
+
+        <!-- Main header with logo, search, and icons -->
+        <MudGrid Class="main-header" Gutter="0">
+            <MudItem xs="2">
+                <MudText Typo="Typo.h4" Class="brand-name">SNEAKER 141.</MudText>
+            </MudItem>
+            <MudItem xs="6" Class="d-flex align-center" Style="padding-left:150px" >
+                <MudSelect T="string" Placeholder="Tất cả loại giày" Variant="Variant.Text" Class="category-dropdown" Style="border-right: 1px solid #000;padding-left:100px;height:50px;width: 200px;padding:10px;border-top-left-radius: 2rem; border-bottom-left-radius: 2rem; background-color:white;color:black;">
+                </MudSelect>
+                <MudTextField T="string" Placeholder="  Tìm kiếm ở đây" Variant="Variant.Text" Class=" search-bar" Style="width: 350px;height:50px;background-color:white;color:black;" />
+                <MudButton Variant="Variant.Filled" Color="Color.Primary" Class="search-button" Style="width: 1000px;height:50px;background-color:red;color:white;font-weight:bold;border-top-right-radius: 2rem;border-bottom-right-radius:2rem;">Tìm kiếm</MudButton>
+            </MudItem>
+            
+            <MudItem xs="4" Class="text-right" Style="padding-left:200px;">
+                <MudText Class="icon-section">
+                    <MudIconButton Icon="@Icons.Material.Filled.FavoriteBorder" />
+                    <span class="badge">0</span>
+                    <MudText Class="icon-text">Yêu thích</MudText>
+                </MudText>
+                <MudText Class="icon-section">
+                    <MudIconButton Icon="@Icons.Material.Filled.ShoppingCart" />
+                    <span class="badge">0</span>
+                    <MudText Class="icon-text">Giỏ hàng</MudText>
+                </MudText>
+            </MudItem>
+           
+        </MudGrid>
+
+    </MudContainer>
+
+</MudAppBar>
+
+<MudPaper Class="navigation-paper" Style="margin-top: 130px;">
+    <hr style="border: 1px solid lightgray; width: 100%;" />
+    <MudContainer MaxWidth="MaxWidth.False" Class="navigation-container">
+        <MudList T="string" Class="navigation-menu" Style="display: flex; justify-content: space-around;background-color: white;pading:10px 0">
+            <MudListItem Href="/" Style="color: black;">Trang chủ</MudListItem>
+            <MudListItem Href="/deals" Style="color: black;">Khuyến mãi</MudListItem>
+            <MudListItem Href="/categories" Style="color: black;">Danh mục</MudListItem>
+            <MudListItem Href="/products" Style="color: black;">Sản phẩm</MudListItem>
+            <MudListItem Href="/contact" Style="color: black;">Liên hệ</MudListItem>
+        </MudList>
+    </MudContainer>
+    <hr style="border: 1px solid orange; width: 100%;" />
+</MudPaper>
+<MudContainer Class="categories-section" MaxWidth="MaxWidth.False" Style="padding-top: 50px; background-color: #f8f9fa; padding-bottom: 50px;">
+    <MudGrid Spacing="3">
+        <MudItem xs="12" sm="4">
+            <MudPaper Style="position: relative; background-color: transparent; height: 300px; overflow: hidden; border-radius: 15px;">
+                <img src="/Image-Index/giaycothap.jpg" alt="Laptop Collection" style="width: 100%; height: 100%; object-fit: cover; filter: brightness(70%);" />
+                <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: flex; flex-direction: column; justify-content: center; align-items: center; color: white; background-color: rgba(255, 0, 0, 0.6); padding: 20px; text-align: center;">
+                    <MudText Typo="Typo.h5" Style="font-weight: bold; font-size: 1.5rem; margin-bottom: 10px;">Giày cổ cao</MudText>
+                    <MudLink Href="/laptops" Style="font-size: 1.1rem; font-weight: bold; color: white; text-decoration: none; padding-top: 10px;">MUA NGAY ➔</MudLink>
+                </div>
+            </MudPaper>
+        </MudItem>
+
+        <MudItem xs="12" sm="4">
+            <MudPaper Style="position: relative; background-color: transparent; height: 300px; overflow: hidden; border-radius: 15px;">
+                <img src="/Image-Index/giaycothap.jpg" alt="Accessories Collection" style="width: 100%; height: 100%; object-fit: cover; filter: brightness(70%);" />
+                <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: flex; flex-direction: column; justify-content: center; align-items: center; color: white; background-color: rgba(255, 0, 0, 0.6); padding: 20px; text-align: center;">
+                    <MudText Typo="Typo.h5" Style="font-weight: bold; font-size: 1.5rem; margin-bottom: 10px;">Giày cổ thấp</MudText>
+                    <MudLink Href="/accessories" Style="font-size: 1.1rem; font-weight: bold; color: white; text-decoration: none; padding-top: 10px;">MUA NGAY ➔</MudLink>
+                </div>
+            </MudPaper>
+        </MudItem>
+
+        <MudItem xs="12" sm="4">
+            <MudPaper Style="position: relative; background-color: transparent; height: 300px; overflow: hidden; border-radius: 15px;">
+                <img src="/Image-Index/sliponvansgold.png" alt="Cameras Collection" style="width: 100%; height: 100%; object-fit: cover; filter: brightness(70%);" />
+                <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: flex; flex-direction: column; justify-content: center; align-items: center; color: white; background-color: rgba(255, 0, 0, 0.6); padding: 20px; text-align: center;">
+                    <MudText Typo="Typo.h5" Style="font-weight: bold; font-size: 1.5rem; margin-bottom: 10px;">Giày không dây</MudText>
+                    <MudLink Href="/cameras" Style="font-size: 1.1rem; font-weight: bold; color: white; text-decoration: none; padding-top: 10px;">MUA NGAY ➔</MudLink>
+                </div>
+            </MudPaper>
+        </MudItem>
+    </MudGrid>
+</MudContainer>
 
 
-<MudThemeProvider @ref="@_mudThemeProvider" @bind-IsDarkMode="@_isDarkMode" />
-<MudDialogProvider />
-<MudSnackbarProvider />
-<MudLayout >
-    <MudAppBar Elevation="24" Color="Color.Primary">
-       @*  <MudIconButton Icon="@Icons.Material.Filled.Menu" Color="Color.Inherit" Edge="Edge.Start" OnClick="@((e) => DrawerToggle())" />
-        <Search></Search>
-        <AuthorizeView>
-            <Authorized>
-                <MudSpacer />
-                <MudExpansionPanels>
-                    <MudIconButton Color="Color.Inherit" Edge="Edge.Start" OnClick="@((e) => ToggleRightDrawer())">
-                        <MudAvatar Color="Color.Warning" Image="@userDto.Image"/>
-                    </MudIconButton>
-                </MudExpansionPanels>
-            </Authorized>
-            <NotAuthorized>
-                <MudSpacer />
-                <MudIconButton Icon="@Icons.Material.Outlined.Login" OnClick="Login" Edge="Edge.End">Login</MudIconButton>
-            </NotAuthorized> 
-        </AuthorizeView>     *@
-        <MudToggleIconButton Toggled="@_isDarkMode" ToggledChanged="OnToggledChanged"
-                             Icon="@Icons.Material.Outlined.LightMode" Color="@Color.Inherit" Title="Default"
-                             ToggledIcon="@Icons.Material.Outlined.DarkMode" ToggledColor="@Color.Dark" ToggledTitle="Dark" Edge="Edge.End" />
-    </MudAppBar>
-    <MudDrawer @bind-Open="_drawerOpen" ClipMode="DrawerClipMode.Never" Breakpoint="Breakpoint.Sm" Elevation="24" Variant="@DrawerVariant.Persistent" OpenMiniOnHover="false">
-        <NavMenuCategory/>
-    </MudDrawer>
-    <MudDrawer @bind-Open="@openEnd" ClipMode="DrawerClipMode.Never" Breakpoint="Breakpoint.Sm" Anchor="Anchor.End" Elevation="24" Variant="@DrawerVariant.Persistent" OpenMiniOnHover="false">
-        <NavUser></NavUser>
-    </MudDrawer>
-    <MudMainContent>
-        <MudContainer>
-            @Body
-        </MudContainer>
-    </MudMainContent>
-</MudLayout>
+
 @code {
-    //UserDto userDto = new UserDto();
-    bool _drawerOpen = true;
-    bool openEnd = false;
-    private bool _isDarkMode = false;
-    private MudThemeProvider _mudThemeProvider;
-    
-
-    public void OnToggledChanged(bool toggled)
-    {
-        // Because variable is not two-way bound, we need to update it ourself
-        _isDarkMode = toggled;
-    }
-
-    //protected  override async void OnInitialized()
-    //{
-    //    //userDto = await _localStorage.GetItemAsync<UserDto>("user");
-    //}
-
-    // protected override async Task OnAfterRenderAsync(bool firstRender)
-    // {
-    //     userDto = await _localStorage.GetItemAsync<UserDto>("user");
-    //     if (firstRender)
-    //     {
-    //         _isDarkMode = await _mudThemeProvider.GetSystemPreference();
-    //         StateHasChanged();
-    //     }
-    // }
-
-
-    // void DrawerToggle()
-    // {
-    //     _drawerOpen = !_drawerOpen;
-    // }
-    // void ToggleRightDrawer()
-    // {
-    //     openEnd = !openEnd;
-    // }
-    // void Login()
-    // {
-    //     _navigationManager.NavigateTo("/login");
-    // }
-
-    // protected async void UnloadHandler()
-    // {
-    //     await _jsRuntime.InvokeVoidAsync("beforunload");
-        
-    // }
+    // Code-behind của layout (nếu cần)
 }
