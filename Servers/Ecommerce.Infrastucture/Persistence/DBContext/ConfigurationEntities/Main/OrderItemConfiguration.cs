@@ -3,11 +3,11 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace Ecommerce.Infrastructure.Persistence.DBContext.ConfigurationEntities;
+namespace Ecommerce.Infrastructure.Persistence.DBContext.ConfigurationEntities.Main;
 
-public class OrderItemConfiguration : IEntityTypeConfiguration<OrderItem>
+public class OrderItemConfiguration : IEntityTypeConfiguration<OrderDetail>
 {
-    public void Configure(EntityTypeBuilder<OrderItem> builder)
+    public void Configure(EntityTypeBuilder<OrderDetail> builder)
     {
         builder.ToTable("ORDER_ITEMS");
         builder.HasKey(oi => oi.Id);
@@ -23,18 +23,11 @@ public class OrderItemConfiguration : IEntityTypeConfiguration<OrderItem>
                .IsRequired()
                .HasColumnType("decimal(18,2)");
 
-
-        builder.HasOne(oi => oi.Order)
-               .WithMany(o => o.OrderItems)
-               .HasForeignKey(oi => oi.OrderId)
-               .OnDelete(DeleteBehavior.Cascade);
-
-        builder.HasOne(oi => oi.Variant)
-               .WithMany()
-               .HasForeignKey(oi => oi.VariantId)
-               .OnDelete(DeleteBehavior.Restrict);
-
         builder.HasIndex(oi => new { oi.OrderId, oi.VariantId })
                .IsUnique();
+        builder.HasOne(p => p.Variant)
+               .WithMany(v => v.OrderDetails)
+               .HasForeignKey(oi => oi.OrderId)
+               .OnDelete(DeleteBehavior.Restrict);
     }
 }

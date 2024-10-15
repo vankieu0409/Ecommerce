@@ -1,40 +1,27 @@
-﻿<MudAppBar Color="Color.Transparent" Fixed="false" Dense="true" Class="header-admin">
-    <MudHidden Breakpoint="Breakpoint.SmAndDown">
-        <MudTextField T="string" Placeholder="Search ..." Adornment="Adornment.Start"
-                      AdornmentIcon="@Icons.Material.Filled.Search" IconSize="Size.Medium" Class="mt-0 mb-0" />
-    </MudHidden>
+﻿
+    <MudStack Row="true" AlignItems="AlignItems.Center" Spacing="2">
+        <MudIconButton Icon="@Icons.Material.Filled.Search" Color="Color.Dark" />
+        <MudTextField T="string" Placeholder="Search..." DisableUnderLine="true" Class="mt-n2" 
+                      Style="background-color: transparent;" />
+    </MudStack>
     <MudSpacer />
-    <MudHidden Breakpoint="Breakpoint.MdAndUp">
-        <MudIconButton Icon="@Icons.Material.Filled.Search" Color="Color.Inherit" Edge="Edge.Start" />
-    </MudHidden>
-    <MudIconButton Icon="@Icons.Material.Filled.Email" Color="Color.Inherit" Edge="Edge.Start" />
-    <MudBadge Content="4" Color="Color.Error" Overlap="true" Bordered="true">
-        <MudIconButton Icon="@Icons.Material.Filled.Notifications" Color="Color.Inherit" Edge="Edge.Start" />
-    </MudBadge>
-    <MudIconButton Icon="@Icons.Material.Filled.Apps" Color="Color.Inherit" Edge="Edge.Start" />
-    <MudMenu Direction="Direction.Bottom" OffsetY="true" Dense="true">
-        <ActivatorContent>
-            <MudAvatar Image="assets/img/profile.jpg" />
-        </ActivatorContent>
-        <ChildContent>
-            <MudText Typo="Typo.body2" Class="px-4 py-2"><b>Hizrian</b></MudText>
-            <MudText Typo="Typo.caption" Class="px-4 py-0">hello@example.com</MudText>
-            <MudDivider Class="mb-2" />
-            <MudMenuItem>My Profile</MudMenuItem>
-            <MudMenuItem>My Balance</MudMenuItem>
-            <MudMenuItem>Inbox</MudMenuItem>
-            <MudDivider />
-            <MudMenuItem>Account Setting</MudMenuItem>
-            <MudMenuItem>Logout</MudMenuItem>
-        </ChildContent>
-    </MudMenu>
-</MudAppBar>
+    <MudStack Row="true" AlignItems="AlignItems.Center" Spacing="2">
+        <MudIconButton Icon="@Icons.Material.Filled.Email" Color="Color.Dark" />
+        <MudBadge Content="1" Color="Color.Success" Overlap="true" Dot="true">
+            <MudIconButton Icon="@Icons.Material.Filled.Notifications" Color="Color.Dark" />
+        </MudBadge>
+        <MudIconButton Icon="@Icons.Material.Filled.ViewStream" Color="Color.Dark" />
+        <MudAvatar Style="height: 32px; width: 32px;">
+            <MudImage Src="/api/placeholder/32/32" Alt="User Avatar" />
+        </MudAvatar>
+    </MudStack>
 
-@code {
 
-}
 <style>
-  .header-admin {
-    display: flex;
-    align-items: center;}
+    .mud-input-control {
+        margin-top: 0 !important;
+    }
+    .mud-input {
+        height: 40px;
+    }
 </style>

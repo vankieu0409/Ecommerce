@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 
 namespace Ecommerce.API.Controllers
 {
@@ -7,5 +6,6 @@ namespace Ecommerce.API.Controllers
     [ApiController]
     public class AuthenticationController : ControllerBase
     {
+
     }
 }

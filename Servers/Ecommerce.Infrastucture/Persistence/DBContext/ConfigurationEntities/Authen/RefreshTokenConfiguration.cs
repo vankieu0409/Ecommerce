@@ -3,7 +3,7 @@ using Ecommerce.Domain.Entities.Author;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace Ecommerce.Infrastructure.Persistence.DBContext.ConfigurationEntities;
+namespace Ecommerce.Infrastructure.Persistence.DBContext.ConfigurationEntities.Authen;
 
 public class RefreshTokenConfiguration : IEntityTypeConfiguration<RefreshToken>
 {
@@ -37,10 +37,5 @@ public class RefreshTokenConfiguration : IEntityTypeConfiguration<RefreshToken>
 
         builder.Property(rt => rt.ReasonRevoked)
             .HasMaxLength(500);
-
-        builder.HasOne(rt => rt.User)
-            .WithMany()
-            .HasForeignKey(rt => rt.UserId)
-            .OnDelete(DeleteBehavior.Cascade);
     }
 }

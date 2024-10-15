@@ -1,12 +1,21 @@
-﻿using Ecommerce.Shared.Domains;
+﻿using Ecommerce.Domain.Entities.Orders;
+using Ecommerce.Shared.Domains;
 
 namespace Ecommerce.Domain.Entities.Products;
-public class Variants : EntityBase<Guid>
+public class Variants : EntityAuditBase<Guid>
 {
     public Guid IdProduct { get; set; }
-    public string Color { get; set; } // Màu sắc của giày
-    public string Size { get; set; } // Kích cỡ của giày
-    public decimal Price { get; set; } // Giá của giày
-    public int Quantity { get; set; } // Số lượng của giày
+    public Guid IdColor { get; set; }
+    public Guid IdSize { get; set; }
+    public Guid IdVarinat { get; set; }
+    public int Quantity { get; set; }
+
+    //navigation
+
+    public virtual ICollection<Images> Images { get; set; }
+    public virtual Sizes Sizes { get; set; }
+    public virtual Colors Colors { get; set; }
+    public virtual ICollection<OrderDetail> OrderDetails { get; set; }
+
 
 }

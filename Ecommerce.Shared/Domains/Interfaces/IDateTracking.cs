@@ -2,6 +2,9 @@ namespace Ecommerce.Shared.Domains.Interfaces;
 
 public interface IDateTracking
 {
-    DateTimeOffset CreatedDate { get; set; }
-    DateTimeOffset? LastModifiedDate { get; set; }
+    DateTime CreatedTime { get; set; }
+    Guid CreatedBy { get; set; }
+
+    DateTime? LastModifiedTime { get; set; }
+    Guid ModifiedBy { get; set; }
 }

@@ -1,5 +1,8 @@
 ﻿
 
+using Ecommerce.Client.Model;
+using Ecommerce.Shared.Common.Models;
+
 namespace Ecommerce.Client.Services.ProductService
 {
     public interface IProductService
@@ -19,5 +22,6 @@ namespace Ecommerce.Client.Services.ProductService
         //Task<ProductEntity> CreateProduct(ProductEntity product);
         //Task<ProductEntity> UpdateProduct(ProductEntity product);
         //Task DeleteProduct(Guid product);
+        Task<PagedList<ProductDto>> GetAdminProducts(ProductFilter? query);
     }
 }
