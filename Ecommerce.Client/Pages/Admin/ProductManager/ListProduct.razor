@@ -1,0 +1,90 @@
+﻿@page "Admin/Products"
+@using Ecommerce.Client.Services.ProductService
+
+
+<MudCard>
+    <MudCardHeader>
+        <MudText Typo="Typo.h6">Add Row</MudText>
+        <MudSpacer />
+        <MudButton Color="Color.Primary" Variant="Variant.Filled" StartIcon="@Icons.Material.Filled.Add" OnClick="@(() => OpenDialog())">Add Row</MudButton>
+    </MudCardHeader>
+    <MudCardContent>
+        <MudTable Items="@productDtos" Hover="true" Breakpoint="Breakpoint.Sm">
+            <HeaderContent>
+                <MudTh>Name</MudTh>
+                <MudTh>Position</MudTh>
+                <MudTh>Office</MudTh>
+                <MudTh>Actions</MudTh>
+            </HeaderContent>
+            <RowTemplate>
+                <MudTd DataLabel="Name">@context.Name</MudTd>
+                <MudTd DataLabel="Position">@context.Position</MudTd>
+                <MudTd DataLabel="Office">@context.Office</MudTd>
+                <MudTd DataLabel="Actions">
+                    <MudIconButton Icon="@Icons.Material.Filled.Edit" Color="Color.Primary" OnClick="@(() => EditEmployee(context))" />
+                    <MudIconButton Icon="@Icons.Material.Filled.Delete" Color="Color.Error" OnClick="@(() => DeleteEmployee(context))" />
+                </MudTd>
+            </RowTemplate>
+        </MudTable>
+    </MudCardContent>
+</MudCard>
+
+<MudDialog @bind-IsVisible="dialogVisible" Options="dialogOptions">
+    <TitleContent>
+        <MudText Typo="Typo.h6">
+            <MudIcon Icon="@Icons.Material.Filled.Add" Class="mr-3" /> Add New Employee
+        </MudText>
+    </TitleContent>
+    <DialogContent>
+        <MudTextField @bind-Value="newEmployee.Name" Label="Name" />
+        <MudTextField @bind-Value="newEmployee.Position" Label="Position" />
+        <MudTextField @bind-Value="newEmployee.Office" Label="Office" />
+    </DialogContent>
+    <DialogActions>
+        <MudButton OnClick="Cancel">Cancel</MudButton>
+        <MudButton Color="Color.Primary" OnClick="Submit">Add</MudButton>
+    </DialogActions>
+</MudDialog>
+
+<style>
+    .mud-table {
+        background-color: transparent;
+        border: none;
+    }
+
+    .mud-table-container {
+        border-radius: 8px;
+        overflow: hidden;
+    }
+
+    .mud-table-row {
+        background-color: white;
+    }
+
+        .mud-table-row:nth-child(even) {
+            background-color: #f8f9fa;
+        }
+
+    .mud-table-cell {
+        border: none;
+        padding: 16px;
+    }
+
+    .mud-table-head {
+        background-color: white;
+    }
+
+        .mud-table-head .mud-table-cell {
+            font-weight: bold;
+            color: #333;
+        }
+
+    .mud-table-pagination {
+        background-color: transparent;
+    }
+
+    .mud-button-filled {
+        border-radius: 4px;
+    }
+
+</style>

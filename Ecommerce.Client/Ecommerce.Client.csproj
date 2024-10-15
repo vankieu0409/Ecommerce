@@ -24,7 +24,10 @@
 
 	<ItemGroup>
 		<Folder Include="Layout\Client\" />
-		<Folder Include="Pages\Admin\" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <ProjectReference Include="..\Servers\Ecommerce.Application\Ecommerce.Application.csproj" />
 	</ItemGroup>
 
 </Project>

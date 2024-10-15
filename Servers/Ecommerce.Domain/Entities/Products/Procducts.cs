@@ -17,6 +17,7 @@ namespace Ecommerce.Domain.Entities.Products
         public Guid IdStyle { get; set; } // Phong cách (Thể thao, Thời trang, v.v.)
         public Guid IdSoleType { get; set; } // Loại đế giày (Chunky, Flat, v.v.)
         public DateTime ReleaseDate { get; set; } // Ngày phát hành của giày
+        public string SKU { get; set; }
         public decimal Price { get; set; }
 
 

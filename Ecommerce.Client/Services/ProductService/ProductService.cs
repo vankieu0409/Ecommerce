@@ -1,6 +1,7 @@
-﻿
+﻿using System.Net.Http.Json;
 
-using System.Net.Http.Json;
+using Ecommerce.Client.Model;
+using Ecommerce.Shared.Common.Models;
 
 namespace Ecommerce.Client.Services.ProductService
 {
@@ -35,13 +36,16 @@ namespace Ecommerce.Client.Services.ProductService
         //    var result = await _http.DeleteAsync($"api/product/{product}");
         //}
 
-        //public async Task<List<ProductEntity>> GetAdminProducts()
-        //{
+        public async Task<PagedList<ProductDto>> GetAdminProducts(ProductFilter? query)
+        {
+            var url = query != null ? $"admin?PageIndex={query.PageIndex}&PageSize={query.PageSize}&PropFilter={Uri.EscapeDataString(query.PropFilter ?? "")}&SearchTerm={Uri.EscapeDataString(query.SearchTerm ?? "")}" : $"/admin";
 
-        //    var result = await _http
-        //        .GetFromJsonAsync<List<ProductEntity>>($"api/Product/admin");
-        //    return result;
-        //}
+            var result = await _http.GetFromJsonAsync<PagedList<ProductDto>>($"api/Product/{url}");
+            //var result = await _http.GetStringAsync($"api/Product/{url}");
+            //var traRa = JsonSerializer.Deserialize<PagedList<ProductDto>>(result, new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
+            return result;
+
+        }
 
         //public async Task<ProductEntity> GetProduct(Guid productId)
         //{

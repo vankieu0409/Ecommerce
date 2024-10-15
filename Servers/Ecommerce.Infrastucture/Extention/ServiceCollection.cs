@@ -1,7 +1,9 @@
 ﻿using System.Reflection;
 
+using Ecommerce.Application.Interfaces.IRepositories;
 using Ecommerce.Infrastructure.Logging;
 using Ecommerce.Infrastructure.Persistence.DBContext;
+using Ecommerce.Infrastructure.Persistence.Repositories;
 using Ecommerce.Shared.Common.Repositories;
 using Ecommerce.Shared.Domains.Interfaces;
 
@@ -20,7 +22,7 @@ public static class ServiceCollection
     /// <returns></returns>
     public static IServiceCollection ConfigureServices(this IServiceCollection services) =>
         services
-            //.AddScoped<IBasketRepository, BasketRepository>()
+            .AddScoped<IProductRepository, ProductRepository>()
             // viết ở đây
             .AddTransient<LoggingDelegatingHandler>();
 
@@ -106,7 +108,7 @@ public static class ServiceCollection
         services.AddDbContext<ApplicationDbContext>(c => c.UseSqlServer(configuration.GetConnectionString("SQLConnection")));
         services.AddHttpContextAccessor();
         services.AddScoped(typeof(IRepositoryBase<,,>), typeof(RepositoryBase<,,>)); //chỉ dùng cho class Generic
-        services.AddScoped(typeof(IRepositoryQueryBase<,>), typeof(RepositoryQueryBase<,>)); //chỉ dùng cho class Generic
+        services.AddScoped(typeof(IRepositoryQueryBase<,,>), typeof(RepositoryQueryBase<,,>)); //chỉ dùng cho class Generic
 
         return services;
 
