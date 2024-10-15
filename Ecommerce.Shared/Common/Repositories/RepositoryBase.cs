@@ -63,6 +63,7 @@ public class RepositoryBase<T, K, TContext> : RepositoryQueryBase<T, K, TContext
         if (_dbContext.Entry(entity).State == EntityState.Unchanged) return;
 
         T exist = _dbContext.Set<T>().Find(entity.Id);
+        this.PreSaveChange(exist);
         _dbContext.Entry(exist).CurrentValues.SetValues(entity);
     }
 
@@ -71,14 +72,28 @@ public class RepositoryBase<T, K, TContext> : RepositoryQueryBase<T, K, TContext
         if (_dbContext.Entry(entity).State == EntityState.Unchanged) return;
 
         T exist = _dbContext.Set<T>().Find(entity.Id);
+        this.PreSaveChange(exist);
         _dbContext.Entry(exist).CurrentValues.SetValues(entity);
         await SaveChangesAsync();
     }
 
-    public void UpdateList(IEnumerable<T> entities) => _dbContext.Set<T>().AddRange(entities);
+    public void UpdateList(IEnumerable<T> entities)
+    {
+        foreach (var entity in entities)
+        {
+            PreSaveChange(entity);
+        }
+
+        _dbContext.Set<T>().AddRangeAsync(entities);
+        _ = SaveChangesAsync();
+    }
 
     public async Task UpdateListAsync(IEnumerable<T> entities)
     {
+        foreach (var entity in entities)
+        {
+            PreSaveChange(entity);
+        }
         await _dbContext.Set<T>().AddRangeAsync(entities);
         await SaveChangesAsync();
     }
@@ -90,7 +105,7 @@ public class RepositoryBase<T, K, TContext> : RepositoryQueryBase<T, K, TContext
 
 
         PropertyInfo property = entity.GetType().GetProperty("IsDeleted");
-        property.SetValue((object)entity, Convert.ChangeType((object)true, property.PropertyType), (object[])null);
+        property.SetValue(entity, Convert.ChangeType(true, property.PropertyType), (object[])null);
         Update(entity);
     }
 
@@ -104,7 +119,7 @@ public class RepositoryBase<T, K, TContext> : RepositoryQueryBase<T, K, TContext
         else
         {
             PropertyInfo property = entity.GetType().GetProperty("IsDeleted");
-            property.SetValue((object)entity, Convert.ChangeType((object)true, property.PropertyType), (object[])null);
+            property.SetValue(entity, Convert.ChangeType(true, property.PropertyType), (object[])null);
             await UpdateAsync(entity);
         }
     }
@@ -113,12 +128,12 @@ public class RepositoryBase<T, K, TContext> : RepositoryQueryBase<T, K, TContext
     {
         if (this.IsInheritsFrom(typeof(T), typeof(IEntityAuditBase<>)))
         {
-            IEnumerable<T> removedEntities = entities.Select<T, T>((Func<T, T>)(entity =>
+            IEnumerable<T> removedEntities = entities.Select<T, T>(entity =>
             {
                 PropertyInfo property = entity.GetType().GetProperty("IsDeleted");
-                property.SetValue((object)entity, Convert.ChangeType((object)true, property.PropertyType), (object[])null);
+                property.SetValue(entity, Convert.ChangeType(true, property.PropertyType), (object[])null);
                 return entity;
-            }));
+            });
             UpdateList(removedEntities);
         }
         else
@@ -131,12 +146,12 @@ public class RepositoryBase<T, K, TContext> : RepositoryQueryBase<T, K, TContext
     {
         if (this.IsInheritsFrom(typeof(T), typeof(IEntityAuditBase<>)))
         {
-            IEnumerable<T> removedEntities = entities.Select<T, T>((Func<T, T>)(entity =>
+            IEnumerable<T> removedEntities = entities.Select<T, T>(entity =>
             {
                 PropertyInfo property = entity.GetType().GetProperty("IsDeleted");
-                property.SetValue((object)entity, Convert.ChangeType((object)true, property.PropertyType), (object[])null);
+                property.SetValue(entity, Convert.ChangeType(true, property.PropertyType), (object[])null);
                 return entity;
-            }));
+            });
             await UpdateListAsync(removedEntities);
         }
         else
@@ -147,18 +162,40 @@ public class RepositoryBase<T, K, TContext> : RepositoryQueryBase<T, K, TContext
     }
 
     public async Task<int> SaveChangesAsync() => await _unitOfWork.CommitAsync();
+    private void PreSaveChange(T entity)
+    {
+        foreach (PropertyInfo property in entity.GetType().GetProperties(BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic))
+        {
+            switch (property.GetValue(entity, (object[])null))
+            {
+                case DateTime dateTime2:
+                    DateTime dateTime1 = this.Truncate(dateTime2, TimeSpan.FromSeconds(1.0));
+                    property.SetValue(entity, Convert.ChangeType(dateTime1, property.PropertyType), (object[])null);
+                    break;
+                case DateTimeOffset dateTime3:
+                    DateTimeOffset dateTimeOffset = this.Truncate(dateTime3, TimeSpan.FromSeconds(1.0));
+                    property.SetValue(entity, Convert.ChangeType(dateTimeOffset, property.PropertyType), (object[])null);
+                    break;
+            }
+        }
+    }
+
+    private DateTime Truncate(DateTime dateTime, TimeSpan timeSpan) => timeSpan == TimeSpan.Zero || dateTime == DateTime.MinValue || dateTime == DateTime.MaxValue ? dateTime : dateTime.AddTicks(-(dateTime.Ticks % timeSpan.Ticks));
+
+    private DateTimeOffset Truncate(DateTimeOffset dateTime, TimeSpan timeSpan) => timeSpan == TimeSpan.Zero || dateTime == DateTimeOffset.MinValue || dateTime == DateTimeOffset.MaxValue ? dateTime : dateTime.AddTicks(-(dateTime.Ticks % timeSpan.Ticks));
+
 
     private bool IsInheritsFrom(object source, Type baseType)
     {
         Type type1 = source.GetType();
-        if (type1 == (Type)null)
+        if (type1 == null)
             return false;
-        if (baseType == (Type)null)
+        if (baseType == null)
             return type1.IsInterface || type1 == typeof(object);
         if (baseType.IsInterface)
-            return ((IEnumerable<Type>)type1.GetInterfaces()).Contains<Type>(baseType);
+            return type1.GetInterfaces().Contains<Type>(baseType);
         Type type2 = type1;
-        if (!(type2 != (Type)null))
+        if (!(type2 != null))
             return false;
         if (type2.BaseType == baseType)
             return true;

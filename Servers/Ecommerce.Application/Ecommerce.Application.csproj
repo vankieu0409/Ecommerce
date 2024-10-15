@@ -10,7 +10,6 @@
     <Folder Include="DTOs\" />
     <Folder Include="Interfaces\IRepositories\" />
     <Folder Include="Interfaces\IServices\" />
-    <Folder Include="Services\" />
   </ItemGroup>
 
   <ItemGroup>

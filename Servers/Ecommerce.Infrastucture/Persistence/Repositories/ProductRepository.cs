@@ -20,6 +20,7 @@ public class ProductRepository : RepositoryBase<Products, Guid, ApplicationDbCon
     public Task<Products> GetProductByIdAsync(Guid id) => GetByIdAsync(id, v => v.Variants);
 
     public async Task<Products> GetProductByNameAsync(string name) => await FindByCondition(p => p.Name.Equals(name), false, v => v.Variants).SingleOrDefaultAsync();
+    public async Task<IEnumerable<Products>> GetAllProductsAsync() => await FindAll(false, v => new { v.Category, v.Brand, v.Material, v.ModelType, v.SoleType, v.Style, }).ToListAsync();
 
 
     public Task CreateProductAsync(Products product) => CreateAsync(product);
@@ -29,6 +30,6 @@ public class ProductRepository : RepositoryBase<Products, Guid, ApplicationDbCon
     public async Task DeleteProductAsync(Guid id)
     {
         var product = await GetProductByIdAsync(id);
-        if (product != null) await DeleteAsync(product);
+        await DeleteAsync(product);
     }
 }

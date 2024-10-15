@@ -19,5 +19,4 @@ public class RefreshToken : EntityBase<Guid>
 
     // Foreign key
     public Guid UserId { get; set; }
-    public UserEntity User { get; set; }
 }

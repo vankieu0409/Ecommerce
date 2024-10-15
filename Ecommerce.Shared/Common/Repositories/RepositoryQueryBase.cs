@@ -27,6 +27,7 @@ public class RepositoryQueryBase<T, K, TContext> : RepositoryQueryBase<T, K>, IR
         !trackChanges ? _dbContext.Set<T>().AsNoTracking() :
             _dbContext.Set<T>();
 
+
     public IQueryable<T> FindAll(bool trackChanges = false, params Expression<Func<T, object>>[] includeProperties)
     {
         var items = FindAll(trackChanges);

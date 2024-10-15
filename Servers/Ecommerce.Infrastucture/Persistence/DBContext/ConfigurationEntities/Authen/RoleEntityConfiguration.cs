@@ -3,7 +3,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace Ecommerce.Infrastructure.Persistence.DBContext.ConfigurationEntities;
+namespace Ecommerce.Infrastructure.Persistence.DBContext.ConfigurationEntities.Authen;
 
 public class RoleEntityConfiguration : IEntityTypeConfiguration<RoleEntity>
 

@@ -1,11 +1,9 @@
 ﻿@using Ecommerce.Client.Shared
 @using AdminLayout=Ecommerce.Client.Layout.Admin.LayoutAdmin
-@inject IJSRuntime _js
 
 
 <Router AppAssembly="@typeof(App).Assembly">
     <Found Context="routeData">
-        <></>
         <RouteView RouteData="@routeData" DefaultLayout="@typeof(AdminLayout)"/>
     </Found>
     <NotFound>
