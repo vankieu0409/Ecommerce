@@ -13,6 +13,7 @@ public class CategoryConfiguration : IEntityTypeConfiguration<Category>
         builder.HasKey(c => c.Id);
         builder.HasIndex(c => new { c.Name, c.Id });
         builder.HasMany<Domain.Entities.Products.Products>(p => p.Products).WithOne(c => c.Category)
-            .HasForeignKey(c => c.IdCategory).OnDelete(DeleteBehavior.Cascade);
+           .HasForeignKey(c => c.IdCategory);
+        //.OnDelete(DeleteBehavior.Cascade);
     }
 }

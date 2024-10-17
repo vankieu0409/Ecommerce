@@ -16,29 +16,39 @@ public class ProductService : IProductService
 
     public async Task<PagedList<ProductDto>> GetAllProductAdmin(RequestParams request)
     {
-        var products = await _productRepository.GetAllProductsAsync();
-        var productDtos = products.Select(p => new ProductDto
+        try
         {
-            Id = p.Id,
-            Name = p.Name,
-            Description = p.Description ?? "",
-            Price = p.Price,
-            SKU = p.SKU,
-            Brand = p.Brand.BrandName,
-            Material = p.Material.MaterialType,
-            ModelType = p.ModelType.ModelType,
-            SoleType = p.SoleType.SoleType,
-            Style = p.Style.Style
 
-        });
-        var propInfo = typeof(ProductDto).GetProperty(request.PropFilter);
-        var filteredProducts = productDtos
-            .Where(dto =>
+            var productsList = _productRepository.AsEnumerable(v => v.Brand);
+            var products = productsList.ToList();
+            var productDtos = products.Select(p => new ProductDto
             {
-                var value = propInfo?.GetValue(dto, null);
-                return value != null && value.Equals(request.SearchTerm);
-            });
-        var result = await PagedList<ProductDto>.ToPagedList(filteredProducts.AsQueryable(), request.PageIndex, request.PageSize);
-        return result;
+                Id = p.Id,
+                Name = p.Name,
+                Description = p.Description ?? "",
+                Price = p.Price,
+                SKU = p.SKU,
+                Brand = p.Brand.BrandName,
+                Material = p.Material.MaterialType,
+                ModelType = p.ModelType.ModelType,
+                SoleType = p.SoleType.SoleType,
+                Style = p.Style.Style
+
+            }).ToList();
+            var propInfo = typeof(ProductDto).GetProperty(request.PropFilter);
+            //var filteredProducts = productDtos
+            //    .Where(dto =>
+            //    {
+            //        var value = propInfo?.GetValue(dto, null);
+            //        return value != null && value.Equals(request.SearchTerm);
+            //    });
+            var result = await PagedList<ProductDto>.ToPagedList(productDtos, request.PageIndex, request.PageSize);
+            return result;
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+            throw;
+        }
     }
 }

@@ -16,7 +16,7 @@ try
     builder.Services.AddRazorPages();
     builder.Services.AddEndpointsApiExplorer();
     builder.Services.AddServerSideBlazor();
-    builder.Services.AddSwaggerGen();
+    builder.Services.AddRazorPages();
     builder.Services.AddConfigurationSettings(builder.Configuration);
     builder.Services.ConfigureServices();
     builder.Services.AddHealthChecks();

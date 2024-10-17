@@ -14,6 +14,7 @@ public class MaterialConfiguration : IEntityTypeConfiguration<Materials>
         builder.HasKey(c => c.Id);
         builder.HasIndex(c => new { c.MaterialType, c.Id });
         builder.HasMany<Domain.Entities.Products.Products>(p => p.Products).WithOne(c => c.Material)
-            .HasForeignKey(c => c.IdMaterial).OnDelete(DeleteBehavior.Cascade);
+         .HasForeignKey(c => c.IdMaterial);
+        // .OnDelete(DeleteBehavior.Cascade);
     }
 }

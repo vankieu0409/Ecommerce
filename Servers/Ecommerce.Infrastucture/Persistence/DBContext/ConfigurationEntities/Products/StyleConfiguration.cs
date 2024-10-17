@@ -14,6 +14,7 @@ public class StyleConfiguration : IEntityTypeConfiguration<Styles>
         builder.HasKey(c => c.Id);
         builder.HasIndex(c => new { c.Style, c.Id });
         builder.HasMany<Domain.Entities.Products.Products>(p => p.Products).WithOne(c => c.Style)
-            .HasForeignKey(c => c.IdStyle).OnDelete(DeleteBehavior.Cascade);
+          .HasForeignKey(c => c.IdStyle);
+        //  .OnDelete(DeleteBehavior.Cascade);
     }
 }

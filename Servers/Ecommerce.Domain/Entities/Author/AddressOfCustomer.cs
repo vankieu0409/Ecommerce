@@ -1,8 +1,8 @@
-﻿using Ecommerce.Shared.Domains;
+﻿using Ecommerce.Shared.Domains.Implements;
 
 namespace Ecommerce.Domain.Entities.Author;
 
-public class AddressOfCustomer : EntityAuditBase<Guid>
+public class AddressOfCustomer : FullAuditedEntity<Guid>
 {
     public string Address { get; set; } //Địa chỉ cụ thể
     /// <summary>

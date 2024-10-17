@@ -2,34 +2,18 @@
 using Ecommerce.Domain.Entities.Products;
 using Ecommerce.Infrastructure.Persistence.DBContext;
 using Ecommerce.Shared.Common.Repositories;
-using Ecommerce.Shared.Domains.Interfaces;
 
-using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 
 namespace Ecommerce.Infrastructure.Persistence.Repositories;
 
-public class ProductRepository : RepositoryBase<Products, Guid, ApplicationDbContext>, IProductRepository
+public class ProductRepository : RepositoryAsync<Products>, IProductRepository
 {
+    private readonly ApplicationDbContext _dbContext;
 
-    public ProductRepository(ApplicationDbContext dbContext, IUnitOfWork<ApplicationDbContext> unitOfWork) : base(dbContext, unitOfWork)
+    public ProductRepository(ApplicationDbContext dbContext, ILogger<ProductRepository> logger) : base(dbContext, logger)
     {
-    }
-
-    public async Task<IEnumerable<Products>> GetProductsAsync() => await FindAll().ToListAsync();
-
-    public Task<Products> GetProductByIdAsync(Guid id) => GetByIdAsync(id, v => v.Variants);
-
-    public async Task<Products> GetProductByNameAsync(string name) => await FindByCondition(p => p.Name.Equals(name), false, v => v.Variants).SingleOrDefaultAsync();
-    public async Task<IEnumerable<Products>> GetAllProductsAsync() => await FindAll(false, v => new { v.Category, v.Brand, v.Material, v.ModelType, v.SoleType, v.Style, }).ToListAsync();
-
-
-    public Task CreateProductAsync(Products product) => CreateAsync(product);
-
-    public Task UpdateProductAsync(Products product) => UpdateAsync(product);
-
-    public async Task DeleteProductAsync(Guid id)
-    {
-        var product = await GetProductByIdAsync(id);
-        await DeleteAsync(product);
+        _dbContext = dbContext ?? throw new AggregateException(nameof(dbContext));
+        logger.LogInformation("\nProductRepository initialized.\n");
     }
 }

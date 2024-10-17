@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Ecommerce.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20241014093621_InitializedDatabase")]
-    partial class InitializedDatabase
+    [Migration("20241017100053_InitializedDBSeed")]
+    partial class InitializedDBSeed
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -29,7 +29,8 @@ namespace Ecommerce.Infrastructure.Migrations
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnOrder(0);
 
                     b.Property<string>("Address")
                         .IsRequired()
@@ -39,7 +40,7 @@ namespace Ecommerce.Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<Guid>("CreatedBy")
+                    b.Property<Guid?>("CreatedBy")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime>("CreatedTime")
@@ -48,6 +49,12 @@ namespace Ecommerce.Infrastructure.Migrations
                     b.Property<Guid>("CustomerId")
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<Guid?>("DeletedBy")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("DeletedTime")
+                        .HasColumnType("datetime2");
+
                     b.Property<string>("District")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -55,11 +62,11 @@ namespace Ecommerce.Infrastructure.Migrations
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
 
-                    b.Property<DateTime?>("LastModifiedTime")
-                        .HasColumnType("datetime2");
-
-                    b.Property<Guid>("ModifiedBy")
+                    b.Property<Guid?>("ModifiedBy")
                         .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("ModifiedTime")
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("StreetAddress")
                         .IsRequired()
@@ -82,12 +89,19 @@ namespace Ecommerce.Infrastructure.Migrations
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnOrder(0);
 
-                    b.Property<Guid>("CreatedBy")
+                    b.Property<Guid?>("CreatedBy")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime>("CreatedTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<Guid?>("DeletedBy")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("DeletedTime")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Email")
@@ -111,11 +125,11 @@ namespace Ecommerce.Infrastructure.Migrations
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
 
-                    b.Property<DateTime?>("LastModifiedTime")
-                        .HasColumnType("datetime2");
-
-                    b.Property<Guid>("ModifiedBy")
+                    b.Property<Guid?>("ModifiedBy")
                         .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("ModifiedTime")
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("PasswordHash")
                         .IsRequired()
@@ -141,19 +155,26 @@ namespace Ecommerce.Infrastructure.Migrations
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnOrder(0);
 
                     b.Property<string>("Avatar")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<Guid>("CreatedBy")
+                    b.Property<Guid?>("CreatedBy")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime>("CreatedTime")
                         .HasColumnType("datetime2");
 
                     b.Property<DateTime>("DateOfBirth")
+                        .HasColumnType("datetime2");
+
+                    b.Property<Guid?>("DeletedBy")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("DeletedTime")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("DistinctiveFeatures")
@@ -180,11 +201,11 @@ namespace Ecommerce.Infrastructure.Migrations
                     b.Property<DateTime>("IssueDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<DateTime?>("LastModifiedTime")
-                        .HasColumnType("datetime2");
-
-                    b.Property<Guid>("ModifiedBy")
+                    b.Property<Guid?>("ModifiedBy")
                         .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("ModifiedTime")
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("Nationality")
                         .IsRequired()
@@ -221,7 +242,8 @@ namespace Ecommerce.Infrastructure.Migrations
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnOrder(0);
 
                     b.Property<DateTime>("Created")
                         .HasColumnType("datetime2");
@@ -269,12 +291,19 @@ namespace Ecommerce.Infrastructure.Migrations
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnOrder(0);
 
-                    b.Property<Guid>("CreatedBy")
+                    b.Property<Guid?>("CreatedBy")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime>("CreatedTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<Guid?>("DeletedBy")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("DeletedTime")
                         .HasColumnType("datetime2");
 
                     b.Property<bool>("IsDeleted")
@@ -282,11 +311,11 @@ namespace Ecommerce.Infrastructure.Migrations
                         .HasColumnType("bit")
                         .HasDefaultValue(false);
 
-                    b.Property<DateTime?>("LastModifiedTime")
-                        .HasColumnType("datetime2");
-
-                    b.Property<Guid>("ModifiedBy")
+                    b.Property<Guid?>("ModifiedBy")
                         .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("ModifiedTime")
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -305,12 +334,13 @@ namespace Ecommerce.Infrastructure.Migrations
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnOrder(0);
 
                     b.Property<DateTime>("CreationDate")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2024, 10, 14, 16, 36, 20, 918, DateTimeKind.Local).AddTicks(8629));
+                        .HasDefaultValue(new DateTime(2024, 10, 17, 17, 0, 53, 1, DateTimeKind.Local).AddTicks(5403));
 
                     b.Property<Guid>("CustomerId")
                         .HasColumnType("uniqueidentifier");
@@ -351,22 +381,29 @@ namespace Ecommerce.Infrastructure.Migrations
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnOrder(0);
 
-                    b.Property<Guid>("CreatedBy")
+                    b.Property<Guid?>("CreatedBy")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime>("CreatedTime")
                         .HasColumnType("datetime2");
 
+                    b.Property<Guid?>("DeletedBy")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("DeletedTime")
+                        .HasColumnType("datetime2");
+
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
 
-                    b.Property<DateTime?>("LastModifiedTime")
-                        .HasColumnType("datetime2");
-
-                    b.Property<Guid>("ModifiedBy")
+                    b.Property<Guid?>("ModifiedBy")
                         .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("ModifiedTime")
+                        .HasColumnType("datetime2");
 
                     b.Property<Guid>("OrderId")
                         .HasColumnType("uniqueidentifier");
@@ -400,16 +437,23 @@ namespace Ecommerce.Infrastructure.Migrations
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnOrder(0);
 
                     b.Property<string>("BrandName")
                         .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<Guid>("CreatedBy")
+                    b.Property<Guid?>("CreatedBy")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime>("CreatedTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<Guid?>("DeletedBy")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("DeletedTime")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Detail")
@@ -419,29 +463,68 @@ namespace Ecommerce.Infrastructure.Migrations
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
 
-                    b.Property<DateTime?>("LastModifiedTime")
-                        .HasColumnType("datetime2");
-
-                    b.Property<Guid>("ModifiedBy")
+                    b.Property<Guid?>("ModifiedBy")
                         .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("ModifiedTime")
+                        .HasColumnType("datetime2");
 
                     b.HasKey("Id");
 
                     b.HasIndex("BrandName", "Id");
 
                     b.ToTable("BRANDS", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("6d07a84f-da5e-4813-88a7-440c930ff9f2"),
+                            BrandName = "Nike",
+                            CreatedTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DeletedTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Detail = "American multinational corporation that designs, develops, and sells athletic footwear, apparel, and accessories.",
+                            IsDeleted = false,
+                            ModifiedTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = new Guid("e11efab9-5554-4818-8b3a-a3153f65f442"),
+                            BrandName = "Adidas",
+                            CreatedTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DeletedTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Detail = "German multinational corporation that designs and manufactures shoes, clothing and accessories.",
+                            IsDeleted = false,
+                            ModifiedTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = new Guid("8c5f8a8b-746a-44b2-b8c6-81a6fea6c812"),
+                            BrandName = "Puma",
+                            CreatedTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DeletedTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Detail = "German multinational corporation that designs and manufactures athletic and casual footwear, apparel and accessories.",
+                            IsDeleted = false,
+                            ModifiedTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        });
                 });
 
             modelBuilder.Entity("Ecommerce.Domain.Entities.Products.Category", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnOrder(0);
 
-                    b.Property<Guid>("CreatedBy")
+                    b.Property<Guid?>("CreatedBy")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime>("CreatedTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<Guid?>("DeletedBy")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("DeletedTime")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Description")
@@ -450,11 +533,11 @@ namespace Ecommerce.Infrastructure.Migrations
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
 
-                    b.Property<DateTime?>("LastModifiedTime")
-                        .HasColumnType("datetime2");
-
-                    b.Property<Guid>("ModifiedBy")
+                    b.Property<Guid?>("ModifiedBy")
                         .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("ModifiedTime")
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -465,53 +548,105 @@ namespace Ecommerce.Infrastructure.Migrations
                     b.HasIndex("Name", "Id");
 
                     b.ToTable("CATEGORY", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("ef0d9c58-46a6-405b-a58a-87786ca89e5d"),
+                            CreatedTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DeletedTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Description = "Athletic and casual sneakers",
+                            IsDeleted = false,
+                            ModifiedTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "Sneakers"
+                        });
                 });
 
             modelBuilder.Entity("Ecommerce.Domain.Entities.Products.Colors", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnOrder(0);
 
                     b.Property<string>("Color")
                         .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<Guid>("CreatedBy")
+                    b.Property<Guid?>("CreatedBy")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime>("CreatedTime")
                         .HasColumnType("datetime2");
 
-                    b.Property<Guid>("IdVadiant")
+                    b.Property<Guid?>("DeletedBy")
                         .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("DeletedTime")
+                        .HasColumnType("datetime2");
 
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
 
-                    b.Property<DateTime?>("LastModifiedTime")
-                        .HasColumnType("datetime2");
-
-                    b.Property<Guid>("ModifiedBy")
+                    b.Property<Guid?>("ModifiedBy")
                         .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("ModifiedTime")
+                        .HasColumnType("datetime2");
 
                     b.HasKey("Id");
 
                     b.HasIndex("Color", "Id");
 
                     b.ToTable("COLOR", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("57e98e77-4298-4028-9a3d-e54a118a9ed7"),
+                            Color = "White",
+                            CreatedTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DeletedTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsDeleted = false,
+                            ModifiedTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = new Guid("ca9aa08a-1b2d-41f6-97e8-ee0f3d6ccc18"),
+                            Color = "Black",
+                            CreatedTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DeletedTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsDeleted = false,
+                            ModifiedTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = new Guid("880db8b7-b2ef-46e2-8aca-e48d5477f729"),
+                            Color = "Red",
+                            CreatedTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DeletedTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsDeleted = false,
+                            ModifiedTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        });
                 });
 
             modelBuilder.Entity("Ecommerce.Domain.Entities.Products.Images", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnOrder(0);
 
-                    b.Property<Guid>("CreatedBy")
+                    b.Property<Guid?>("CreatedBy")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime>("CreatedTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<Guid?>("DeletedBy")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("DeletedTime")
                         .HasColumnType("datetime2");
 
                     b.Property<Guid>("IdVariant")
@@ -520,11 +655,11 @@ namespace Ecommerce.Infrastructure.Migrations
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
 
-                    b.Property<DateTime?>("LastModifiedTime")
-                        .HasColumnType("datetime2");
-
-                    b.Property<Guid>("ModifiedBy")
+                    b.Property<Guid?>("ModifiedBy")
                         .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("ModifiedTime")
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -547,12 +682,19 @@ namespace Ecommerce.Infrastructure.Migrations
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnOrder(0);
 
-                    b.Property<Guid>("CreatedBy")
+                    b.Property<Guid?>("CreatedBy")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime>("CreatedTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<Guid?>("DeletedBy")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("DeletedTime")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Detail")
@@ -562,33 +704,62 @@ namespace Ecommerce.Infrastructure.Migrations
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
 
-                    b.Property<DateTime?>("LastModifiedTime")
-                        .HasColumnType("datetime2");
-
                     b.Property<string>("MaterialType")
                         .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<Guid>("ModifiedBy")
+                    b.Property<Guid?>("ModifiedBy")
                         .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("ModifiedTime")
+                        .HasColumnType("datetime2");
 
                     b.HasKey("Id");
 
                     b.HasIndex("MaterialType", "Id");
 
                     b.ToTable("MATERIALS", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("b17bf4cc-a5f8-43c7-bcd1-d383dc421df2"),
+                            CreatedTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DeletedTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Detail = "High-quality, durable leather material for premium footwear.",
+                            IsDeleted = false,
+                            MaterialType = "Leather",
+                            ModifiedTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = new Guid("08ca7bcf-addc-461f-b407-3de3ae138b87"),
+                            CreatedTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DeletedTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Detail = "Lightweight, breathable synthetic material for athletic shoes.",
+                            IsDeleted = false,
+                            MaterialType = "Synthetic",
+                            ModifiedTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        });
                 });
 
             modelBuilder.Entity("Ecommerce.Domain.Entities.Products.ModelTypes", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnOrder(0);
 
-                    b.Property<Guid>("CreatedBy")
+                    b.Property<Guid?>("CreatedBy")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime>("CreatedTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<Guid?>("DeletedBy")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("DeletedTime")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Detail")
@@ -598,33 +769,52 @@ namespace Ecommerce.Infrastructure.Migrations
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
 
-                    b.Property<DateTime?>("LastModifiedTime")
-                        .HasColumnType("datetime2");
-
                     b.Property<string>("ModelType")
                         .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<Guid>("ModifiedBy")
+                    b.Property<Guid?>("ModifiedBy")
                         .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("ModifiedTime")
+                        .HasColumnType("datetime2");
 
                     b.HasKey("Id");
 
                     b.HasIndex("ModelType", "Id");
 
                     b.ToTable("MODELTYPE", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("a5ce9ec3-2757-48ac-ba1e-269584dd276e"),
+                            CreatedTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DeletedTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Detail = "Sneakers that sit below the ankle, offering flexibility and versatility.",
+                            IsDeleted = false,
+                            ModelType = "Low-top",
+                            ModifiedTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        });
                 });
 
             modelBuilder.Entity("Ecommerce.Domain.Entities.Products.Products", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnOrder(0);
 
-                    b.Property<Guid>("CreatedBy")
+                    b.Property<Guid?>("CreatedBy")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime>("CreatedTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<Guid?>("DeletedBy")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("DeletedTime")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Description")
@@ -654,11 +844,11 @@ namespace Ecommerce.Infrastructure.Migrations
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
 
-                    b.Property<DateTime?>("LastModifiedTime")
-                        .HasColumnType("datetime2");
-
-                    b.Property<Guid>("ModifiedBy")
+                    b.Property<Guid?>("ModifiedBy")
                         .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("ModifiedTime")
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -669,6 +859,10 @@ namespace Ecommerce.Infrastructure.Migrations
 
                     b.Property<DateTime>("ReleaseDate")
                         .HasColumnType("datetime2");
+
+                    b.Property<string>("SKU")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
@@ -687,28 +881,97 @@ namespace Ecommerce.Infrastructure.Migrations
                     b.HasIndex("Name", "Id");
 
                     b.ToTable("PRODUCTS", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("b1c1c9aa-af8d-4360-a4b4-b648487f0ab0"),
+                            CreatedTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DeletedTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Description = "Iconic Nike sneaker with excellent cushioning.",
+                            IdBrand = new Guid("6d07a84f-da5e-4813-88a7-440c930ff9f2"),
+                            IdCategory = new Guid("ef0d9c58-46a6-405b-a58a-87786ca89e5d"),
+                            IdGender = new Guid("43009fc4-9d8c-4d02-91fb-129c45b09680"),
+                            IdMaterial = new Guid("08ca7bcf-addc-461f-b407-3de3ae138b87"),
+                            IdModel = new Guid("a5ce9ec3-2757-48ac-ba1e-269584dd276e"),
+                            IdSoleType = new Guid("0720f4f0-304b-40c4-9d5e-c02bca032794"),
+                            IdStyle = new Guid("fec9b1ab-f7e5-423f-8932-caa81b19cf7c"),
+                            IsDeleted = false,
+                            ModifiedTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "Air Max 90",
+                            Price = 120.00m,
+                            ReleaseDate = new DateTime(2023, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            SKU = "AM90-001"
+                        },
+                        new
+                        {
+                            Id = new Guid("8843bcc1-2ff3-4ff6-a495-8c542a047ddb"),
+                            CreatedTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DeletedTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Description = "Classic Adidas sneaker with shell toe.",
+                            IdBrand = new Guid("e11efab9-5554-4818-8b3a-a3153f65f442"),
+                            IdCategory = new Guid("ef0d9c58-46a6-405b-a58a-87786ca89e5d"),
+                            IdGender = new Guid("5eefb6fb-56b9-4f68-92f2-f325b8304d57"),
+                            IdMaterial = new Guid("b17bf4cc-a5f8-43c7-bcd1-d383dc421df2"),
+                            IdModel = new Guid("a5ce9ec3-2757-48ac-ba1e-269584dd276e"),
+                            IdSoleType = new Guid("0720f4f0-304b-40c4-9d5e-c02bca032794"),
+                            IdStyle = new Guid("fec9b1ab-f7e5-423f-8932-caa81b19cf7c"),
+                            IsDeleted = false,
+                            ModifiedTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "Superstar",
+                            Price = 80.00m,
+                            ReleaseDate = new DateTime(2023, 2, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            SKU = "SS-001"
+                        },
+                        new
+                        {
+                            Id = new Guid("3d3bd16c-b27f-4399-a499-0654438609bb"),
+                            CreatedTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DeletedTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Description = "Timeless Puma sneaker with suede upper.",
+                            IdBrand = new Guid("8c5f8a8b-746a-44b2-b8c6-81a6fea6c812"),
+                            IdCategory = new Guid("ef0d9c58-46a6-405b-a58a-87786ca89e5d"),
+                            IdGender = new Guid("df91e3d9-a113-4145-ba39-6787a6a98218"),
+                            IdMaterial = new Guid("b17bf4cc-a5f8-43c7-bcd1-d383dc421df2"),
+                            IdModel = new Guid("a5ce9ec3-2757-48ac-ba1e-269584dd276e"),
+                            IdSoleType = new Guid("0720f4f0-304b-40c4-9d5e-c02bca032794"),
+                            IdStyle = new Guid("fec9b1ab-f7e5-423f-8932-caa81b19cf7c"),
+                            IsDeleted = false,
+                            ModifiedTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "Suede Classic",
+                            Price = 65.00m,
+                            ReleaseDate = new DateTime(2023, 3, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            SKU = "SC-001"
+                        });
                 });
 
             modelBuilder.Entity("Ecommerce.Domain.Entities.Products.Sizes", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnOrder(0);
 
-                    b.Property<Guid>("CreatedBy")
+                    b.Property<Guid?>("CreatedBy")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime>("CreatedTime")
                         .HasColumnType("datetime2");
 
+                    b.Property<Guid?>("DeletedBy")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("DeletedTime")
+                        .HasColumnType("datetime2");
+
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
 
-                    b.Property<DateTime?>("LastModifiedTime")
-                        .HasColumnType("datetime2");
-
-                    b.Property<Guid>("ModifiedBy")
+                    b.Property<Guid?>("ModifiedBy")
                         .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("ModifiedTime")
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("Size")
                         .IsRequired()
@@ -719,18 +982,54 @@ namespace Ecommerce.Infrastructure.Migrations
                     b.HasIndex("Size", "Id");
 
                     b.ToTable("SIZE", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("c1c2358d-e669-45b0-ab49-b5558978f4c2"),
+                            CreatedTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DeletedTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsDeleted = false,
+                            ModifiedTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Size = "US 8 / EU 41"
+                        },
+                        new
+                        {
+                            Id = new Guid("2b2e50a0-6fb2-40b7-b660-315b300d48bd"),
+                            CreatedTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DeletedTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsDeleted = false,
+                            ModifiedTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Size = "US 9 / EU 42"
+                        },
+                        new
+                        {
+                            Id = new Guid("9fb06243-06ab-4e61-ac4d-0a78a6545347"),
+                            CreatedTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DeletedTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsDeleted = false,
+                            ModifiedTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Size = "US 10 / EU 43"
+                        });
                 });
 
             modelBuilder.Entity("Ecommerce.Domain.Entities.Products.SoleTypes", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnOrder(0);
 
-                    b.Property<Guid>("CreatedBy")
+                    b.Property<Guid?>("CreatedBy")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime>("CreatedTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<Guid?>("DeletedBy")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("DeletedTime")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Detail")
@@ -740,11 +1039,11 @@ namespace Ecommerce.Infrastructure.Migrations
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
 
-                    b.Property<DateTime?>("LastModifiedTime")
-                        .HasColumnType("datetime2");
-
-                    b.Property<Guid>("ModifiedBy")
+                    b.Property<Guid?>("ModifiedBy")
                         .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("ModifiedTime")
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("SoleType")
                         .IsRequired()
@@ -755,18 +1054,37 @@ namespace Ecommerce.Infrastructure.Migrations
                     b.HasIndex("SoleType", "Id");
 
                     b.ToTable("SOLETYPE", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("0720f4f0-304b-40c4-9d5e-c02bca032794"),
+                            CreatedTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DeletedTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Detail = "A thin, level sole providing close contact with the ground.",
+                            IsDeleted = false,
+                            ModifiedTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            SoleType = "Flat"
+                        });
                 });
 
             modelBuilder.Entity("Ecommerce.Domain.Entities.Products.Styles", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnOrder(0);
 
-                    b.Property<Guid>("CreatedBy")
+                    b.Property<Guid?>("CreatedBy")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime>("CreatedTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<Guid?>("DeletedBy")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("DeletedTime")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Detail")
@@ -776,11 +1094,11 @@ namespace Ecommerce.Infrastructure.Migrations
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
 
-                    b.Property<DateTime?>("LastModifiedTime")
-                        .HasColumnType("datetime2");
-
-                    b.Property<Guid>("ModifiedBy")
+                    b.Property<Guid?>("ModifiedBy")
                         .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("ModifiedTime")
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("Style")
                         .IsRequired()
@@ -791,18 +1109,37 @@ namespace Ecommerce.Infrastructure.Migrations
                     b.HasIndex("Style", "Id");
 
                     b.ToTable("STYLES", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("fec9b1ab-f7e5-423f-8932-caa81b19cf7c"),
+                            CreatedTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DeletedTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Detail = "Performance-oriented sneakers designed for sports and physical activities.",
+                            IsDeleted = false,
+                            ModifiedTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Style = "Athletic"
+                        });
                 });
 
             modelBuilder.Entity("Ecommerce.Domain.Entities.Products.Variants", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnOrder(0);
 
-                    b.Property<Guid>("CreatedBy")
+                    b.Property<Guid?>("CreatedBy")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime>("CreatedTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<Guid?>("DeletedBy")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("DeletedTime")
                         .HasColumnType("datetime2");
 
                     b.Property<Guid>("IdColor")
@@ -814,17 +1151,14 @@ namespace Ecommerce.Infrastructure.Migrations
                     b.Property<Guid>("IdSize")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("IdVarinat")
-                        .HasColumnType("uniqueidentifier");
-
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
 
-                    b.Property<DateTime?>("LastModifiedTime")
-                        .HasColumnType("datetime2");
-
-                    b.Property<Guid>("ModifiedBy")
+                    b.Property<Guid?>("ModifiedBy")
                         .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("ModifiedTime")
+                        .HasColumnType("datetime2");
 
                     b.Property<int>("Quantity")
                         .HasColumnType("int");
@@ -838,6 +1172,116 @@ namespace Ecommerce.Infrastructure.Migrations
                     b.HasIndex("IdProduct", "Id");
 
                     b.ToTable("VARIANTS", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("3670d2b6-5573-4380-9beb-8645716d1d33"),
+                            CreatedTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DeletedTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IdColor = new Guid("57e98e77-4298-4028-9a3d-e54a118a9ed7"),
+                            IdProduct = new Guid("b1c1c9aa-af8d-4360-a4b4-b648487f0ab0"),
+                            IdSize = new Guid("c1c2358d-e669-45b0-ab49-b5558978f4c2"),
+                            IsDeleted = false,
+                            ModifiedTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Quantity = 100
+                        },
+                        new
+                        {
+                            Id = new Guid("69c307a2-89fc-4a81-b8b0-34e59024dccc"),
+                            CreatedTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DeletedTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IdColor = new Guid("ca9aa08a-1b2d-41f6-97e8-ee0f3d6ccc18"),
+                            IdProduct = new Guid("b1c1c9aa-af8d-4360-a4b4-b648487f0ab0"),
+                            IdSize = new Guid("2b2e50a0-6fb2-40b7-b660-315b300d48bd"),
+                            IsDeleted = false,
+                            ModifiedTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Quantity = 100
+                        },
+                        new
+                        {
+                            Id = new Guid("5c422f52-d9d0-4307-a09d-70b37413bf7a"),
+                            CreatedTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DeletedTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IdColor = new Guid("880db8b7-b2ef-46e2-8aca-e48d5477f729"),
+                            IdProduct = new Guid("b1c1c9aa-af8d-4360-a4b4-b648487f0ab0"),
+                            IdSize = new Guid("9fb06243-06ab-4e61-ac4d-0a78a6545347"),
+                            IsDeleted = false,
+                            ModifiedTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Quantity = 100
+                        },
+                        new
+                        {
+                            Id = new Guid("a342cd47-7d0b-4f14-a778-0c695b2ff529"),
+                            CreatedTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DeletedTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IdColor = new Guid("57e98e77-4298-4028-9a3d-e54a118a9ed7"),
+                            IdProduct = new Guid("8843bcc1-2ff3-4ff6-a495-8c542a047ddb"),
+                            IdSize = new Guid("c1c2358d-e669-45b0-ab49-b5558978f4c2"),
+                            IsDeleted = false,
+                            ModifiedTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Quantity = 100
+                        },
+                        new
+                        {
+                            Id = new Guid("8e479cc9-31a2-4fa5-a588-1dd55f66a927"),
+                            CreatedTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DeletedTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IdColor = new Guid("ca9aa08a-1b2d-41f6-97e8-ee0f3d6ccc18"),
+                            IdProduct = new Guid("8843bcc1-2ff3-4ff6-a495-8c542a047ddb"),
+                            IdSize = new Guid("2b2e50a0-6fb2-40b7-b660-315b300d48bd"),
+                            IsDeleted = false,
+                            ModifiedTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Quantity = 100
+                        },
+                        new
+                        {
+                            Id = new Guid("155d73de-35d2-4e8d-bc3f-7891fffc46ce"),
+                            CreatedTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DeletedTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IdColor = new Guid("880db8b7-b2ef-46e2-8aca-e48d5477f729"),
+                            IdProduct = new Guid("8843bcc1-2ff3-4ff6-a495-8c542a047ddb"),
+                            IdSize = new Guid("9fb06243-06ab-4e61-ac4d-0a78a6545347"),
+                            IsDeleted = false,
+                            ModifiedTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Quantity = 100
+                        },
+                        new
+                        {
+                            Id = new Guid("f4b403a1-9ed7-40fa-9148-7b6e84d3fa13"),
+                            CreatedTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DeletedTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IdColor = new Guid("57e98e77-4298-4028-9a3d-e54a118a9ed7"),
+                            IdProduct = new Guid("3d3bd16c-b27f-4399-a499-0654438609bb"),
+                            IdSize = new Guid("c1c2358d-e669-45b0-ab49-b5558978f4c2"),
+                            IsDeleted = false,
+                            ModifiedTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Quantity = 100
+                        },
+                        new
+                        {
+                            Id = new Guid("1da8a26d-2662-434d-92c4-ab9ac10ad117"),
+                            CreatedTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DeletedTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IdColor = new Guid("ca9aa08a-1b2d-41f6-97e8-ee0f3d6ccc18"),
+                            IdProduct = new Guid("3d3bd16c-b27f-4399-a499-0654438609bb"),
+                            IdSize = new Guid("2b2e50a0-6fb2-40b7-b660-315b300d48bd"),
+                            IsDeleted = false,
+                            ModifiedTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Quantity = 100
+                        },
+                        new
+                        {
+                            Id = new Guid("a28f6483-3a82-4f24-b315-127e49794a8a"),
+                            CreatedTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DeletedTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IdColor = new Guid("880db8b7-b2ef-46e2-8aca-e48d5477f729"),
+                            IdProduct = new Guid("3d3bd16c-b27f-4399-a499-0654438609bb"),
+                            IdSize = new Guid("9fb06243-06ab-4e61-ac4d-0a78a6545347"),
+                            IsDeleted = false,
+                            ModifiedTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Quantity = 100
+                        });
                 });
 
             modelBuilder.Entity("Ecommerce.Domain.Entities.Author.AddressOfCustomer", b =>
