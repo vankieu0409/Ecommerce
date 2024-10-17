@@ -1,8 +1,8 @@
-﻿using Ecommerce.Shared.Domains;
+﻿using Ecommerce.Shared.Domains.Implements;
 
 namespace Ecommerce.Domain.Entities.Author;
 
-public class RefreshToken : EntityBase<Guid>
+public class RefreshToken : Entity<Guid>
 {
 
     public string Token { get; set; }

@@ -12,7 +12,11 @@ public class ColorConfiguration : IEntityTypeConfiguration<Colors>
         builder.ToTable("COLOR");
         builder.HasKey(c => c.Id);
         builder.HasIndex(c => new { c.Color, c.Id });
-        builder.HasMany<Variants>(p => p.Variants).WithOne(c => c.Colors)
-            .HasForeignKey(c => c.IdColor).OnDelete(DeleteBehavior.Cascade);
+
+        // Configure one-to-many relationship
+        builder.HasMany(c => c.Variants)
+               .WithOne(v => v.Colors)
+               .HasForeignKey(v => v.IdColor)
+               .OnDelete(DeleteBehavior.Cascade);
     }
 }

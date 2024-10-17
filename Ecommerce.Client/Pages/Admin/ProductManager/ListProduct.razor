@@ -1,5 +1,4 @@
-﻿@page "Admin/Products"
-@using Ecommerce.Client.Services.ProductService
+﻿@page "/Admin/Products"
 
 
 <MudCard>
@@ -18,12 +17,12 @@
             </HeaderContent>
             <RowTemplate>
                 <MudTd DataLabel="Name">@context.Name</MudTd>
-                <MudTd DataLabel="Position">@context.Position</MudTd>
+@*                 <MudTd DataLabel="Position">@context.Position</MudTd>
                 <MudTd DataLabel="Office">@context.Office</MudTd>
                 <MudTd DataLabel="Actions">
                     <MudIconButton Icon="@Icons.Material.Filled.Edit" Color="Color.Primary" OnClick="@(() => EditEmployee(context))" />
-                    <MudIconButton Icon="@Icons.Material.Filled.Delete" Color="Color.Error" OnClick="@(() => DeleteEmployee(context))" />
-                </MudTd>
+                    <MudIconButton Icon="@Icons.Material.Filled.Delete" Color="Color.Error" OnClick="@(() => DeleteEmployee(context))" /> 
+                </MudTd>*@
             </RowTemplate>
         </MudTable>
     </MudCardContent>
@@ -36,9 +35,9 @@
         </MudText>
     </TitleContent>
     <DialogContent>
-        <MudTextField @bind-Value="newEmployee.Name" Label="Name" />
+  @*       <MudTextField @bind-Value="newEmployee.Name" Label="Name" />
         <MudTextField @bind-Value="newEmployee.Position" Label="Position" />
-        <MudTextField @bind-Value="newEmployee.Office" Label="Office" />
+        <MudTextField @bind-Value="newEmployee.Office" Label="Office" /> *@
     </DialogContent>
     <DialogActions>
         <MudButton OnClick="Cancel">Cancel</MudButton>

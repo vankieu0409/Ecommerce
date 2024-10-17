@@ -1,8 +1,8 @@
-﻿using Ecommerce.Shared.Domains;
+﻿using Ecommerce.Shared.Domains.Implements;
 
 namespace Ecommerce.Domain.Entities.Author;
 
-public class RoleEntity : EntityAuditBase<Guid>
+public class RoleEntity : FullAuditedEntity<Guid>
 {
     public string Name { get; set; }
 

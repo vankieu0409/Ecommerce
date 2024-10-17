@@ -5,5 +5,5 @@ namespace Ecommerce.Application.Interfaces.IServices;
 
 public interface IProductService
 {
-    Task<PagedList<ProductDto>> GetAllProductAdmin(RequestParams request);
+    public Task<PagedList<ProductDto>> GetAllProductAdmin(RequestParams request);
 }

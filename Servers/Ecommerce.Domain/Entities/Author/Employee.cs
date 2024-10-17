@@ -1,10 +1,10 @@
 ﻿using Ecommerce.Domain.Entities.Orders;
 using Ecommerce.Domain.Enum;
-using Ecommerce.Shared.Domains;
+using Ecommerce.Shared.Domains.Implements;
 
 namespace Ecommerce.Domain.Entities.Author;
 
-public class Employee : EntityAuditBase<Guid>
+public class Employee : FullAuditedEntity<Guid>
 {
     /// <summary>
     /// Số Bảo hiểm xã hội của nhân viên

@@ -30,7 +30,6 @@ public partial class ListProduct : ComponentBase
             PageSize = pageSize
         };
         productDtos = await _productService.GetAdminProducts(request);
-        productDtos
     }
     private void OpenDialog()
     {
