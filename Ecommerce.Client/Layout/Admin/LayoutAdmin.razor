@@ -18,13 +18,19 @@
                OpenMiniOnHover="true">
         <SidebarAdmin DrawOpen="@_drawerOpen"></SidebarAdmin>
     </MudDrawer>
-    <MudMainContent Class="pt-16 px-16">
+    <MudMainContent>
         @Body
     </MudMainContent>
 </MudLayout>
 
 @code {
     private bool _drawerOpen = true;
+
+
+    protected override void OnInitialized()
+    {
+        _js.InvokeAsync<object>("console.log", new string("OnInitialized"));
+    }
 
     private void _toggleDrawer()
     {

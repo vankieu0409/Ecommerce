@@ -1,13 +1,14 @@
-﻿@using Ecommerce.Client.Shared
+﻿
 @using AdminLayout=Ecommerce.Client.Layout.Admin.LayoutAdmin
+@using MainLayout=Ecommerce.Client.Shared.MainLayout
 
 
 <Router AppAssembly="@typeof(App).Assembly">
     <Found Context="routeData">
-        <RouteView RouteData="@routeData" DefaultLayout="@typeof(AdminLayout)"/>
+        <RouteView RouteData="@routeData" DefaultLayout="@typeof(MainLayout)" />
     </Found>
     <NotFound>
-        <LayoutView Layout="@typeof(AdminLayout)">
+        <LayoutView Layout="@typeof(MainLayout)">
             <p>Sorry, there's nothing at this address.</p>
         </LayoutView>
     </NotFound>
