@@ -1,8 +1,479 @@
-﻿
+﻿@page "/"
+@using MudBlazor
+
+<link href="~/css/kaiadmin.css" rel="stylesheet" />
+
+<MudContainer MaxWidth="MaxWidth.Large" Class="mt-16">
+    <MudGrid>
+        <!-- Product Images -->
+        <MudItem xs="12" md="7">
+            <MudPaper Elevation="0">
+                <MudGrid Style="height: 400px;">
+                    <!-- Cột bên trái cho 3 ảnh nhỏ và nút điều hướng -->
+                    <MudItem xs="3" Class="d-flex">
+                        <MudStack Spacing="0" AlignItems="AlignItems.Stretch" Class="w-100">
+                            <MudIconButton Icon="@Icons.Material.Filled.KeyboardArrowUp" Color="Color.Primary"
+                                           OnClick="@(() => NavigateImages(-1))" Class="mx-auto" />
+
+                            @for (int i = 0; i < 3; i++)
+                            {
+                                var index = i;
+                                <MudPaper Elevation="0"
+                                          Class="@($"d-flex border-image cursor-pointer flex-grow-1 {(selectedImage == images[(currentIndex + index) % images.Length] ? "selected-image" : "")}")"
+                                          @onclick="@(() => SelectImage(index))">
+                                    <MudImage Src="@images[(currentIndex + index) % images.Length]"
+                                              Alt="Product Image" ObjectFit="ObjectFit.Cover" Class="w-100" />
+                                </MudPaper>
+                            }
+
+                            <MudIconButton Icon="@Icons.Material.Filled.KeyboardArrowDown" Color="Color.Primary"
+                                           OnClick="@(() => NavigateImages(1))" Class="mx-auto" />
+                        </MudStack>
+                    </MudItem>
+
+                    <!-- Cột bên phải cho ảnh lớn -->
+                    <MudItem xs="9" Class="d-flex">
+                        <MudImage Src="@selectedImage" Alt="Selected Product Image"
+                                  ObjectFit="ObjectFit.Contain" Class="rounded-lg w-100 h-100" />
+                    </MudItem>
+                </MudGrid>
+            </MudPaper>
+        </MudItem>
+
+        <!-- Product Details -->
+        <MudItem xs="12" md="5">
+            <MudPaper Elevation="0" Class="pa-4">
+                <MudText Typo="Typo.h4" Class="mb-4">Product Name Goes Here</MudText>
+                <MudRating ReadOnly="true" SelectedValue="4" />
+                <MudLink Href="#reviews" Underline="Underline.Always">10 Review(s) | Add your review</MudLink>
+                <MudText Class="d-flex justify-center mt-1">
+                    <MudText Typo="Typo.h5" Color="Color.Error" Style="font-weight: bold;" Class="mr-2">$990.00$</MudText>
+                    <MudText Typo="Typo.body2" Style="text-decoration: line-through;" Class="fw-light">
+                        $980.00
+                    </MudText>
+                </MudText>
+                <MudChip T="string" Color="Color.Success" Size="Size.Small" Class="mt-2">In Stock</MudChip>
+                <MudText Typo="Typo.body1" Class="my-4">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</MudText>
+
+                <MudGrid Class="mt-3">
+                    <MudItem xs="6">
+                        <MudSelect T="string" Label="Size" AnchorOrigin="Origin.BottomCenter" FullWidth="true">
+                            <MudSelectItem Value="@("XS")">XS</MudSelectItem>
+                            <MudSelectItem Value="@("S")">S</MudSelectItem>
+                            <MudSelectItem Value="@("M")">M</MudSelectItem>
+                            <MudSelectItem Value="@("L")">L</MudSelectItem>
+                            <MudSelectItem Value="@("XL")">XL</MudSelectItem>
+                        </MudSelect>
+                    </MudItem>
+                    <MudItem xs="6">
+                        <MudSelect T="string" Label="Color" AnchorOrigin="Origin.BottomCenter" FullWidth="true">
+                            <MudSelectItem Value="@("Red")">Red</MudSelectItem>
+                            <MudSelectItem Value="@("Blue")">Blue</MudSelectItem>
+                            <MudSelectItem Value="@("Green")">Green</MudSelectItem>
+                        </MudSelect>
+                    </MudItem>
+                </MudGrid>
+
+
+                <MudStack Row="true" AlignItems="AlignItems.Center" Spacing="2" class="mt-2">
+                    <MudText>Quantity:</MudText>
+                    <MudPaper Elevation="0" Class="d-flex align-center border-quantity">
+                        <MudIconButton Icon="@Icons.Material.Filled.Remove" OnClick="@DecrementQuantity" Size="Size.Small" Class="px-1" />
+                        <MudNumericField @bind-Value="quantity"
+                                         Variant="Variant.Text"
+                                         HideSpinButtons="true"
+                                         Min="1"
+                                         Class="quantity-input" />
+                        <MudIconButton Icon="@Icons.Material.Filled.Add" OnClick="@IncrementQuantity" Size="Size.Small" Class="px-1" />
+                    </MudPaper>
+                </MudStack>
+
+                <MudGrid Class="mt-4" Spacing="2">
+                    <MudItem xs="6">
+                        <MudButton Variant="Variant.Filled" Color="Color.Error" FullWidth="true" Size="Size.Large">
+                            <MudIcon Icon="@Icons.Material.Filled.ShoppingCart" Class="mr-2" /> ADD TO CART
+                        </MudButton>
+                    </MudItem>
+                    <MudItem xs="6">
+                        <MudButton Variant="Variant.Filled" Color="Color.Primary" FullWidth="true" Size="Size.Large">
+                            <MudIcon Icon="@Icons.Material.Filled.ShoppingBasket" Class="mr-2" /> BUY NOW
+                        </MudButton>
+                    </MudItem>
+                </MudGrid>
+
+                <MudStack Row="true" Class="mt-4">
+                    <MudButton Variant="Variant.Text" StartIcon="@Icons.Material.Filled.Favorite">Add to Wishlist</MudButton>
+                    <MudButton Variant="Variant.Text" StartIcon="@Icons.Material.Filled.Compare">Add to Compare</MudButton>
+                </MudStack>
+
+                <MudDivider Class="my-4" />
+
+                @* <MudText Typo="Typo.subtitle1">Category: <MudLink Href="#">Headphones</MudLink>, <MudLink Href="#">Accessories</MudLink></MudText> *@
+
+                <MudStack Row="true" AlignItems="AlignItems.Center" Spacing="2" Class="mt-2">
+                    <MudText Typo="Typo.subtitle1">Share:</MudText>
+                    <MudStack Row="true" Spacing="2">
+                        <MudIconButton Icon="@Icons.Custom.Brands.Facebook" Color="Color.Default" Size="Size.Small" />
+                        <MudIconButton Icon="@Icons.Custom.Brands.Twitter" Color="Color.Default" Size="Size.Small" />
+                        <MudIconButton Icon="@Icons.Custom.Brands.Google" Color="Color.Default" Size="Size.Small" />
+                        <MudIconButton Icon="@Icons.Material.Filled.Email" Color="Color.Default" Size="Size.Small" />
+                    </MudStack>
+                </MudStack>
+            </MudPaper>
+        </MudItem>
+    </MudGrid>
+
+    <!-- Product Tabs -->
+    <MudTabs Elevation="2" Rounded="true" ApplyEffectsToContainer="true" PanelClass="pa-6" Class="mt-8">
+        <MudTabPanel Text="Description">
+            <MudText>
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+            </MudText>
+        </MudTabPanel>
+        <MudTabPanel Text="Details">
+            <MudText>
+                Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+            </MudText>
+        </MudTabPanel>
+        <MudTabPanel Text="Reviews (3)">
+            <!-- Add review content here -->
+            <MudGrid>
+                <!-- Rating Summary -->
+                <MudItem xs="12" md="3">
+                    <MudPaper Elevation="0" Class="pa-4">
+                        <MudText Typo="Typo.h5" Align="Align.Center" Class="mb-4">Đánh giá trung bình</MudText>
+                        <MudText Typo="Typo.h3" Align="Align.Center" Class="mb-2">4.5</MudText>
+                        <MudRating ReadOnly="true" SelectedValue="4" Size="Size.Large" Class="d-flex justify-center mb-4" />
+                        <MudList Dense="true" DisablePadding="true" T="object">
+                            @for (int i = 5; i >= 1; i--)
+                            {
+                                int value = i;
+                                <MudListItem DisableGutters="true">
+                                    <MudGrid Justify="Justify.SpaceBetween">
+                                        <MudItem xs="4" Class="d-flex justify-center">
+                                            <MudRating ReadOnly="true" SelectedValue="@value" Size="Size.Small" Style="transform: scale(0.8);" />
+                                        </MudItem>
+                                        <MudItem xs="6" Style="min-width: 100px;" Class="d-flex justify-center">
+                                            <MudProgressLinear Color="Color.Primary" Value="@(GetRatingPercentage(value))" Class="my-3" Style="width: 90%;" />
+                                        </MudItem>
+                                        <MudItem xs="2" Class="pr-0 d-flex justify-center">
+                                            <MudText Typo="Typo.body2">@GetRatingCount(value)</MudText>
+                                        </MudItem>
+                                    </MudGrid>
+                                </MudListItem>
+                            }
+                        </MudList>
+                    </MudPaper>
+                </MudItem>
+
+                <!-- Reviews List -->
+                <MudItem xs="12" md="6">
+                    <MudPaper Elevation="0" Class="pa-4">
+                        <MudText Typo="Typo.h5" Class="mb-4">Đánh giá của khách hàng</MudText>
+                        @foreach (var review in reviews)
+                        {
+                            <MudCard Elevation="0" Class="mb-4">
+                                <MudCardHeader>
+                                    <CardHeaderAvatar>
+                                        <MudAvatar Color="Color.Secondary">@review.Name[0]</MudAvatar>
+                                    </CardHeaderAvatar>
+                                    <CardHeaderContent>
+                                        <MudText Typo="Typo.body1">@review.Name</MudText>
+                                        <MudText Typo="Typo.caption">@review.Date</MudText>
+                                    </CardHeaderContent>
+                                    <CardHeaderActions>
+                                        <MudRating ReadOnly="true" SelectedValue="@review.Rating" />
+                                    </CardHeaderActions>
+                                </MudCardHeader>
+                                <MudCardContent>
+                                    <MudText Typo="Typo.body2">@review.Comment</MudText>
+                                </MudCardContent>
+                            </MudCard>
+                        }
+                        <MudPagination Count="4" SelectedChanged="PageChanged" />
+                    </MudPaper>
+                </MudItem>
+
+                <!-- Review Form -->
+                <MudItem xs="12" md="3">
+                    <MudPaper Elevation="0" Class="pa-4">
+                        <MudText Typo="Typo.h5" Class="mb-4">Viết đánh giá</MudText>
+                        <MudTextField T="string" Label="Tên của bạn" Variant="Variant.Outlined" Class="mb-3" />
+                        <MudTextField T="string" Label="Email của bạn" Variant="Variant.Outlined" Class="mb-3" />
+                        <MudTextField T="string" Label="Đánh giá của bạn" Variant="Variant.Outlined" Lines="4" Class="mb-3" />
+                        <MudText Typo="Typo.body2" Class="mb-2">Đánh giá của bạn:</MudText>
+                        <MudRating @bind-SelectedValue="userRating" />
+                        <MudButton Variant="Variant.Filled" Color="Color.Primary" FullWidth="true" Class="mt-4">Gửi đánh giá</MudButton>
+                    </MudPaper>
+                </MudItem>
+            </MudGrid>
+        </MudTabPanel>
+    </MudTabs>
+
+    <MudTabs Class="mt-16">
+        @* <MudText Typo="Typo.h4" Align="Align.Center" GutterBottom="true">Related Products</MudText> *@
+
+        <MudGrid Justify="Justify.Center" Spacing="2">
+            @foreach (var product in relatedProducts)
+            {
+                <MudItem Class="border p-2 ma-1 custom-item">
+                    <MudPaper Elevation="0" Class="h-100 d-flex flex-column" Style="overflow: hidden;">
+                        <MudCard Elevation="0" Class="product-card flex-grow-1">
+                            <MudCardMedia Image="@product.ImageSrc" Height="200">
+                                @if (!string.IsNullOrEmpty(product.Label))
+                                {
+                                    <MudChip T="string" Color="@product.LabelColor" Size="Size.Small" Class="product-label">@product.Label</MudChip>
+                                }
+                            </MudCardMedia>
+                            <MudCardContent>
+                                <MudText Typo="Typo.body2" Align="Align.Center" Color="Color.Dark" Class="mb-2 category-text">@product.Category</MudText>
+                                <MudText Typo="Typo.h6" Align="Align.Center" Class="mt-1">@product.Name</MudText>
+                                <MudText Align="Align.Center" Class="d-flex justify-center align-center mt-1">
+                                    <MudText Typo="Typo.h5" Color="Color.Error" Style="font-weight: bold;" Class="mr-2">$@product.Price.ToString("F2")</MudText>
+                                    @if (product.OldPrice.HasValue)
+                                    {
+                                        <MudText Typo="Typo.body2" Style="text-decoration: line-through;" Class="fw-light">
+                                            $@product.OldPrice.Value.ToString("F2")
+                                        </MudText>
+                                    }
+                                </MudText>
+                                <div class="d-flex justify-center">
+                                    <MudRating ReadOnly="true" SelectedValue="@product.Rating" />
+                                </div>
+                            </MudCardContent>
+                            <MudCardActions Class="d-flex justify-space-between mt-auto">
+                                <MudIconButton Icon="@Icons.Material.Filled.FavoriteBorder" Color="Color.Default" />
+                                <MudIconButton Icon="@Icons.Material.Filled.CompareArrows" Color="Color.Default" />
+                                <MudIconButton Icon="@Icons.Material.Filled.Visibility" Color="Color.Default" />
+                            </MudCardActions>
+                            <MudCardActions>
+                                <MudButton FullWidth="true" Variant="Variant.Filled" Color="Color.Primary" StartIcon="@Icons.Material.Filled.ShoppingCart">
+                                    Add to Cart
+                                </MudButton>
+                            </MudCardActions>
+                        </MudCard>
+                    </MudPaper>
+                </MudItem>
+            }
+        </MudGrid>
+    </MudTabs>
+</MudContainer>
+
 @page "/product"
 @using Ecommerce.Client.Shared
 @layout MainLayout
 <h1>123</h1>
 @code {
+    [Parameter]
+    public int Id { get; set; }
 
+    private int quantity = 1;
+
+    private string[] images = { "/img/adiasx.jpg", "/img/adidasforum.jpg", "/img/adidasr1.jpg" };
+    private int currentIndex = 0;
+    private string selectedImage = "/img/adiasx.jpg";
+
+    private void SelectImage(int offset)
+    {
+        selectedImage = images[(currentIndex + offset) % images.Length];
+    }
+
+    private void NavigateImages(int direction)
+    {
+        currentIndex = (currentIndex + direction + images.Length) % images.Length;
+        selectedImage = images[currentIndex];
+    }
+
+    private void IncrementQuantity()
+    {
+        quantity++;
+    }
+
+    private void DecrementQuantity()
+    {
+        if (quantity > 1) quantity--;
+    }
+
+    private int userRating = 0;
+    private List<Review> reviews = new List<Review>
+    {
+        new Review { Name = "John", Date = "27 DEC 2023, 8:00 PM", Rating = 4, Comment = "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua" },
+        new Review { Name = "Jane", Date = "26 DEC 2023, 7:30 PM", Rating = 5, Comment = "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat." },
+        new Review { Name = "Bob", Date = "25 DEC 2023, 9:15 PM", Rating = 3, Comment = "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur." }
+    };
+
+    private int GetRatingCount(int rating)
+    {
+        // Giả lập số lượng đánh giá cho mỗi mức sao
+        return rating switch
+        {
+            5 => 3,
+            4 => 2,
+            _ => 0
+        };
+    }
+
+    private double GetRatingPercentage(int rating)
+    {
+        int count = GetRatingCount(rating);
+        int total = reviews.Count;
+        return total > 0 ? (double)count / total * 100 : 0;
+    }
+
+    private void PageChanged(int i)
+    {
+        // Xử lý khi trang thay đổi
+    }
+
+    public class Review
+    {
+        public string Name { get; set; }
+        public string Date { get; set; }
+        public int Rating { get; set; }
+        public string Comment { get; set; }
+    }
+
+    private List<ProductModel> relatedProducts = new List<ProductModel>
+    {
+        new ProductModel
+        {
+            ImageSrc = "./img/adiasx.jpg",
+            Category = "Category",
+            Name = "Product name goes here",
+            Price = 980.00m,
+            OldPrice = 990.00m,
+            Rating = 0,
+            Label = "-30%",
+            LabelColor = Color.Error
+        },
+        new ProductModel
+        {
+            ImageSrc = "./img/adidasforum.jpg",
+            Category = "Category",
+            Name = "Product name goes here",
+            Price = 980.00m,
+            OldPrice = 990.00m,
+            Rating = 5,
+            Label = "NEW",
+            LabelColor = Color.Success
+        },
+        new ProductModel
+        {
+            ImageSrc = "./img/adidasr1.jpg",
+            Category = "Category",
+            Name = "Product name goes here",
+            Price = 980.00m,
+            OldPrice = 990.00m,
+            Rating = 4
+        },
+        new ProductModel
+        {
+            ImageSrc = "./img/adiasx.jpg",
+            Category = "Category",
+            Name = "Product name goes here",
+            Price = 980.00m,
+            OldPrice = 990.00m,
+            Rating = 0
+        }
+    };
+
+    public class ProductModel
+    {
+        public string ImageSrc { get; set; }
+        public string Category { get; set; }
+        public string Name { get; set; }
+        public decimal Price { get; set; }
+        public decimal? OldPrice { get; set; }
+        public int Rating { get; set; }
+        public string Label { get; set; }
+        public Color LabelColor { get; set; }
+    }
 }
+
+<style>
+
+    .border-image {
+        border: 1px solid #e0e0e0;
+        overflow: hidden;
+    }
+
+    .w-100 {
+        width: 100%;
+    }
+
+    .h-100 {
+        height: 100%;
+    }
+
+    .selected-image {
+        border-color: #ff0000 !important;
+    }
+
+    /* Chỉnh sửa Quantity*/
+    .border-quantity {
+        border: 1px solid #bdbdbd;
+        border-radius: 4px;
+        overflow: hidden;
+    }
+
+    .quantity-input {
+        text-align: center;
+        width: 40px;
+    }
+
+        .quantity-input ::deep input {
+            text-align: center;
+            padding: 0;
+            margin: 0;
+        }
+    /* Custom styles to match the original design more closely */
+    .mud-typography-h4 {
+        font-weight: 700;
+        margin-bottom: 10px;
+    }
+
+    .mud-typography-h5 {
+        color: #D10024;
+        font-weight: 700;
+    }
+
+    .mud-button-filled {
+        background-color: #D10024;
+        color: #FFFFFF;
+    }
+
+        .mud-button-filled:hover {
+            background-color: #A50018;
+        }
+
+    .mud-tabs {
+        margin-top: 60px;
+    }
+
+    .mud-tab {
+        font-weight: 500;
+        text-transform: uppercase;
+    }
+
+        .mud-tab.mud-selected {
+            color: #D10024;
+        }
+
+    .mud-tabs-panels {
+        background-color: #FFFFFF;
+    }
+
+    .product-card {
+        position: relative;
+    }
+
+    .product-label {
+        position: absolute;
+        top: 10px;
+        left: 10px;
+    }
+
+    .category-text {
+        text-transform: uppercase;
+    }
+</style>
