@@ -1,14 +1,11 @@
-﻿using System.Collections.ObjectModel;
-
-using Ecommerce.Shared.Domains;
+﻿using Ecommerce.Shared.Domains.Implements;
 
 namespace Ecommerce.Domain.Entities.Products;
 
-public class Sizes : EntityAuditBase<Guid>
+public class Sizes : FullAuditedEntity<Guid>
 {
     public string Size { get; set; }
 
-
-    public virtual Collection<Variants> Variants { get; set; }
+    public List<Variants> Variants { get; set; }
 
 }

@@ -1,9 +1,9 @@
 ﻿using Ecommerce.Domain.Entities.Orders;
-using Ecommerce.Shared.Domains;
+using Ecommerce.Shared.Domains.Implements;
 
 namespace Ecommerce.Domain.Entities.Author;
 
-public class Customer : EntityAuditBase<Guid>
+public class Customer : FullAuditedEntity<Guid>
 {
     public Guid IdAddress { get; set; }
     public Guid IdRole { get; set; }

@@ -13,6 +13,7 @@ public class SoleTypeConfiguration : IEntityTypeConfiguration<SoleTypes>
         builder.HasKey(c => c.Id);
         builder.HasIndex(c => new { c.SoleType, c.Id });
         builder.HasMany<Domain.Entities.Products.Products>(p => p.Products).WithOne(c => c.SoleType)
-            .HasForeignKey(c => c.IdSoleType).OnDelete(DeleteBehavior.Cascade);
+            .HasForeignKey(c => c.IdSoleType);
+        //.OnDelete(DeleteBehavior.Cascade);
     }
 }

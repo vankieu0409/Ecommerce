@@ -1,11 +1,11 @@
 ﻿using System.Reflection;
 
 using Ecommerce.Application.Interfaces.IRepositories;
+using Ecommerce.Application.Interfaces.IServices;
 using Ecommerce.Infrastructure.Logging;
 using Ecommerce.Infrastructure.Persistence.DBContext;
 using Ecommerce.Infrastructure.Persistence.Repositories;
-using Ecommerce.Shared.Common.Repositories;
-using Ecommerce.Shared.Domains.Interfaces;
+using Ecommerce.Infrastructure.Services;
 
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -22,10 +22,9 @@ public static class ServiceCollection
     /// <returns></returns>
     public static IServiceCollection ConfigureServices(this IServiceCollection services) =>
         services
+            .AddTransient<LoggingDelegatingHandler>()
             .AddScoped<IProductRepository, ProductRepository>()
-            // viết ở đây
-            .AddTransient<LoggingDelegatingHandler>();
-
+            .AddScoped<IProductService, ProductService>();
 
 
 
@@ -105,11 +104,18 @@ public static class ServiceCollection
         //        options.CallbackPath = "/signin-facebook";
         //    });
 
-        services.AddDbContext<ApplicationDbContext>(c => c.UseSqlServer(configuration.GetConnectionString("SQLConnection")));
+        services.AddDbContext<ApplicationDbContext>(c => c.UseSqlServer(configuration.GetConnectionString("SQLConnection"))
+            .LogTo(Console.WriteLine)
+            .EnableSensitiveDataLogging());
         services.AddHttpContextAccessor();
-        services.AddScoped(typeof(IRepositoryBase<,,>), typeof(RepositoryBase<,,>)); //chỉ dùng cho class Generic
-        services.AddScoped(typeof(IRepositoryQueryBase<,,>), typeof(RepositoryQueryBase<,,>)); //chỉ dùng cho class Generic
-
+        // services.AddScoped<IProductRepository, ProductRepository>(); //chỉ dùng cho class Generic
+        //services.AddScoped<ProductService>(provider =>
+        //{
+        //    var dbContext = provider.GetRequiredService<ApplicationDbContext>();
+        //    var logger = provider.GetRequiredService<ILogger<ProductRepository>>();
+        //    logger.LogInformation("Creating ProductRepository instance");
+        //    return new ProductService(new ProductRepository(dbContext, logger));
+        //});
         return services;
 
     }

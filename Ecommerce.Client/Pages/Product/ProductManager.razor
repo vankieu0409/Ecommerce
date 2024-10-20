@@ -1,5 +1,260 @@
-﻿<h3>ProductManager</h3>
+﻿
+@page "/"
+@layout MainLayout
 
+
+
+<MudPaper Class="navigation-paper" Style="margin-top: 230px;">
+    <hr style="border: 1px solid lightgray; width: 100%;" />
+    <MudContainer MaxWidth="MaxWidth.False" Class="navigation-container">
+        <MudList T="string" Class="navigation-menu" Style="display: flex; justify-content: space-around;background-color: white;pading:10px 0">
+            <MudListItem Href="/" Style="color: black;">Trang chủ</MudListItem>
+            <MudListItem Href="/deals" Style="color: black;">Khuyến mãi</MudListItem>
+            <MudListItem Href="/categories" Style="color: black;">Danh mục</MudListItem>
+            <MudListItem Href="/products" Style="color: black;">Sản phẩm</MudListItem>
+            <MudListItem Href="/contact" Style="color: black;">Liên hệ</MudListItem>
+        </MudList>
+    </MudContainer>
+    <hr style="border: 1px solid orange; width: 100%;" />
+</MudPaper>
+<MudContainer Class="categories-section" MaxWidth="MaxWidth.False" Style="padding-top: 50px; background-color: #f8f9fa; padding-bottom: 50px;">
+    <MudGrid Spacing="3">
+        <MudItem xs="12" sm="4">
+            <MudPaper Style="position: relative; background-color: transparent; height: 300px; overflow: hidden; border-radius: 15px;">
+                <img src="/Image-Index/giaycothap.jpg" alt="Laptop Collection" style="width: 100%; height: 100%; object-fit: cover; filter: brightness(70%);" />
+                <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: flex; flex-direction: column; justify-content: center; align-items: center; color: white; background-color: rgba(255, 0, 0, 0.6); padding: 20px; text-align: center;">
+                    <MudText Typo="Typo.h5" Style="font-weight: bold; font-size: 1.5rem; margin-bottom: 10px;">Giày cổ cao</MudText>
+                    <MudLink Href="/laptops" Style="font-size: 1.1rem; font-weight: bold; color: white; text-decoration: none; padding-top: 10px;">MUA NGAY ➔</MudLink>
+                </div>
+            </MudPaper>
+        </MudItem>
+
+        <MudItem xs="12" sm="4">
+            <MudPaper Style="position: relative; background-color: transparent; height: 300px; overflow: hidden; border-radius: 15px;">
+                <img src="/Image-Index/giaycothap.jpg" alt="Accessories Collection" style="width: 100%; height: 100%; object-fit: cover; filter: brightness(70%);" />
+                <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: flex; flex-direction: column; justify-content: center; align-items: center; color: white; background-color: rgba(255, 0, 0, 0.6); padding: 20px; text-align: center;">
+                    <MudText Typo="Typo.h5" Style="font-weight: bold; font-size: 1.5rem; margin-bottom: 10px;">Giày cổ thấp</MudText>
+                    <MudLink Href="/accessories" Style="font-size: 1.1rem; font-weight: bold; color: white; text-decoration: none; padding-top: 10px;">MUA NGAY ➔</MudLink>
+                </div>
+            </MudPaper>
+        </MudItem>
+
+        <MudItem xs="12" sm="4">
+            <MudPaper Style="position: relative; background-color: transparent; height: 300px; overflow: hidden; border-radius: 15px;">
+                <img src="/Image-Index/sliponvansgold.png" alt="Cameras Collection" style="width: 100%; height: 100%; object-fit: cover; filter: brightness(70%);" />
+                <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: flex; flex-direction: column; justify-content: center; align-items: center; color: white; background-color: rgba(255, 0, 0, 0.6); padding: 20px; text-align: center;">
+                    <MudText Typo="Typo.h5" Style="font-weight: bold; font-size: 1.5rem; margin-bottom: 10px;">Giày không dây</MudText>
+                    <MudLink Href="/cameras" Style="font-size: 1.1rem; font-weight: bold; color: white; text-decoration: none; padding-top: 10px;">MUA NGAY ➔</MudLink>
+                </div>
+            </MudPaper>
+        </MudItem>
+    </MudGrid>
+</MudContainer>
+<MudContainer MaxWidth="MaxWidth.ExtraLarge" Class="new-products-container">
+    <MudText Typo="Typo.h4" Class="new-products-title">Sản phẩm mới</MudText>
+    <MudNav MenuIcon="@Icons.Material.Filled.Menu" Class="mud-nav">
+        <MudNavLink Href="#" Class="active">Laptops</MudNavLink>
+        <MudNavLink Href="#">Smartphones</MudNavLink>
+        <MudNavLink Href="#">Cameras</MudNavLink>
+        <MudNavLink Href="#">Accessories</MudNavLink>
+    </MudNav>
+
+
+    <MudGrid Spacing="3" Gutter="0">
+        @foreach (var product in products)
+        {
+            <MudItem xs="3">
+                <div class="product-card"
+                     @onmouseover="() => ShowAddToCart(product.Id)"
+                     @onmouseout="() => HideAddToCart(product.Id)">
+                    <MudCard Class="product-card-content">
+                        <MudCardMedia Image="@product.Image" Alt="Product Image" Class="product-image" />
+                        <MudCardContent Class="product-info">
+                            <MudText Typo="Typo.caption" Class="product-category">@product.Category</MudText>
+                            <MudText Typo="Typo.h6" Class="product-name">@product.Name</MudText>
+                            <MudText Typo="Typo.h5" Class="product-price">
+                                <span class="sale-price">@product.SalePrice</span>
+                                <span class="original-price">@product.OriginalPrice</span>
+                            </MudText>
+                            <MudRating Value="@product.Rating" ReadOnly="true" MaxValue="5" Class="product-rating" />
+                            <div class="product-actions">
+                                <MudIconButton Icon="@Icons.Material.Filled.FavoriteBorder" Color="Color.Secondary" />
+                                <MudIconButton Icon="@Icons.Material.Filled.CompareArrows" Color="Color.Secondary" />
+                                <MudIconButton Icon="@Icons.Material.Filled.Visibility" Color="Color.Secondary" />
+                            </div>
+                        </MudCardContent>
+                    </MudCard>
+                    @if (product.IsHovered)
+                    {
+                        <MudButton Variant="Variant.Filled" Class="add-to-cart-btn">ADD TO CART</MudButton>
+                    }
+                </div>
+            </MudItem>
+        }
+    </MudGrid>
+</MudContainer>
+<style>
+
+    .mud-nav {
+        display: flex;
+        gap: 20px; /* Space between items */
+    }
+
+        .mud-nav a {
+            color: gray; /* Default color for non-active links */
+            text-decoration: none;
+            font-weight: normal;
+        }
+
+            .mud-nav a.active {
+                color: red; /* Color for active link */
+                font-weight: bold;
+                border-bottom: 2px solid red; /* Underline active link */
+            }
+
+            .mud-nav a:hover {
+                color: black; /* Optional hover effect */
+            }
+
+            .mud-nav a:focus {
+                outline: none;
+            }
+
+    .new-products-container {
+        padding: 20px;
+    }
+
+    .new-products-title {
+        font-weight: bold;
+        margin-bottom: 20px;
+    }
+
+    .product-category-tabs {
+        margin-bottom: 20px;
+    }
+
+    .tab-item {
+        font-weight: bold;
+        color: gray;
+    }
+
+        .tab-item.active {
+            color: red;
+        }
+
+    .product-card {
+        border: 1px solid #e0e0e0;
+        padding: 15px;
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+
+        .product-card.active {
+            border-color: red;
+        }
+
+    .product-card-content {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .product-image {
+        max-width: 100%;
+        height: auto;
+    }
+
+    .product-info {
+        text-align: center;
+    }
+
+    .product-category {
+        font-size: 12px;
+        color: gray;
+        margin-bottom: 5px;
+    }
+
+    .product-name {
+        font-weight: bold;
+        margin-bottom: 10px;
+    }
+
+    .product-price {
+        margin-bottom: 10px;
+    }
+
+    .sale-price {
+        color: red;
+        font-weight: bold;
+    }
+
+    .original-price {
+        text-decoration: line-through;
+        color: gray;
+        margin-left: 5px;
+    }
+
+    .product-rating {
+        margin-bottom: 10px;
+    }
+
+    .product-actions {
+        display: flex;
+        justify-content: space-around;
+        margin-bottom: 10px;
+    }
+
+    .add-to-cart-btn {
+        width: 100%;
+        background-color: red;
+        color: white;
+        font-weight: bold;
+        border-radius: 0;
+    }
+</style>
 @code {
+    // Code-behind của layout (nếu cần)
+    private List<Product> products = new List<Product>
+    {
+        new Product { Id = 1, Name = "Giày convers 1970s", SalePrice = "$980.00", OriginalPrice = "$990.00", Category = "Loại 1", Image = "image-url-1.png", Rating = 5 },
+        new Product { Id = 2, Name = "Giày vans slipon", SalePrice = "$880.00", OriginalPrice = "$890.00", Category = "Loại 2", Image = "image-url-2.png", Rating = 4 },
+        new Product { Id = 3, Name = "Giày convers classic", SalePrice = "$980.00", OriginalPrice = "$990.00", Category = "Loại 3", Image = "image-url-1.png", Rating = 5 },
+        new Product { Id = 4, Name = "Giày vans old skool", SalePrice = "$880.00", OriginalPrice = "$890.00", Category = "Loại 4", Image = "image-url-2.png", Rating = 4 },
 
+        // Thêm các sản phẩm khác tại đây...
+    };
+
+    // Hàm để hiển thị nút "Add to Cart"
+    private void ShowAddToCart(int productId)
+    {
+        var product = products.FirstOrDefault(p => p.Id == productId);
+        if (product != null)
+        {
+            product.IsHovered = true;
+        }
+    }
+
+    // Hàm để ẩn nút "Add to Cart"
+    private void HideAddToCart(int productId)
+    {
+        var product = products.FirstOrDefault(p => p.Id == productId);
+        if (product != null)
+        {
+            product.IsHovered = false;
+        }
+    }
+    public class Product
+    {
+        public int Id { get; set; }
+        public string Name { get; set; }
+        public string SalePrice { get; set; }
+        public string OriginalPrice { get; set; }
+        public string Category { get; set; }
+        public string Image { get; set; }
+        public int Rating { get; set; }
+        public bool IsHovered { get; set; } // Trạng thái để theo dõi xem ô có đang được hover không
+    }
 }

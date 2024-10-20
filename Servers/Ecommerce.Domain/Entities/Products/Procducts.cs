@@ -1,10 +1,8 @@
-﻿using System.Collections.ObjectModel;
-
-using Ecommerce.Shared.Domains;
+﻿using Ecommerce.Shared.Domains.Implements;
 
 namespace Ecommerce.Domain.Entities.Products
 {
-    public class Products : EntityAuditBase<Guid>
+    public class Products : FullAuditedEntity<Guid>
     {
         public Guid IdCategory { get; set; }
         public string Name { get; set; } // Tên của giày
@@ -22,13 +20,13 @@ namespace Ecommerce.Domain.Entities.Products
 
 
         //Navigation
-        public virtual Category Category { get; set; }
-        public virtual Brand Brand { get; set; }
-        public virtual ModelTypes ModelType { get; set; }
-        public virtual Styles Style { get; set; }
-        public virtual Materials Material { get; set; }
-        public virtual SoleTypes SoleType { get; set; }
+        public Category Category { get; set; }
+        public Brand Brand { get; set; }
+        public ModelTypes ModelType { get; set; }
+        public Styles Style { get; set; }
+        public Materials Material { get; set; }
+        public SoleTypes SoleType { get; set; }
 
-        public virtual Collection<Variants> Variants { get; set; } // Danh sách các biến thể của giày
+        public List<Variants> Variants { get; set; } // Danh sách các biến thể của giày
     }
 }

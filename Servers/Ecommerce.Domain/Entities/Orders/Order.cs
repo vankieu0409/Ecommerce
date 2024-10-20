@@ -1,9 +1,9 @@
 ﻿using Ecommerce.Domain.Entities.Author;
-using Ecommerce.Shared.Domains;
+using Ecommerce.Shared.Domains.Implements;
 
 namespace Ecommerce.Domain.Entities.Orders
 {
-    public class Order : EntityBase<Guid>
+    public class Order : Entity<Guid>
     {
         public Guid EmployeeId { get; set; }
         public Guid CustomerId { get; set; }

@@ -1,8 +1,8 @@
-﻿@using MudBlazor.Utilities
+﻿@using System.Linq.Expressions
 @inherits LayoutComponentBase
-@using Microsoft.AspNetCore.Components.Authorization
 @using MudBlazor
 
+<<<<<<< HEAD
 <MudAppBar Elevation="0" Color="Color.Dark">
     <MudContainer MaxWidth="MaxWidth.False" Style="padding: 0;">
         <!-- Top contact info -->
@@ -282,89 +282,82 @@
 
 
 <MudThemeProvider @ref="@_mudThemeProvider" @bind-IsDarkMode="@_isDarkMode" />
+=======
+<MudThemeProvider />
+<MudPopoverProvider />
+>>>>>>> 9efce13cbe59d9d718615832cbaa615d576c522c
 <MudDialogProvider />
 <MudSnackbarProvider />
-<MudLayout >
-    <MudAppBar Elevation="0" Color="Color.Transparent" Style="border-bottom: 1px solid #e0e0e0;">
-       
-       @*  <MudIconButton Icon="@Icons.Material.Filled.Menu" Color="Color.Inherit" Edge="Edge.Start" OnClick="@((e) => DrawerToggle())" />
-        <Search></Search>
-        <AuthorizeView>
-            <Authorized>
-                <MudSpacer />
-                <MudExpansionPanels>
-                    <MudIconButton Color="Color.Inherit" Edge="Edge.Start" OnClick="@((e) => ToggleRightDrawer())">
-                        <MudAvatar Color="Color.Warning" Image="@userDto.Image"/>
-                    </MudIconButton>
-                </MudExpansionPanels>
-            </Authorized>
-            <NotAuthorized>
-                <MudSpacer />
-                <MudIconButton Icon="@Icons.Material.Outlined.Login" OnClick="Login" Edge="Edge.End">Login</MudIconButton>
-            </NotAuthorized> 
-        </AuthorizeView>     *@
-        <MudToggleIconButton Toggled="@_isDarkMode" ToggledChanged="OnToggledChanged"
-                             Icon="@Icons.Material.Outlined.LightMode" Color="@Color.Inherit" Title="Default"
-                             ToggledIcon="@Icons.Material.Outlined.DarkMode" ToggledColor="@Color.Dark" ToggledTitle="Dark" Edge="Edge.End" />
-    </MudAppBar>
-    <MudDrawer @bind-Open="_drawerOpen" ClipMode="DrawerClipMode.Never" Breakpoint="Breakpoint.Sm" Elevation="24" Variant="@DrawerVariant.Persistent" OpenMiniOnHover="false">
-        <NavMenuCategory/>
-    </MudDrawer>
-    <MudDrawer @bind-Open="@openEnd" ClipMode="DrawerClipMode.Never" Breakpoint="Breakpoint.Sm" Anchor="Anchor.End" Elevation="24" Variant="@DrawerVariant.Persistent" OpenMiniOnHover="false">
-        <NavUser></NavUser>
-    </MudDrawer>
-    <MudMainContent>
-        <MudContainer>
-            @Body
+<MudLayout>
+    <MudAppBar Elevation="1" Color="Color.Dark">
+        <MudContainer MaxWidth="MaxWidth.False" Style="padding: 0;">
+            <!-- Top contact info -->
+            <MudGrid Gutter="0" Style="background-color: #222; color: white; padding: 1.5rem; align-items: center;">
+                <MudItem xs="6">
+                    <MudText Style="display: flex; align-items: center; font-size: 0.875rem;">
+                        <MudIcon Icon="@Icons.Material.Filled.Phone" Style="color: red; margin-right: 0.5rem;" />
+                        +0357906234
+                        <MudIcon Icon="@Icons.Material.Filled.Email" Style="color: red; margin-left: 1rem; margin-right: 0.5rem;" />
+                        manhlntph19847@fpt.edu.vn
+                        <MudIcon Icon="@Icons.Material.Filled.Place" Style="color: red; margin-left: 1rem; margin-right: 0.5rem;" />
+                        193 Phú Diễn
+                    </MudText>
+                </MudItem>
+                <MudItem xs="6" Style="text-align: right;">
+                    <MudText Style="display: flex; justify-content: flex-end; align-items: center; color: white; font-size: 0.875rem;">
+                        <span Style="margin-right: 0.5rem;">$ VND</span>
+                        <span Style="margin-right: 0.5rem;"> | </span>
+                        <MudLink Href="#" Style="margin-right: 0.5rem; color: white;">Tài khoản của tôi</MudLink>
+                    </MudText>
+                </MudItem>
+            </MudGrid>
+
+            <!-- Main header with logo, search, and icons -->
+            <MudGrid Gutter="0" Style="background-color: #000; color: white; padding: 1rem; align-items: center;">
+                <MudItem xs="2">
+                    <MudText Typo="Typo.h4" Style="font-weight: bold;font-size:30px">SNEAKER 141.</MudText>
+                </MudItem>
+
+                <MudItem xs="6" Style="display: flex; align-items: center; justify-content: center; margin-left: auto; margin-right: auto;">
+                    <MudSelect T="string" Placeholder="Tất cả loại giày" Variant="Variant.Text"
+                               Style="text-align: center; width: 200px; height: 50px; padding: 0; background-color: white; color: black; border-right: 1px solid #ccc; border-top-left-radius: 2rem; border-bottom-left-radius: 2rem;" />
+                    <MudTextField T="string" Placeholder="Tìm kiếm ở đây" Variant="Variant.Text"
+                                  Style="width: 350px; height: 50px; background-color: white; color: black;" />
+                    <MudButton Variant="Variant.Filled" Color="Color.Primary"
+                               Style="height: 50px; background-color: red; color: white; font-weight: bold; border-top-right-radius: 2rem; border-bottom-right-radius: 2rem; margin-left: -80px;">
+                        Tìm kiếm
+                    </MudButton>
+                </MudItem>
+
+
+                <MudItem xs="4" Style="display: flex; justify-content: flex-end; align-items: center; padding-right: 2rem;">
+                    <!-- Yêu thích -->
+                    <div Style="position: relative; display: inline-block;">
+                        <MudIconButton Icon="@Icons.Material.Filled.FavoriteBorder" Style="color: white;" />
+                        <span class="badge" Style="position: absolute; top: -10px; right: -10px; background-color: red; border-radius: 50%; padding: 0.25rem 0.5rem; color: white; font-size: 0.75rem;">2</span>
+                    </div>
+                    <MudText Style="margin-left: 0.5rem;">Yêu thích</MudText>
+
+                    <!-- Giỏ hàng -->
+                    <div Style="position: relative; display: inline-block; margin-left: 2rem;">
+                        <MudIconButton Icon="@Icons.Material.Filled.ShoppingCart" Style="color: white;" />
+                        <span class="badge" Style="position: absolute; top: -10px; right: -10px; background-color: red; border-radius: 50%; padding: 0.25rem 0.5rem; color: white; font-size: 0.75rem;">3</span>
+                    </div>
+                    <MudText Style="margin-left: 0.5rem;">Giỏ hàng</MudText>
+                </MudItem>
+            </MudGrid>
         </MudContainer>
+    </MudAppBar>
+
+    <MudMainContent>
+        @Body
     </MudMainContent>
 </MudLayout>
+
+
+
+
+
 @code {
-    //UserDto userDto = new UserDto();
-    bool _drawerOpen = true;
-    bool openEnd = false;
-    private bool _isDarkMode = false;
-    private MudThemeProvider _mudThemeProvider;
-    
 
-    public void OnToggledChanged(bool toggled)
-    {
-        // Because variable is not two-way bound, we need to update it ourself
-        _isDarkMode = toggled;
-    }
-
-    //protected  override async void OnInitialized()
-    //{
-    //    //userDto = await _localStorage.GetItemAsync<UserDto>("user");
-    //}
-
-    // protected override async Task OnAfterRenderAsync(bool firstRender)
-    // {
-    //     userDto = await _localStorage.GetItemAsync<UserDto>("user");
-    //     if (firstRender)
-    //     {
-    //         _isDarkMode = await _mudThemeProvider.GetSystemPreference();
-    //         StateHasChanged();
-    //     }
-    // }
-
-
-    // void DrawerToggle()
-    // {
-    //     _drawerOpen = !_drawerOpen;
-    // }
-    // void ToggleRightDrawer()
-    // {
-    //     openEnd = !openEnd;
-    // }
-    // void Login()
-    // {
-    //     _navigationManager.NavigateTo("/login");
-    // }
-
-    // protected async void UnloadHandler()
-    // {
-    //     await _jsRuntime.InvokeVoidAsync("beforunload");
-        
-    // }
 }

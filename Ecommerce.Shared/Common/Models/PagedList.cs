@@ -1,6 +1,3 @@
-using Microsoft.EntityFrameworkCore;
-using Ecommerce.Shared.Common.Models;
-
 namespace Ecommerce.Shared.Common.Models;
 
 public class PagedList<T> : List<T>
@@ -12,7 +9,7 @@ public class PagedList<T> : List<T>
             TotalItems = totalItems,
             PageSize = pageSize,
             CurrentPage = pageIndex,
-            TotalPages = (int) Math.Ceiling(totalItems / (double) pageSize)
+            TotalPages = (int)Math.Ceiling(totalItems / (double)pageSize)
         };
         AddRange(items);
     }
@@ -24,12 +21,12 @@ public class PagedList<T> : List<T>
         return _metaData;
     }
 
-    public static async Task<PagedList<T>> ToPagedList(IQueryable<T> source, int pageNumber, int pageSize)
+    public static async Task<PagedList<T>> ToPagedList(List<T> source, int pageNumber, int pageSize)
     {
-        var count = await source.CountAsync();
-        var items = await source
+        var count = source.Count();
+        var items = source
             .Skip((pageNumber - 1) * pageSize)
-            .Take(pageSize).ToListAsync();
+            .Take(pageSize).ToList();
 
         return new PagedList<T>(items, count, pageNumber, pageSize);
     }

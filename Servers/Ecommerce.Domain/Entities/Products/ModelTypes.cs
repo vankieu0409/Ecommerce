@@ -1,13 +1,11 @@
-﻿using System.Collections.ObjectModel;
-
-using Ecommerce.Shared.Domains;
+﻿using Ecommerce.Shared.Domains.Implements;
 
 namespace Ecommerce.Domain.Entities.Products;
 
-public class ModelTypes : EntityAuditBase<Guid>
+public class ModelTypes : FullAuditedEntity<Guid>
 {
     public string ModelType { get; set; } // Loại Chất Liệu
     public string Detail { get; set; } // Chi tiết
 
-    public virtual Collection<Products> Products { get; set; }
+    public List<Products> Products { get; set; }
 }

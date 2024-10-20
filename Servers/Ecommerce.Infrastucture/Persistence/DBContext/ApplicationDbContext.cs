@@ -1,6 +1,4 @@
-﻿using System.Diagnostics.CodeAnalysis;
-
-using Ecommerce.Domain.Entities.Author;
+﻿using Ecommerce.Domain.Entities.Author;
 using Ecommerce.Domain.Entities.Cart;
 using Ecommerce.Domain.Entities.Orders;
 using Ecommerce.Domain.Entities.Products;
@@ -12,15 +10,10 @@ namespace Ecommerce.Infrastructure.Persistence.DBContext;
 
 public class ApplicationDbContext : DbContext
 {
-    public ApplicationDbContext([NotNull] DbContextOptions<ApplicationDbContext> options) : base(options)
+    public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
     {
-        ChangeTracker.LazyLoadingEnabled = false;
-        ChangeTracker.QueryTrackingBehavior = QueryTrackingBehavior.NoTracking;
-    }
-    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-    {
-        base.OnConfiguring(optionsBuilder);
-        optionsBuilder.LogTo(Console.WriteLine);
+        //this.ChangeTracker.LazyLoadingEnabled = false;
+        //this.ChangeTracker.QueryTrackingBehavior = QueryTrackingBehavior.NoTracking;
     }
 
     public DbSet<Products> Products;

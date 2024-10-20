@@ -1,11 +1,11 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 
 using Ecommerce.Domain.Entities.Products;
-using Ecommerce.Shared.Domains;
+using Ecommerce.Shared.Domains.Implements;
 
 namespace Ecommerce.Domain.Entities.Orders
 {
-    public class OrderDetail : EntityAuditBase<Guid>
+    public class OrderDetail : FullAuditedEntity<Guid>
     {
         public Guid OrderId { get; set; }
         public Guid VariantId { get; set; }
