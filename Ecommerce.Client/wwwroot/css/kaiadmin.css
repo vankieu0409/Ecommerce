@@ -86,3 +86,26 @@ body {
         max-width: 25%;
     }
 }
+
+/*custom layout Item*/
+.custom-item {
+    flex: 0 0 auto;
+    width: 99%; /* 11/12 */
+    max-width: 99%;
+}
+
+/* Màn hình nhỏ (sm) */
+@media (min-width: 600px) {
+    .custom-item {
+        width: 41.67%; /* 5/12 */
+        max-width: 41.67%;
+    }
+}
+
+/* Màn hình trung bình và lớn hơn (md+) */
+@media (min-width: 960px) {
+    .custom-item {
+        width: 24%; /* Giữa 2/12 (16.67%) và 3/12 (25%) */
+        max-width: 24%;
+    }
+}
