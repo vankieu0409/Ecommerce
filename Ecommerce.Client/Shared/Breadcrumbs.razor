@@ -4,10 +4,10 @@
     <div class="container">
         <div class="row">
             <div class="col-md-12">
-                <h3 class="breadcrumb-header"></h3>
-                <MudBreadcrumbs Items="_items">
+                <h3 class="breadcrumb-header">@Title.ToUpper()</h3>
+                <MudBreadcrumbs Class="breadcrumb-tree" Items="_items">
                     <ItemTemplate Context="item">
-                        <MudLink Href="@item.Href" Color="Color.Dark">@item.Text.ToUpper()</MudLink>
+                        <MudLink Typo="Typo.input"  Href="@item.Href" Color="Color.Dark">@item.Text.ToUpper()</MudLink>
                     </ItemTemplate>
                 </MudBreadcrumbs>
             </div>
@@ -15,6 +15,8 @@
     </div>
 </div>
 @code {
+    [Parameter]
+    public string Title { get; set; }
     private List<BreadcrumbItem> _items { get; set; } = new List<BreadcrumbItem>();
 
     protected override void OnInitialized()
@@ -59,8 +61,14 @@
             display: inline-block;
         }
 
+            #breadcrumb .breadcrumb-tree li {
+                display: inline-block;
+                font-weight: 500;
+                text-transform: uppercase;
+            }
+
     ul, ol {
-        margin: 0;
+        margin: 0 ;
         padding: 0;
         list-style: none;
     }
