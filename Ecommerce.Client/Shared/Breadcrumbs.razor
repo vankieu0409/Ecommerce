@@ -1,0 +1,32 @@
+﻿@inject NavigationManager Navigation
+
+<MudBreadcrumbs Items="_items">
+    <ItemTemplate Context="item">
+        <MudLink Href="@item.Href" Color="Color.Dark" Typo="Typo.h5">@item.Text.ToUpper()</MudLink>
+    </ItemTemplate>
+</MudBreadcrumbs>
+
+@code {
+    private List<BreadcrumbItem> _items { get; set; } = new List<BreadcrumbItem>();
+
+    protected override void OnInitialized()
+    {
+        UpdateBreadcrumbs();
+        Navigation.LocationChanged += (sender, args) => UpdateBreadcrumbs();
+    }
+
+    private void UpdateBreadcrumbs()
+    {
+        var uri = new Uri(Navigation.Uri);
+        var segments = uri.Segments.Select(s => s.Trim('/')).Where(s => !string.IsNullOrEmpty(s)).ToList();
+
+        _items.Clear();
+        var url = "/";
+        foreach (var segment in segments)
+        {
+            url += $"{segment}/";
+            _items.Add(new BreadcrumbItem(segment, url));
+        }
+    }
+
+}

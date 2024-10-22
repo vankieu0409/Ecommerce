@@ -1,0 +1,81 @@
+﻿@page "/checkout"
+@using Ecommerce.Client.Model
+@layout MainLayout
+
+
+<MudMainContent>
+    <PageTitle></PageTitle>
+    <MudBreadcrumbs Items="_items">
+        <ItemTemplate Context="item">
+            <MudLink Href="@item.Href" Color="Color.Dark" Typo="Typo.h5">@item.Text.ToUpper()</MudLink>
+        </ItemTemplate>
+    </MudBreadcrumbs>
+
+    <MudGrid>
+        <MudItem xs="12" md="6">
+            <MudPaper>
+                <MudText Typo="Typo.h5">Billing Address</MudText>
+                <MudTextField T="string" Label="First Name"/>
+                <MudTextField T="string" Label="Last Name"/>
+                <MudTextField T="string" Label="Email"/>
+                <MudTextField T="string" Label="Address"/>
+                <MudAutocomplete T="AddressModel" MaxItems="100" Variant="Variant.Outlined" SearchFunc="@SearchProvide" ValueChanged=" async (e) => { _districts = await _common.GetDistricts(e.id); }" ToStringFunc="@(e => $"{e.name}")" Label="Tỉnh"/>
+                <MudAutocomplete T="AddressModel" MaxItems="100" Variant="Variant.Outlined" SearchFunc="@SearchDistrict" ValueChanged=" async (e) => { _wards = await _common.GetWasds(e.id); }" ToStringFunc="@(e => $"{e.name}")" Label="Huyện"/>
+                <MudTextField T="string" Label="ZIP Code"/>
+                <MudTextField T="string" Label="Telephone"/>
+                <MudCheckBox T="bool" Label="Create Account?"/>
+            </MudPaper>
+        </MudItem>
+        <MudItem xs="12" md="6">
+            <MudPaper>
+                <MudText Typo="Typo.h5">Your Order</MudText>
+                @* <MudTable>
+                aaa
+                </MudTable>
+                <MudRadioGroup>
+                @*   <MudRadio Value="" >Direct Bank Transfer </MudRadio>
+                <MudRadio Value="" >Cheque Payment </MudRadio>
+                <MudRadio Value="" >Paypal System </MudRadio>
+                </MudRadioGroup> *@
+                @* <MudCheckBox Label="I've read and accept the terms & conditions" /> *@
+                <MudButton Variant="Variant.Filled" Color="Color.Primary">Place Order</MudButton>
+            </MudPaper>
+        </MudItem>
+    </MudGrid>
+</MudMainContent>
+
+@code {
+    private List<BreadcrumbItem> _items = new List<BreadcrumbItem>
+    {
+        new BreadcrumbItem("Home", href: "/"),
+        new BreadcrumbItem("Checkout", href: "/checkout"),
+    };
+
+    private List<AddressModel> _provinces = new List<AddressModel>();
+    private List<AddressModel> _districts = new List<AddressModel>();
+    private List<AddressModel> _wards = new List<AddressModel>();
+
+
+    protected override async Task OnInitializedAsync()
+    {
+        _provinces = await _common.GetProvinces();
+    }
+
+    private async Task<IEnumerable<AddressModel>> SearchProvide(string value, CancellationToken token)
+    {
+        await Task.Delay(5, token);
+        if (string.IsNullOrEmpty(value))
+            return _provinces;
+        return _provinces.Where(e => e.name.Contains(value, StringComparison.InvariantCultureIgnoreCase)).ToList();
+    }
+
+
+    private async Task<IEnumerable<AddressModel>> SearchDistrict(string value, CancellationToken token)
+    {
+        await Task.Delay(5, token);
+        if (string.IsNullOrEmpty(value))
+            return _districts;
+        return _districts.Where(e => e.name.Contains(value, StringComparison.InvariantCultureIgnoreCase)).ToList();
+    }
+
+}
