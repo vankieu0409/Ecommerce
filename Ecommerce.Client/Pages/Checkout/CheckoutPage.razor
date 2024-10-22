@@ -4,26 +4,22 @@
 
 
 <MudMainContent>
-    <PageTitle></PageTitle>
-    <MudBreadcrumbs Items="_items">
-        <ItemTemplate Context="item">
-            <MudLink Href="@item.Href" Color="Color.Dark" Typo="Typo.h5">@item.Text.ToUpper()</MudLink>
-        </ItemTemplate>
-    </MudBreadcrumbs>
+    <Title>Checkout</Title>
+    <Breadcrumbs></Breadcrumbs>
 
     <MudGrid>
         <MudItem xs="12" md="6">
             <MudPaper>
                 <MudText Typo="Typo.h5">Billing Address</MudText>
-                <MudTextField T="string" Label="First Name"/>
-                <MudTextField T="string" Label="Last Name"/>
-                <MudTextField T="string" Label="Email"/>
-                <MudTextField T="string" Label="Address"/>
-                <MudAutocomplete T="AddressModel" MaxItems="100" Variant="Variant.Outlined" SearchFunc="@SearchProvide" ValueChanged=" async (e) => { _districts = await _common.GetDistricts(e.id); }" ToStringFunc="@(e => $"{e.name}")" Label="Tỉnh"/>
-                <MudAutocomplete T="AddressModel" MaxItems="100" Variant="Variant.Outlined" SearchFunc="@SearchDistrict" ValueChanged=" async (e) => { _wards = await _common.GetWasds(e.id); }" ToStringFunc="@(e => $"{e.name}")" Label="Huyện"/>
-                <MudTextField T="string" Label="ZIP Code"/>
-                <MudTextField T="string" Label="Telephone"/>
-                <MudCheckBox T="bool" Label="Create Account?"/>
+                <MudTextField T="string" Label="First Name" />
+                <MudTextField T="string" Label="Last Name" />
+                <MudTextField T="string" Label="Email" />
+                <MudTextField T="string" Label="Address" />
+                <MudAutocomplete T="AddressModel" MaxItems="100" Variant="Variant.Outlined" SearchFunc="@SearchProvide" ValueChanged=" async (e) => { _districts = await _common.GetDistricts(e.id); }" ToStringFunc="@(e => $"{e.name}")" Label="Tỉnh" />
+                <MudAutocomplete T="AddressModel" MaxItems="100" Variant="Variant.Outlined" SearchFunc="@SearchDistrict" ValueChanged=" async (e) => { _wards = await _common.GetWasds(e.id); }" ToStringFunc="@(e => $"{e.name}")" Label="Huyện" />
+                <MudTextField T="string" Label="ZIP Code" />
+                <MudTextField T="string" Label="Telephone" />
+                <MudCheckBox T="bool" Label="Create Account?" />
             </MudPaper>
         </MudItem>
         <MudItem xs="12" md="6">
