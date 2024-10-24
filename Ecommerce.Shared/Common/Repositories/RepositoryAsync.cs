@@ -129,6 +129,7 @@ public class RepositoryAsync<TEntity> : IRepositoryAsync<TEntity>, IDisposable w
     {
         this._dbContext?.Dispose();
         GC.SuppressFinalize(this);
+        _logger.LogInformation("DbContext Disposed! ");
     }
 
     private void PreSaveChange(TEntity entity)

@@ -2,16 +2,18 @@
 
 using Ecommerce.Application.Interfaces.IRepositories;
 using Ecommerce.Application.Interfaces.IServices;
+using Ecommerce.Application.Services;
 using Ecommerce.Infrastructure.Logging;
 using Ecommerce.Infrastructure.Persistence.DBContext;
 using Ecommerce.Infrastructure.Persistence.Repositories;
-using Ecommerce.Infrastructure.Services;
 
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Ecommerce.Infrastructure.Extention;
+using Serilog;
+
+namespace Ecommerce.Infrastructure.Extension;
 
 public static class ServiceCollection
 {
@@ -21,12 +23,17 @@ public static class ServiceCollection
     /// <param name="services"></param>
     /// <returns></returns>
     public static IServiceCollection ConfigureServices(this IServiceCollection services) =>
-        services
-            .AddTransient<LoggingDelegatingHandler>()
-            .AddScoped<IProductRepository, ProductRepository>()
+        services.AddScoped<IProductRepository, ProductRepository>()
             .AddScoped<IProductService, ProductService>();
 
-
+    public static IServiceCollection ConfigureLogging(this IServiceCollection services) =>
+        services.AddSerilog(logbuilder =>
+                logbuilder.Enrich.FromLogContext()
+                          .Enrich.WithMachineName()
+                          .WriteTo.Console()
+                          .WriteTo.Debug()
+                          .MinimumLevel.Debug())
+            .AddTransient<LoggingDelegatingHandler>();
 
 
 

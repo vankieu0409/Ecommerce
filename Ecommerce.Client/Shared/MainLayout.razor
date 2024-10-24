@@ -24,41 +24,41 @@
             </MudItem>
         </MudGrid>
 
-        <!-- Main header with logo, search, and icons -->
-        <MudGrid Gutter="0" Style="background-color: #000; color: white; padding: 1rem; align-items: center;">
-            <MudItem xs="2">
-                <MudText Typo="Typo.h4" Style="font-weight: bold;font-size:30px">SNEAKER 141.</MudText>
-            </MudItem>
-            
-            <MudItem xs="6" Style="display: flex; align-items: center; justify-content: center; margin-left: auto; margin-right: auto;">
-                <MudSelect T="string" Placeholder="Tất cả loại giày" Variant="Variant.Text"
-                           Style="text-align: center; width: 200px; height: 50px; padding: 0; background-color: white; color: black; border-right: 1px solid #ccc; border-top-left-radius: 2rem; border-bottom-left-radius: 2rem;" />
-                <MudTextField T="string" Placeholder="Tìm kiếm ở đây" Variant="Variant.Text"
-                              Style="width: 350px; height: 50px; background-color: white; color: black;" />
-                <MudButton Variant="Variant.Filled" Color="Color.Primary"
-                           Style="height: 50px; background-color: red; color: white; font-weight: bold; border-top-right-radius: 2rem; border-bottom-right-radius: 2rem; margin-left: -80px;">
-                    Tìm kiếm
-                </MudButton>
-            </MudItem>
+            <!-- Main header with logo, search, and icons -->
+            <MudGrid Gutter="0" Style="background-color: #000; color: white; padding: 1rem; align-items: center;">
+                <MudItem xs="2">
+                    <MudText Typo="Typo.h4" Style="font-weight: bold;font-size:30px">SNEAKER 141.</MudText>
+                </MudItem>
+
+                <MudItem xs="6" Style="display: flex; align-items: center; justify-content: center; margin-left: auto; margin-right: auto;">
+                    <MudSelect T="string" Placeholder="Tất cả loại giày" Variant="Variant.Text"
+                               Style="text-align: center; width: 200px; height: 50px; padding: 0; background-color: white; color: black; border-right: 1px solid #ccc; border-top-left-radius: 2rem; border-bottom-left-radius: 2rem;" />
+                    <MudTextField T="string" Placeholder="Tìm kiếm ở đây" Variant="Variant.Text"
+                                  Style="width: 350px; height: 50px; background-color: white; color: black;" />
+                    <MudButton Variant="Variant.Filled" Color="Color.Primary"
+                               Style="height: 50px; background-color: red; color: white; font-weight: bold; border-top-right-radius: 2rem; border-bottom-right-radius: 2rem; margin-left: -80px;">
+                        Tìm kiếm
+                    </MudButton>
+                </MudItem>
 
 
-            <MudItem xs="4" Style="display: flex; justify-content: flex-end; align-items: center; padding-right: 2rem;">
-                <!-- Yêu thích -->
-                <div Style="position: relative; display: inline-block;">
-                    <MudIconButton Icon="@Icons.Material.Filled.FavoriteBorder" Style="color: white;" />
-                    <span class="badge" Style="position: absolute; top: -10px; right: -10px; background-color: red; border-radius: 50%; padding: 0.25rem 0.5rem; color: white; font-size: 0.75rem;">2</span>
-                </div>
-                <MudText Style="margin-left: 0.5rem;">Yêu thích</MudText>
+                <MudItem xs="4" Style="display: flex; justify-content: flex-end; align-items: center; padding-right: 2rem;">
+                    <!-- Yêu thích -->
+                    <div Style="position: relative; display: inline-block;">
+                        <MudIconButton Icon="@Icons.Material.Filled.FavoriteBorder" Style="color: white;" />
+                        <span class="badge" Style="position: absolute; top: -10px; right: -10px; background-color: red; border-radius: 50%; padding: 0.25rem 0.5rem; color: white; font-size: 0.75rem;">2</span>
+                    </div>
+                    <MudText Style="margin-left: 0.5rem;">Yêu thích</MudText>
 
-                <!-- Giỏ hàng -->
-                <div Style="position: relative; display: inline-block; margin-left: 2rem;">
-                    <MudIconButton Icon="@Icons.Material.Filled.ShoppingCart" Style="color: white;" />
-                    <span class="badge" Style="position: absolute; top: -10px; right: -10px; background-color: red; border-radius: 50%; padding: 0.25rem 0.5rem; color: white; font-size: 0.75rem;">3</span>
-                </div>
-                <MudText Style="margin-left: 0.5rem;">Giỏ hàng</MudText>
-            </MudItem>
+                    <!-- Giỏ hàng -->
+                    <div Style="position: relative; display: inline-block; margin-left: 2rem;">
+                        <MudIconButton Icon="@Icons.Material.Filled.ShoppingCart" Style="color: white;" />
+                        <span class="badge" Style="position: absolute; top: -10px; right: -10px; background-color: red; border-radius: 50%; padding: 0.25rem 0.5rem; color: white; font-size: 0.75rem;">3</span>
+                    </div>
+                    <MudText Style="margin-left: 0.5rem;">Giỏ hàng</MudText>
+                </MudItem>
 
-        </MudGrid>
+            </MudGrid>
 
     </MudContainer>
 </MudAppBar>
@@ -87,15 +87,6 @@
             </MudPaper>
         </MudItem>
 
-        <MudItem xs="12" sm="4">
-            <MudPaper Style="position: relative; background-color: transparent; height: 300px; overflow: hidden; border-radius: 15px;">
-                <img src="/Image-Index/giaycothap.jpg" alt="Accessories Collection" style="width: 100%; height: 100%; object-fit: cover; filter: brightness(70%);" />
-                <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: flex; flex-direction: column; justify-content: center; align-items: center; color: white; background-color: rgba(255, 0, 0, 0.6); padding: 20px; text-align: center;">
-                    <MudText Typo="Typo.h5" Style="font-weight: bold; font-size: 1.5rem; margin-bottom: 10px;">Giày cổ thấp</MudText>
-                    <MudLink Href="/accessories" Style="font-size: 1.1rem; font-weight: bold; color: white; text-decoration: none; padding-top: 10px;">MUA NGAY ➔</MudLink>
-                </div>
-            </MudPaper>
-        </MudItem>
 
         <MudItem xs="12" sm="4">
             <MudPaper Style="position: relative; background-color: transparent; height: 300px; overflow: hidden; border-radius: 15px;">

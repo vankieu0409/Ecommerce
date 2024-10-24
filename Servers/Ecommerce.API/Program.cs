@@ -1,4 +1,4 @@
-using Ecommerce.Infrastructure.Extention;
+using Ecommerce.Infrastructure.Extension;
 
 using Serilog;
 
@@ -13,6 +13,7 @@ try
     builder.Services.AddControllersWithViews();
     // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 
+    builder.Services.ConfigureLogging();
     builder.Services.AddRazorPages();
     builder.Services.AddEndpointsApiExplorer();
     builder.Services.AddServerSideBlazor();
@@ -21,6 +22,7 @@ try
     builder.Services.ConfigureServices();
     builder.Services.AddHealthChecks();
     var app = builder.Build();
+    app.UseSerilogRequestLogging();
     //app.UseSwaggerUI();
     // Configure the HTTP request pipeline.
     if (app.Environment.IsDevelopment())
