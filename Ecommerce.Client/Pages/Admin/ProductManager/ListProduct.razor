@@ -11,19 +11,41 @@
     <MudCardContent>
         <MudTable Items="@productDtos" Hover="true" Breakpoint="Breakpoint.Sm">
             <HeaderContent>
+                <MudTh>Id</MudTh>
                 <MudTh>Name</MudTh>
-                <MudTh>Position</MudTh>
-                <MudTh>Office</MudTh>
+                <MudTh>Brand</MudTh>
+                <MudTh>Description</MudTh>
+                <MudTh>Price</MudTh>
+                <MudTh>SKU</MudTh>
+                <MudTh>Is Available</MudTh>
+                <MudTh>Gender</MudTh>
+                <MudTh>Material</MudTh>
+                <MudTh>Style</MudTh>
+                <MudTh>Model Type</MudTh>
+                <MudTh>Weight</MudTh>
+                <MudTh>Season</MudTh>
+                <MudTh>Sole Type</MudTh>
                 <MudTh>Actions</MudTh>
             </HeaderContent>
             <RowTemplate>
+                <MudTd DataLabel="Id">@context.Id</MudTd>
                 <MudTd DataLabel="Name">@context.Name</MudTd>
-@*                 <MudTd DataLabel="Position">@context.Position</MudTd>
-                <MudTd DataLabel="Office">@context.Office</MudTd>
+                <MudTd DataLabel="Brand">@context.Brand</MudTd>
+                <MudTd DataLabel="Description">@context.Description</MudTd>
+                <MudTd DataLabel="Price">@context.Price.ToString("C")</MudTd>
+                <MudTd DataLabel="SKU">@context.SKU</MudTd>
+                <MudTd DataLabel="Is Available">@context.IsAvailable</MudTd>
+                <MudTd DataLabel="Gender">@context.Gender</MudTd>
+                <MudTd DataLabel="Material">@context.Material</MudTd>
+                <MudTd DataLabel="Style">@context.Style</MudTd>
+                <MudTd DataLabel="Model Type">@context.ModelType</MudTd>
+                <MudTd DataLabel="Weight">@context.Weight?.ToString() ?? "N/A"</MudTd>
+                <MudTd DataLabel="Season">@context.Season</MudTd>
+                <MudTd DataLabel="Sole Type">@context.SoleType</MudTd>
                 <MudTd DataLabel="Actions">
-                    <MudIconButton Icon="@Icons.Material.Filled.Edit" Color="Color.Primary" OnClick="@(() => EditEmployee(context))" />
-                    <MudIconButton Icon="@Icons.Material.Filled.Delete" Color="Color.Error" OnClick="@(() => DeleteEmployee(context))" /> 
-                </MudTd>*@
+                    <MudIconButton Icon="@Icons.Material.Filled.Edit" Color="Color.Primary" OnClick="@(() => {})" />
+                    <MudIconButton Icon="@Icons.Material.Filled.Delete" Color="Color.Error" OnClick="@(() => {})" />
+                </MudTd>
             </RowTemplate>
         </MudTable>
     </MudCardContent>
