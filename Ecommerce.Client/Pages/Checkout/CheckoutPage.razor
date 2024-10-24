@@ -3,57 +3,62 @@
 @layout MainLayout
 
 
-<MudMainContent>
-    <PageTitle></PageTitle>
-    <MudBreadcrumbs Items="_items">
-        <ItemTemplate Context="item">
-            <MudLink Href="@item.Href" Color="Color.Dark" Typo="Typo.h5">@item.Text.ToUpper()</MudLink>
-        </ItemTemplate>
-    </MudBreadcrumbs>
 
-    <MudGrid>
-        <MudItem xs="12" md="6">
-            <MudPaper>
-                <MudText Typo="Typo.h5">Billing Address</MudText>
-                <MudTextField T="string" Label="First Name"/>
-                <MudTextField T="string" Label="Last Name"/>
-                <MudTextField T="string" Label="Email"/>
-                <MudTextField T="string" Label="Address"/>
-                <MudAutocomplete T="AddressModel" MaxItems="100" Variant="Variant.Outlined" SearchFunc="@SearchProvide" ValueChanged=" async (e) => { _districts = await _common.GetDistricts(e.id); }" ToStringFunc="@(e => $"{e.name}")" Label="Tỉnh"/>
-                <MudAutocomplete T="AddressModel" MaxItems="100" Variant="Variant.Outlined" SearchFunc="@SearchDistrict" ValueChanged=" async (e) => { _wards = await _common.GetWasds(e.id); }" ToStringFunc="@(e => $"{e.name}")" Label="Huyện"/>
-                <MudTextField T="string" Label="ZIP Code"/>
-                <MudTextField T="string" Label="Telephone"/>
-                <MudCheckBox T="bool" Label="Create Account?"/>
-            </MudPaper>
-        </MudItem>
-        <MudItem xs="12" md="6">
-            <MudPaper>
-                <MudText Typo="Typo.h5">Your Order</MudText>
-                @* <MudTable>
-                aaa
-                </MudTable>
-                <MudRadioGroup>
-                @*   <MudRadio Value="" >Direct Bank Transfer </MudRadio>
-                <MudRadio Value="" >Cheque Payment </MudRadio>
-                <MudRadio Value="" >Paypal System </MudRadio>
-                </MudRadioGroup> *@
-                @* <MudCheckBox Label="I've read and accept the terms & conditions" /> *@
-                <MudButton Variant="Variant.Filled" Color="Color.Primary">Place Order</MudButton>
-            </MudPaper>
-        </MudItem>
-    </MudGrid>
-</MudMainContent>
 
+<Breadcrumbs Title="Checkout"></Breadcrumbs>
+<div class="container">
+    <div class="row">
+        <MudGrid>
+            <MudItem Class="col-md-7">
+                <MudPaper Class="row">
+                    <MudText Variant="Variant.Outlined" Typo="Typo.h5">Billing Address</MudText>
+                    <MudTextField Class="input" Variant="Variant.Outlined" T="string" Label="Họ" />
+                    <MudTextField Class="input" Variant="Variant.Outlined" T="string" Label="Tên" />
+                    <MudTextField Class="input" Variant="Variant.Outlined" T="string" Label="Email" />
+                    
+                    <MudAutocomplete  T="AddressModel" MaxItems="100" Variant="Variant.Outlined" SearchFunc="@SearchProvide" ValueChanged="@OnValueChanged" ToStringFunc="@(e => $"{e.name}")" Label="Tỉnh/Thành Phố" />
+                    <div class="col-6">
+                        <MudAutocomplete T="AddressModel" MaxItems="100" Variant="Variant.Outlined" SearchFunc="@SearchDistrict" ValueChanged=" async (e) => { _wardIsDisabled = string.IsNullOrEmpty(e.id); _wards = await _common.GetWasds(e.id); }" ToStringFunc="@(e => $"{e.name}")" Label="Quân/Huyện" Disabled="@_districtIsDisabled" />
+                    </div> 
+                    <div class="col-6">
+                        <MudAutocomplete T="AddressModel" MaxItems="100" Variant="Variant.Outlined" SearchFunc="@SearchWards" ToStringFunc="@(e => $"{e.name}")" Label="Phường/ Xã" Disabled="@_wardIsDisabled" />
+                    </div>
+                    <MudTextField Class="input" Variant="Variant.Outlined" T="string" Label="Địa chỉ nhận hàng (Số nhà, đường phố, hẻm, Căn hộ...)" />
+                    <MudTextField Class="input" Variant="Variant.Outlined" T="string" Label="ZIP Code" />
+                    <MudTextField Class="input" Variant="Variant.Outlined" T="string" Label="Số điện thoại" />
+                    <MudCheckBox T="bool" Label="Create Account?" />
+                </MudPaper>
+            </MudItem>
+            <MudItem Class="col-md-5">
+                <MudPaper Class="row">
+                    <MudText Typo="Typo.h5">Your Order</MudText>
+                    @* <MudTable>
+                    aaa
+                    </MudTable>
+                    <MudRadioGroup>
+                    @*   <MudRadio Value="" >Direct Bank Transfer </MudRadio>
+                    <MudRadio Value="" >Cheque Payment </MudRadio>
+                    <MudRadio Value="" >Paypal System </MudRadio>
+                    </MudRadioGroup> *@
+                    @* <MudCheckBox Label="I've read and accept the terms & conditions" /> *@
+                    <MudButton Variant="Variant.Filled" Color="Color.Primary">Place Order</MudButton>
+                </MudPaper>
+            </MudItem>
+        </MudGrid>
+    </div>
+</div>
+<style>
+    .input {
+       margin:11px ;
+   }
+</style>
 @code {
-    private List<BreadcrumbItem> _items = new List<BreadcrumbItem>
-    {
-        new BreadcrumbItem("Home", href: "/"),
-        new BreadcrumbItem("Checkout", href: "/checkout"),
-    };
 
     private List<AddressModel> _provinces = new List<AddressModel>();
     private List<AddressModel> _districts = new List<AddressModel>();
     private List<AddressModel> _wards = new List<AddressModel>();
+    private bool _districtIsDisabled = true;
+    private bool _wardIsDisabled = true;
 
 
     protected override async Task OnInitializedAsync()
@@ -61,6 +66,12 @@
         _provinces = await _common.GetProvinces();
     }
 
+    private async void OnValueChanged(AddressModel e)
+    {
+        _js.InvokeAsync<object>("console.log", $@"{!string.IsNullOrEmpty(e.id)} + {e.id}");
+        _districtIsDisabled = string.IsNullOrEmpty(e.id);
+        _districts = await _common.GetDistricts(e.id);
+    }
     private async Task<IEnumerable<AddressModel>> SearchProvide(string value, CancellationToken token)
     {
         await Task.Delay(5, token);
@@ -76,6 +87,14 @@
         if (string.IsNullOrEmpty(value))
             return _districts;
         return _districts.Where(e => e.name.Contains(value, StringComparison.InvariantCultureIgnoreCase)).ToList();
+    }
+
+    private async Task<IEnumerable<AddressModel>> SearchWards(string value, CancellationToken token)
+    {
+        await Task.Delay(5, token);
+        if (string.IsNullOrEmpty(value))
+            return _wards;
+        return _wards.Where(e => e.name.Contains(value, StringComparison.InvariantCultureIgnoreCase)).ToList();
     }
 
 }
