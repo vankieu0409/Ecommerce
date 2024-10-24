@@ -18,4 +18,5 @@ builder.Services.AddBlazoredLocalStorage();
 builder.Services.AddMudServices();
 builder.Services.AddScoped<IProductService, ProductService>();
 
+
 await builder.Build().RunAsync();
