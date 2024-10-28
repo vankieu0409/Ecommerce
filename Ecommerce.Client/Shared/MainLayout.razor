@@ -1,29 +1,13 @@
-﻿@using System.Linq.Expressions
+@using System.Linq.Expressions
 @inherits LayoutComponentBase
 @using MudBlazor
-<MudAppBar Elevation="0" Color="Color.Dark">
-    <MudContainer MaxWidth="MaxWidth.False" Style="padding: 0;">
-        <!-- Top contact info -->
-        <MudGrid Gutter="0" Style="background-color: #222; color: white; padding: 1.5rem; align-items: center;">
-            <MudItem xs="6">
-                <MudText Style="display: flex; align-items: center; font-size: 0.875rem;">
-                    <MudIcon Icon="@Icons.Material.Filled.Phone" Style="color: red; margin-right: 0.5rem;" />
-                    +0357906234
-                    <MudIcon Icon="@Icons.Material.Filled.Email" Style="color: red; margin-left: 1rem; margin-right: 0.5rem;" />
-                    manhlntph19847@fpt.edu.vn
-                    <MudIcon Icon="@Icons.Material.Filled.Place" Style="color: red; margin-left: 1rem; margin-right: 0.5rem;" />
-                    193 Phú Diễn
-                </MudText>
-            </MudItem>
-            <MudItem xs="6" Style="text-align: right;">
-                <MudText Style="display: flex; justify-content: flex-end; align-items: center; color: white; font-size: 0.875rem;">
-                    <span Style="margin-right: 0.5rem;">$ VND</span>
-                    <span Style="margin-right: 0.5rem;"> | </span>
-                    <MudLink Href="#" Style="margin-right: 0.5rem; color: white;">Tài khoản của tôi</MudLink>
-                </MudText>
-            </MudItem>
-        </MudGrid>
 
+
+<MudThemeProvider />
+<MudPopoverProvider />
+<MudDialogProvider />
+<MudSnackbarProvider />
+@*
             <!-- Main header with logo, search, and icons -->
             <MudGrid Gutter="0" Style="background-color: #000; color: white; padding: 1rem; align-items: center;">
                 <MudItem xs="2">
@@ -561,7 +545,8 @@
         font-weight: bold;
         border-radius: 0;
     }
-</style>
+</style>*@
+
 
 <MudLayout>
     <MudAppBar Elevation="1" Color="Color.Dark">
@@ -603,6 +588,7 @@
                         Tìm kiếm
                     </MudButton>
                 </MudItem>
+
                 <MudItem xs="4" Style="display: flex; justify-content: flex-end; align-items: center; padding-right: 2rem;">
                     <!-- Yêu thích -->
                     <div Style="position: relative; display: inline-block;">
