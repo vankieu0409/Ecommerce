@@ -2,6 +2,7 @@
 
 using Ecommerce.Application.Interfaces.IRepositories;
 using Ecommerce.Application.Interfaces.IServices;
+using Ecommerce.Application.Interfaces.IUnitOfWork;
 using Ecommerce.Application.Services;
 using Ecommerce.Infrastructure.Logging;
 using Ecommerce.Infrastructure.Persistence.DBContext;
@@ -24,7 +25,14 @@ public static class ServiceCollection
     /// <returns></returns>
     public static IServiceCollection ConfigureServices(this IServiceCollection services) =>
         services.AddScoped<IProductRepository, ProductRepository>()
+            .AddScoped<IAddressOfCustomerRepository, AddressOfCustomerRepository>()
+            .AddScoped<IOrderRepository, OrderRepository>()
+            .AddScoped<IOrderDetailRepository, OrderDetailRepository>()
+            .AddScoped<IRoleRepository, RoleRepository>()
+            .AddScoped<IUnitOfWork, UnitOfWork.UnitOfWork>()
             .AddScoped<IProductService, ProductService>();
+
+
 
     public static IServiceCollection ConfigureLogging(this IServiceCollection services) =>
         services.AddSerilog(logbuilder =>

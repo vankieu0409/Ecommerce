@@ -1,8 +1,7 @@
 ﻿namespace Ecommerce.Application.DTOs;
 
-public class ProductDto
+public class ProductDto : BaseDto
 {
-    public Guid Id { get; set; }
     public string Name { get; set; }
 
     public string Brand { get; set; }

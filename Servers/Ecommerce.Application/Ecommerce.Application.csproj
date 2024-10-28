@@ -7,12 +7,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="DTOs\" />
-    <Folder Include="Interfaces\IRepositories\" />
-    <Folder Include="Interfaces\IServices\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\..\Ecommerce.Shared\Ecommerce.Shared.csproj" />
     <ProjectReference Include="..\Ecommerce.Domain\Ecommerce.Domain.csproj" />
   </ItemGroup>

@@ -11,7 +11,7 @@ public class ProductRepository : RepositoryAsync<Products>, IProductRepository
 {
     private readonly ApplicationDbContext _dbContext;
 
-    public ProductRepository(ApplicationDbContext dbContext, ILogger<ProductRepository> logger) : base(dbContext, logger)
+    public ProductRepository(ApplicationDbContext dbContext, ILogger<RepositoryAsync<Products>> logger) : base(dbContext, logger)
     {
         _dbContext = dbContext ?? throw new AggregateException(nameof(dbContext));
         logger.LogInformation("\nProductRepository initialized.\n");
