@@ -1,11 +1,553 @@
-﻿@using System.Linq.Expressions
+@using System.Linq.Expressions
 @inherits LayoutComponentBase
 @using MudBlazor
+
 
 <MudThemeProvider />
 <MudPopoverProvider />
 <MudDialogProvider />
 <MudSnackbarProvider />
+@*
+            <!-- Main header with logo, search, and icons -->
+            <MudGrid Gutter="0" Style="background-color: #000; color: white; padding: 1rem; align-items: center;">
+                <MudItem xs="2">
+                    <MudText Typo="Typo.h4" Style="font-weight: bold;font-size:30px">SNEAKER 141.</MudText>
+                </MudItem>
+
+                <MudItem xs="6" Style="display: flex; align-items: center; justify-content: center; margin-left: auto; margin-right: auto;">
+                    <MudSelect T="string" Placeholder="Tất cả loại giày" Variant="Variant.Text"
+                               Style="text-align: center; width: 200px; height: 50px; padding: 0; background-color: white; color: black; border-right: 1px solid #ccc; border-top-left-radius: 2rem; border-bottom-left-radius: 2rem;" />
+                    <MudTextField T="string" Placeholder="Tìm kiếm ở đây" Variant="Variant.Text"
+                                  Style="width: 350px; height: 50px; background-color: white; color: black;" />
+                    <MudButton Variant="Variant.Filled" Color="Color.Primary"
+                               Style="height: 50px; background-color: red; color: white; font-weight: bold; border-top-right-radius: 2rem; border-bottom-right-radius: 2rem; margin-left: -80px;">
+                        Tìm kiếm
+                    </MudButton>
+                </MudItem>
+
+
+                <MudItem xs="4" Style="display: flex; justify-content: flex-end; align-items: center; padding-right: 2rem;">
+                    <!-- Yêu thích -->
+                    <div Style="position: relative; display: inline-block;">
+                        <MudIconButton Icon="@Icons.Material.Filled.FavoriteBorder" Style="color: white;" />
+                        <span class="badge" Style="position: absolute; top: -10px; right: -10px; background-color: red; border-radius: 50%; padding: 0.25rem 0.5rem; color: white; font-size: 0.75rem;">2</span>
+                    </div>
+                    <MudText Style="margin-left: 0.5rem;">Yêu thích</MudText>
+
+                    <!-- Giỏ hàng -->
+                    <div Style="position: relative; display: inline-block; margin-left: 2rem;">
+                        <MudIconButton Icon="@Icons.Material.Filled.ShoppingCart" Style="color: white;" />
+                        <span class="badge" Style="position: absolute; top: -10px; right: -10px; background-color: red; border-radius: 50%; padding: 0.25rem 0.5rem; color: white; font-size: 0.75rem;">3</span>
+                    </div>
+                    <MudText Style="margin-left: 0.5rem;">Giỏ hàng</MudText>
+                </MudItem>
+
+            </MudGrid>
+
+    </MudContainer>
+</MudAppBar>
+<MudPaper Class="navigation-paper" Style="margin-top: 153.5px;">
+    <hr style="border: 1px solid lightgray; width: 100%;" />
+    <MudContainer MaxWidth="MaxWidth.False" Class="navigation-container">
+        <MudList T="string" Class="navigation-menu" Style="display: flex; justify-content: space-around;background-color: white;pading:10px 0">
+            <MudListItem Href="/" Style="color: black;">Trang chủ</MudListItem>
+            <MudListItem Href="/deals" Style="color: black;">Khuyến mãi</MudListItem>
+            <MudListItem Href="/categories" Style="color: black;">Danh mục</MudListItem>
+            <MudListItem Href="/products" Style="color: black;">Sản phẩm</MudListItem>
+            <MudListItem Href="/contact" Style="color: black;">Liên hệ</MudListItem>
+        </MudList>
+    </MudContainer>
+    <hr style="border: 1px solid orange; width: 100%;" />
+</MudPaper>
+<MudContainer Class="categories-section" MaxWidth="MaxWidth.False" Style="padding-top: 50px; background-color: #f8f9fa; padding-bottom: 50px;">
+    <MudGrid Spacing="3">
+        <MudItem xs="12" sm="4">
+            <MudPaper Style="position: relative; background-color: transparent; height: 300px; overflow: hidden; border-radius: 15px;">
+                <img src="/Image-Index/giaycothap.jpg" alt="Laptop Collection" style="width: 100%; height: 100%; object-fit: cover; filter: brightness(70%);" />
+                <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: flex; flex-direction: column; justify-content: center; align-items: center; color: white; background-color: rgba(255, 0, 0, 0.6); padding: 20px; text-align: center;">
+                    <MudText Typo="Typo.h5" Style="font-weight: bold; font-size: 1.5rem; margin-bottom: 10px;">Giày cổ cao</MudText>
+                    <MudLink Href="/laptops" Style="font-size: 1.1rem; font-weight: bold; color: white; text-decoration: none; padding-top: 10px;">MUA NGAY ➔</MudLink>
+                </div>
+            </MudPaper>
+        </MudItem>
+
+
+        <MudItem xs="12" sm="4">
+            <MudPaper Style="position: relative; background-color: transparent; height: 300px; overflow: hidden; border-radius: 15px;">
+                <img src="/Image-Index/sliponvansgold.png" alt="Cameras Collection" style="width: 100%; height: 100%; object-fit: cover; filter: brightness(70%);" />
+                <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: flex; flex-direction: column; justify-content: center; align-items: center; color: white; background-color: rgba(255, 0, 0, 0.6); padding: 20px; text-align: center;">
+                    <MudText Typo="Typo.h5" Style="font-weight: bold; font-size: 1.5rem; margin-bottom: 10px;">Giày không dây</MudText>
+                    <MudLink Href="/cameras" Style="font-size: 1.1rem; font-weight: bold; color: white; text-decoration: none; padding-top: 10px;">MUA NGAY ➔</MudLink>
+                </div>
+            </MudPaper>
+        </MudItem>
+    </MudGrid>
+</MudContainer>
+<MudContainer MaxWidth="MaxWidth.ExtraLarge" Class="new-products-container">
+    <MudGrid Spacing="0" AlignItems="Center">
+        <MudItem xs="6">
+            <MudText Typo="Typo.h4" Class="new-products-title">Sản phẩm mới</MudText>
+        </MudItem>
+        <MudItem xs="6" Class="text-align-right">
+            <MudNav MenuIcon="@Icons.Material.Filled.Menu" Class="mud-nav">
+                <MudNavLink Href="#" Class="active">Vans</MudNavLink>
+                <MudNavLink Href="#">Converse</MudNavLink>
+                <MudNavLink Href="#">Nike</MudNavLink>
+                <MudNavLink Href="#">Adidas</MudNavLink>
+            </MudNav>
+        </MudItem>
+    </MudGrid>
+
+    <MudGrid Spacing="3" Gutter="0">
+        <MudItem xs="3">
+            <div class="product-card">
+                <MudCard Class="product-card-content">
+                    <MudCardMedia Image="Image" Alt="Product Image" Class="product-image" />
+                    <MudCardContent Class="product-info">
+                        <MudText Typo="Typo.caption" Class="product-category">Loại</MudText>
+                        <MudText Typo="Typo.h6" Class="product-name">Tên</MudText>
+                        <MudText Typo="Typo.h5" Class="product-price">
+                            <span class="sale-price">Giá bán</span>
+                            <span class="original-price">Giá gốc</span>
+                        </MudText>
+                        <MudRating Value="Rating" ReadOnly="true" MaxValue="5" Class="product-rating" />
+                        <div class="product-actions">
+                            <MudIconButton Icon="@Icons.Material.Filled.FavoriteBorder" Color="Color.Secondary" />
+                            <MudIconButton Icon="@Icons.Material.Filled.CompareArrows" Color="Color.Secondary" />
+                            <MudIconButton Icon="@Icons.Material.Filled.Visibility" Color="Color.Secondary" />
+                        </div>
+                    </MudCardContent>
+                </MudCard>
+                <MudButton Variant="Variant.Filled" Class="add-to-cart-btn">THÊM VÀO GIỎ</MudButton>
+            </div>
+            <div class="navigation-buttons">
+                <MudIconButton Icon="@Icons.Material.Filled.ChevronLeft" Class="circle-button" Color="Color.Primary" />
+                <MudIconButton Icon="@Icons.Material.Filled.ChevronRight" Class="circle-button" Color="Color.Primary" />
+            </div>
+        </MudItem>
+    </MudGrid>
+</MudContainer>
+<MudContainer MaxWidth="MaxWidth.ExtraLarge" Class="hot-deal-container">
+    <MudGrid Justify="Justify.Center" AlignItems="AlignItems.Center" Spacing="3">
+        <!-- Phần hình ảnh sản phẩm bên trái -->
+        <MudItem xs="4">
+            <img src="/Image-Index/giaycothap.jpg" alt="Laptop" class="product-image" />
+        </MudItem>
+
+        <!-- Phần nội dung bên phải -->
+        <MudItem xs="6" Class="deal-content">
+            <div class="countdown-timers">
+                <MudPaper Class="circle-timer">
+                    <MudText Typo="Typo.h5" Color="Color.Primary">02</MudText>
+                    <MudText Typo="Typo.caption">NGÀY</MudText>
+                </MudPaper>
+                <MudPaper Class="circle-timer">
+                    <MudText Typo="Typo.h5" Color="Color.Primary">10</MudText>
+                    <MudText Typo="Typo.caption">GIỜ</MudText>
+                </MudPaper>
+                <MudPaper Class="circle-timer">
+                    <MudText Typo="Typo.h5" Color="Color.Primary">34</MudText>
+                    <MudText Typo="Typo.caption">PHÚT</MudText>
+                </MudPaper>
+                <MudPaper Class="circle-timer">
+                    <MudText Typo="Typo.h5" Color="Color.Primary">60</MudText>
+                    <MudText Typo="Typo.caption">GIÂY</MudText>
+                </MudPaper>
+            </div>
+
+            <MudText Typo="Typo.h4" Class="hot-deal-title">ƯU ĐÃI SỐC TUẦN NÀY</MudText>
+            <MudText Typo="Typo.subtitle1" Class="hot-deal-subtitle">SẢN PHẨM MỚI GIẢM GIÁ LÊN ĐẾN 50%</MudText>
+
+            <MudButton Variant="Variant.Filled" Color="Color.Primary" Class="shop-now-button">MUA NGAY</MudButton>
+        </MudItem><!-- Phần hình ảnh sản phẩm bên phải -->
+        <MudItem xs="4">
+            <img src="/Image-Index/sliponvansgold.png" alt="Headphones" class="product-image" />
+        </MudItem>
+    </MudGrid>
+</MudContainer>
+<MudContainer MaxWidth="MaxWidth.ExtraLarge" Class="new-products-container">
+    <MudGrid Spacing="0" AlignItems="Center">
+        <MudItem xs="6">
+            <MudText Typo="Typo.h4" Class="new-products-title">Sản phẩm bán chạy</MudText>
+        </MudItem>
+        <MudItem xs="6" Class="text-align-right">
+            <MudNav MenuIcon="@Icons.Material.Filled.Menu" Class="mud-nav">
+                <MudNavLink Href="#" Class="active">Vans</MudNavLink>
+                <MudNavLink Href="#">Converse</MudNavLink>
+                <MudNavLink Href="#">Nike</MudNavLink>
+                <MudNavLink Href="#">Adidas</MudNavLink>
+            </MudNav>
+        </MudItem>
+    </MudGrid>
+
+    <MudGrid Spacing="3" Gutter="0">
+        <MudItem xs="3">
+            <div class="product-card">
+                <MudCard Class="product-card-content">
+                    <MudCardMedia Image="Image" Alt="Product Image" Class="product-image" />
+                    <MudCardContent Class="product-info">
+                        <MudText Typo="Typo.caption" Class="product-category">Loại</MudText>
+                        <MudText Typo="Typo.h6" Class="product-name">Tên</MudText>
+                        <MudText Typo="Typo.h5" Class="product-price">
+                            <span class="sale-price">Giá bán</span>
+                            <span class="original-price">Giá gốc</span>
+                        </MudText>
+                        <MudRating Value="Rating" ReadOnly="true" MaxValue="5" Class="product-rating" />
+                        <div class="product-actions">
+                            <MudIconButton Icon="@Icons.Material.Filled.FavoriteBorder" Color="Color.Secondary" />
+                            <MudIconButton Icon="@Icons.Material.Filled.CompareArrows" Color="Color.Secondary" />
+                            <MudIconButton Icon="@Icons.Material.Filled.Visibility" Color="Color.Secondary" />
+                        </div>
+                    </MudCardContent>
+                </MudCard>
+                <MudButton Variant="Variant.Filled" Class="add-to-cart-btn">THÊM VÀO GIỎ</MudButton>
+            </div>
+            <div class="navigation-buttons">
+                <MudIconButton Icon="@Icons.Material.Filled.ChevronLeft" Class="circle-button" Color="Color.Primary" />
+                <MudIconButton Icon="@Icons.Material.Filled.ChevronRight" Class="circle-button" Color="Color.Primary" />
+            </div>
+        </MudItem>
+    </MudGrid>
+</MudContainer>
+
+<MudContainer MaxWidth="MaxWidth.ExtraLarge" Class="top-selling-container">
+    <MudText Typo="Typo.h4" Class="text-center">TOP SELLING</MudText>
+
+    <MudGrid Spacing="3" Justify="Justify.SpaceBetween" >
+        @for (int i = 0; i < 6; i++)
+        {
+            <MudItem xs="12" sm="6" md="4">
+                <MudPaper Class="product-card">
+                    <MudImage Src="link_to_image.jpg" Alt="Product Image" class="product-Image1" />
+                    <MudText Typo="Typo.caption" Class="category-text">CATEGORY</MudText>
+                    <MudText Typo="Typo.subtitle1" Class="product-name">PRODUCT NAME GOES HERE</MudText>
+                    <MudText Typo="Typo.h6" Class="price-text" Color="Color.Error">$980.00</MudText>
+                    <MudText Typo="Typo.body2" Class="old-price">$990.00</MudText>
+                </MudPaper>
+            </MudItem>
+        }
+    </MudGrid>
+
+    <MudDivider />
+
+    <div class="newsletter-signup">
+        <MudText Typo="Typo.h6" Class="newsletter-title">Đăng ký ở đây để <b>NHẬN THÔNG TIN</b></MudText>
+        <div class="input-group">    
+        <MudTextField T="string" Placeholder="Nhập Email của bạn" Adornment="Adornment.Start" AdornmentIcon="@Icons.Material.Filled.Email" Class="newsletter-input" />
+        <MudButton Color="Color.Primary" Variant="Variant.Filled">ĐĂNG KÝ</MudButton>
+        </div>
+    </div>
+</MudContainer>
+
+<MudContainer Class="social-icons">
+    <MudIconButton>
+        <img src="https://upload.wikimedia.org/wikipedia/commons/5/51/Facebook_f_logo_%282019%29.svg" alt="Facebook" style="width:24px; height:24px;" />
+    </MudIconButton>
+    <MudIconButton>
+        <img src="/Image-Index/twiter.png" alt="Twitter" style="width:24px; height:24px;" />
+    </MudIconButton>
+    <MudIconButton>
+        <img src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png" alt="Instagram" style="width:24px; height:24px;" />
+    </MudIconButton>
+    <MudIconButton>
+        <img src="https://upload.wikimedia.org/wikipedia/commons/0/08/Pinterest-logo.png" alt="Pinterest" style="width:24px; height:24px;" />
+    </MudIconButton>
+</MudContainer>
+
+
+<style>
+    .newsletter-button {
+        min-width: 120px; /* Đặt chiều rộng tối thiểu cho nút */
+        border-radius: 0;
+    }
+    .newsletter-input {
+        flex: 1; /* Chiếm không gian còn lại */
+        margin-right: -1px; /* Khoảng cách giữa ô input và nút */
+    }
+    .input-group {
+        display: flex; /* Sử dụng flexbox để căn chỉnh các phần tử */
+        justify-content: center; /* Căn giữa nhóm phần tử */
+        align-items: center; /* Căn giữa theo chiều dọc */
+        margin-top: 16px; /* Thêm khoảng cách phía trên */
+    }
+    .product-Image1 {
+        display: block;
+        max-width: 100%;
+        height: auto;
+        margin: 0 auto; /* Centering the image */
+    }
+    .top-selling-container {
+        margin-top: 20px;
+        text-align: center;
+    }
+
+    .text-center {
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+    .product-card {
+        padding: 15px;
+        text-align: left;
+        border: 1px solid #ddd;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        transition: box-shadow 0.3s;
+        width: 100%;
+    }
+
+    .product-card:hover {
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .category-text {
+        color: #888;
+        margin-bottom: 5px;
+    }
+
+    .product-name {
+        font-weight: bold;
+        margin-bottom: 5px;
+    }
+
+    .price-text {
+        color: red;
+        font-weight: bold;
+    }
+
+    .old-price {
+        text-decoration: line-through;
+        color: #aaa;
+    }
+
+    .newsletter-signup {
+        margin: 30px 0;
+        text-align: center;
+    }
+
+    .newsletter-title {
+        margin-bottom: 10px;
+    }
+
+    .social-icons {
+        margin-top: 20px;
+        text-align: center;
+    }
+
+        .social-icons .MudIconButton {
+            margin: 0 10px;
+        }
+
+    .hot-deal-container {
+        background-color: #03bfcc;
+        padding: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+    
+    .product-image {
+        max-width: 350px;
+        max-height: 250px;
+        width: auto;
+        height: auto;
+        display: block;
+        margin: auto;
+    }
+
+    .deal-content {
+        flex: 1;
+        
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+    }
+
+    .countdown-timers {
+        display: flex;
+        justify-content: space-evenly;
+        gap: 10px;
+        margin-bottom: 20px;
+    }
+
+    .circle-timer {
+        width: 80px;
+        height: 80px;
+        border-radius: 50%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        border: 2px solid #e53935; /* Màu đỏ nhạt cho viền */
+    }
+
+    .hot-deal-title {
+        color: #1e2a39;
+        margin-bottom: 10px;
+        font-size:25px;
+        font-weight: bold;
+    }
+
+    .hot-deal-subtitle {
+        color: black;
+        margin-bottom: 20px;
+        
+        font-size: 25px;
+    }
+
+    .shop-now-button {
+        background-color: #e53935;
+        color: white;
+        padding: 10px 20px;
+        border-radius: 25px;
+        margin-top: 20px;
+        box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Tạo hiệu ứng nổi */
+        font-size: 25px;
+    }
+
+
+    .circle-button {
+        border: 1px solid #e0e0e0; /* Viền màu xám nhạt */
+        border-radius: 50%; /* Bo tròn viền */
+        width: 40px; /* Chiều rộng nút */
+        height: 40px; /* Chiều cao nút */
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .navigation-buttons {
+        position: absolute;
+        bottom: 20px;
+        right: 20px;
+        display: flex;
+        gap: 10px;
+    }
+    .mud-nav {
+        display: flex;
+        gap: 20px; /* Space between items */
+    }
+
+        .mud-nav a {
+            color: gray; /* Default color for non-active links */
+            text-decoration: none;
+            font-weight: normal;
+        }
+
+            .mud-nav a.active {
+                color: red; /* Color for active link */
+                font-weight: bold;
+                border-bottom: 2px solid red; /* Underline active link */
+            }
+
+            .mud-nav a:hover {
+                color: black; /* Optional hover effect */
+            }
+
+            .mud-nav a:focus {
+                outline: none;
+            }
+
+    .new-products-container {
+        padding: 20px;
+        position: relative;
+    }
+
+    .new-products-title {
+        font-weight: bold;
+        margin-bottom: 20px;
+        font-size: 20px;
+    }
+
+    .product-category-tabs {
+        margin-bottom: 20px;
+    }
+
+    .tab-item {
+        font-weight: bold;
+        color: gray;
+    }
+
+        .tab-item.active {
+            color: red;
+        }
+
+    .product-card {
+        border: 1px solid #e0e0e0;
+        padding: 15px;
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+
+        .product-card.active {
+            border-color: red;
+        }
+
+    .product-card-content {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .product-image {
+        max-width: 100%;
+        height: auto;
+    }
+
+    .product-info {
+        text-align: center;
+    }
+
+    .product-category {
+        font-size: 12px;
+        color: gray;
+        margin-bottom: 5px;
+    }
+
+    .product-name {
+        font-weight: bold;
+        margin-bottom: 10px;
+    }
+
+    .product-price {
+        margin-bottom: 10px;
+    }
+
+    .sale-price {
+        color: red;
+        font-weight: bold;
+    }
+
+    .original-price {
+        text-decoration: line-through;
+        color: gray;
+        margin-left: 5px;
+    }
+
+    .product-rating {
+        margin-bottom: 10px;
+    }
+
+    .product-actions {
+        display: flex;
+        justify-content: space-around;
+        margin-bottom: 10px;
+    }
+
+    .add-to-cart-btn {
+        width: 100%;
+        background-color: red;
+        color: white;
+        font-weight: bold;
+        border-radius: 0;
+    }
+</style>*@
+
+
 <MudLayout>
     <MudAppBar Elevation="1" Color="Color.Dark">
         <MudContainer MaxWidth="MaxWidth.False" Style="padding: 0;">
@@ -46,7 +588,6 @@
                         Tìm kiếm
                     </MudButton>
                 </MudItem>
-
 
                 <MudItem xs="4" Style="display: flex; justify-content: flex-end; align-items: center; padding-right: 2rem;">
                     <!-- Yêu thích -->
