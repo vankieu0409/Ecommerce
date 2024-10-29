@@ -16,7 +16,7 @@ namespace Ecommerce.Domain.Entities.Orders
         public decimal TotalAmount { get; set; }
 
         public virtual Customer Customer { get; set; }
-        public virtual Employee Employee { get; set; }
+        public virtual Employee? Employee { get; set; }
         public virtual ICollection<OrderDetail> OrderDetails { get; set; }
 
     }

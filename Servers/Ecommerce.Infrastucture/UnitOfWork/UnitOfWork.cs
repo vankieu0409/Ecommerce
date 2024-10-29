@@ -12,10 +12,9 @@ public class UnitOfWork : IUnitOfWork
     private IDbContextTransaction _transaction;
     private readonly ILogger<UnitOfWork> _logger;
 
-    public UnitOfWork(ApplicationDbContext context, IDbContextTransaction transaction, ILogger<UnitOfWork> logger)
+    public UnitOfWork(ApplicationDbContext context, ILogger<UnitOfWork> logger)
     {
         _context = context ?? throw new AggregateException(nameof(context));
-        _transaction = transaction ?? throw new AggregateException(nameof(transaction));
         _logger = logger ?? throw new AggregateException(nameof(logger));
         logger.LogInformation("\n UnitOfWork initialized \n");
     }

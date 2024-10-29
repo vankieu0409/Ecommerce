@@ -25,12 +25,15 @@ public static class ServiceCollection
     /// <returns></returns>
     public static IServiceCollection ConfigureServices(this IServiceCollection services) =>
         services.AddScoped<IProductRepository, ProductRepository>()
+            .AddScoped<ICustomerRepository, CustomerRepository>()
             .AddScoped<IAddressOfCustomerRepository, AddressOfCustomerRepository>()
             .AddScoped<IOrderRepository, OrderRepository>()
             .AddScoped<IOrderDetailRepository, OrderDetailRepository>()
             .AddScoped<IRoleRepository, RoleRepository>()
-            .AddScoped<IUnitOfWork, UnitOfWork.UnitOfWork>()
-            .AddScoped<IProductService, ProductService>();
+            .AddScoped<IVariantRepository, VariantRepository>()
+            .AddTransient<IUnitOfWork, UnitOfWork.UnitOfWork>()
+            .AddTransient<IOrderService, OrderService>()
+            .AddTransient<IProductService, ProductService>();
 
 
 
@@ -60,7 +63,7 @@ public static class ServiceCollection
         //    options.Password.RequireUppercase = false;
         //}).AddEntityFrameworkStores<ApplicationDbContext>().AddDefaultTokenProviders();
 
-        //services.AddAuthorization();
+        services.AddAuthorization();
 
         //services.AddAuthentication(
         //        options => //được sử dụng để cấu hình xác thực trong ứng dụng và thiết lập chế độ xác thực và thách thức mặc định cho JWT bearer authentication.

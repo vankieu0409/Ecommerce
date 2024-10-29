@@ -2,9 +2,9 @@
 
 public interface IUnitOfWork : IDisposable
 {
-    Task BeginTransaction();
-    Task CommitTransaction();
-    Task RollbackTransaction();
-    Task SaveChange();
+    public Task BeginTransaction();
+    public Task CommitTransaction();
+    public Task RollbackTransaction();
+    public Task SaveChange();
 
 }
