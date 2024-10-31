@@ -1,0 +1,160 @@
+﻿@page "/store"
+@layout MainLayout
+
+
+<MudContainer>
+    <MudGrid>
+        <!-- Sidebar -->
+        <MudItem xs="12" md="3">
+            <MudPaper Class="pa-4" Elevation="1">
+                <!-- Categories Section -->
+                <MudText Typo="Typo.h6">Categories</MudText>
+                <MudList T="string">
+                    @foreach (var category in Categories)
+                    {
+                        <MudListItem>
+                            <MudCheckBox Label="@category" />
+                            <MudText Class="ml-2" Typo="Typo.subtitle2">(120)</MudText>
+                        </MudListItem>
+                    }
+                </MudList>
+
+
+                <!-- Price Filter Section -->
+                <MudText Typo="Typo.h6">Price</MudText>
+                <MudSlider @bind-Value="minPrice" Min="1" Max="999" Step="1" />
+                <MudSlider @bind-Value="maxPrice" Min="1" Max="999" Step="1" />
+                <MudTextField @bind-Value="minPrice" Type="number" Label="Min Price" />
+                <MudTextField @bind-Value="maxPrice" Type="number" Label="Max Price" />
+
+                <!-- Brand Filter Section -->
+                <MudText Typo="Typo.h6">Brand</MudText>
+                <MudList T="string">
+                    @foreach (var brand in Brands)
+                    {
+                        <MudListItem>
+                            <MudCheckBox Label="@brand" />
+                            <MudText Class="ml-2" Typo="Typo.subtitle2">(578)</MudText>
+                        </MudListItem>
+                    }
+                </MudList>
+
+            </MudPaper>
+        </MudItem>
+
+        <!-- Main Content -->
+        <MudItem xs="12" md="9">
+            <MudGrid>
+                <!-- Sorting and Items per Page Options -->
+                <!-- Product Grid -->
+                <MudItem xs="12">
+                    <MudGrid>
+                        @foreach (var product in PaginatedProducts)
+                        {
+                            <MudItem xs="6" sm="4" md="3">
+                                <MudCard>
+                                    <MudCardMedia Image="@product.ImageUrl" />
+                                    <MudCardContent>
+                                        <MudText Typo="Typo.h6">@product.Name</MudText>
+                                        <MudText>Category: @product.Category</MudText>
+                                        <MudText>Price: $@product.Price</MudText>
+                                        <MudButton @onclick="() => AddToCart(product)">Add to Cart</MudButton>
+                                    </MudCardContent>
+                                </MudCard>
+                            </MudItem>
+                        }
+                    </MudGrid>
+                </MudItem>
+
+                <!-- Pagination Controls -->
+                <MudItem xs="12">
+                    <MudPagination PageSize="ItemsPerPage" Count="TotalPages" CurrentPage="@CurrentPage" />
+                </MudItem>
+            </MudGrid>
+        </MudItem>
+    </MudGrid>
+</MudContainer>
+
+@code {
+    // Sample data for categories and brands
+    private List<string> Categories = new List<string> { "Laptop", "Smartphone", "Camera", "Accessories" };
+    private List<string> Brands = new List<string> { "Samsung", "Sony", "LG" };
+
+    // List of products
+    private List<ProductModel> Products = new List<ProductModel>
+    {
+        new ProductModel { Name = "Product 1", Price = 980.00m, ImageUrl = "https://via.placeholder.com/150", Category = "Laptop" },
+        new ProductModel { Name = "Product 2", Price = 1200.00m, ImageUrl = "https://via.placeholder.com/150", Category = "Smartphone" },
+        new ProductModel { Name = "Product 3", Price = 250.00m, ImageUrl = "https://via.placeholder.com/150", Category = "Camera" },
+        new ProductModel { Name = "Product 4", Price = 450.00m, ImageUrl = "https://via.placeholder.com/150", Category = "Accessories" },
+        new ProductModel { Name = "Product 5", Price = 300.00m, ImageUrl = "https://via.placeholder.com/150", Category = "Laptop" },
+        // Add more products as needed...
+    };
+
+    // Pagination and sorting variables
+    private decimal minPrice = 1;
+    private decimal maxPrice = 999;
+    private int ItemsPerPage = 6; // Default items per page
+    private int CurrentPage = 1; // Current page
+    private int TotalPages => (int)Math.Ceiling((decimal)Products.Count / ItemsPerPage); // Total pages
+
+    // Current product data based on the selected page
+    private List<ProductModel> PaginatedProducts =>
+        Products.Skip((CurrentPage - 1) * ItemsPerPage).Take(ItemsPerPage).ToList();
+
+    // Change page method
+    private void ChangePage(int pageNumber)
+    {
+        if (pageNumber >= 1 && pageNumber <= TotalPages)
+        {
+            CurrentPage = pageNumber; // Update current page
+            StateHasChanged(); // Refresh component
+        }
+    }
+
+    // Method to handle sorting change
+    private void ChangeSort(ChangeEventArgs e)
+    {
+        var sortOption = e.Value.ToString();
+        switch (sortOption)
+        {
+            case "popular":
+                Products = Products.OrderByDescending(p => p.Name).ToList();
+                break;
+            case "newest":
+                Products = Products.OrderByDescending(p => p.Name).ToList();
+                break;
+            case "price-asc":
+                Products = Products.OrderBy(p => p.Price).ToList();
+                break;
+            case "price-desc":
+                Products = Products.OrderByDescending(p => p.Price).ToList();
+                break;
+        }
+        // Reset to first page after sorting
+        CurrentPage = 1;
+    }
+
+    // Method to handle items per page change
+    private void ChangeItemsPerPage(ChangeEventArgs e)
+    {
+        ItemsPerPage = int.Parse(e.Value.ToString());
+        CurrentPage = 1; // Reset to the first page
+        StateHasChanged(); // Update display when changing the number of products per page
+    }
+
+    // Method to add a product to the cart
+    private void AddToCart(ProductModel product)
+    {
+        // Logic to add product to the cart
+    }
+
+    // Product model class
+    public class ProductModel
+    {
+        public string Name { get; set; }
+        public decimal Price { get; set; }
+        public string ImageUrl { get; set; }
+        public string Category { get; set; }
+    }
+}
