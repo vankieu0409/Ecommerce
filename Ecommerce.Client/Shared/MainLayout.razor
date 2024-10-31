@@ -1,13 +1,14 @@
 @using System.Linq.Expressions
 @inherits LayoutComponentBase
 @using MudBlazor
+@using Ecommerce.Domain.Entities.Products;
 
 
 <MudThemeProvider />
 <MudPopoverProvider />
 <MudDialogProvider />
 <MudSnackbarProvider />
-@*
+
             <!-- Main header with logo, search, and icons -->
             <MudGrid Gutter="0" Style="background-color: #000; color: white; padding: 1rem; align-items: center;">
                 <MudItem xs="2">
@@ -44,9 +45,8 @@
 
             </MudGrid>
 
-    </MudContainer>
-</MudAppBar>
-<MudPaper Class="navigation-paper" Style="margin-top: 153.5px;">
+
+<MudPaper Class="navigation-paper" Style="margin-top: 30.5px;">
     <hr style="border: 1px solid lightgray; width: 100%;" />
     <MudContainer MaxWidth="MaxWidth.False" Class="navigation-container">
         <MudList T="string" Class="navigation-menu" Style="display: flex; justify-content: space-around;background-color: white;pading:10px 0">
@@ -63,27 +63,55 @@
     <MudGrid Spacing="3">
         <MudItem xs="12" sm="4">
             <MudPaper Style="position: relative; background-color: transparent; height: 300px; overflow: hidden; border-radius: 15px;">
-                <img src="/Image-Index/giaycothap.jpg" alt="Laptop Collection" style="width: 100%; height: 100%; object-fit: cover; filter: brightness(70%);" />
-                <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: flex; flex-direction: column; justify-content: center; align-items: center; color: white; background-color: rgba(255, 0, 0, 0.6); padding: 20px; text-align: center;">
-                    <MudText Typo="Typo.h5" Style="font-weight: bold; font-size: 1.5rem; margin-bottom: 10px;">Giày cổ cao</MudText>
-                    <MudLink Href="/laptops" Style="font-size: 1.1rem; font-weight: bold; color: white; text-decoration: none; padding-top: 10px;">MUA NGAY ➔</MudLink>
+                <img src="/Image-Index/giaycothap.jpg" alt="Laptop Collection"
+                     style="width: 100%; height: 100%; object-fit: cover; filter: brightness(70%); transition: transform 0.3s ease; transform-origin: center;"
+                     onmouseover="this.style.transform='scale(1.1)';"
+                     onmouseleave="this.style.transform='scale(1)';" />
+                <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; overflow: hidden; border-radius: 15px;">
+                    <!-- Tạo hình tam giác đỏ -->
+                    <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(255, 0, 0, 0.6); clip-path: polygon(0 0, 100% 0, 50% 100%, 0% 100%);"></div>
+                    <!-- Phần nội dung văn bản -->
+                    <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: flex; flex-direction: column; justify-content: center; align-items: center; color: white; padding: 20px; text-align: center;">
+                        <MudText Typo="Typo.h5" Style="font-weight: bold; font-size: 1.5rem; margin-bottom: 10px;">Giày cổ cao</MudText>
+                        <MudLink Href="/laptops" Style="font-size: 1.1rem; font-weight: bold; color: white; text-decoration: none; padding-top: 10px;">MUA NGAY ➔</MudLink>
+                    </div>
                 </div>
             </MudPaper>
         </MudItem>
 
+        <MudItem xs="12" sm="4">
+            <MudPaper Style="position: relative; background-color: transparent; height: 300px; overflow: hidden; border-radius: 15px;">
+                <img src="/Image-Index/sliponvansgold.png" alt="Cameras Collection" style="width: 100%; height: 100%; object-fit: cover; filter: brightness(70%);" class="zoom-image" />
+                <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; overflow: hidden; border-radius: 15px;">
+                    <!-- Tạo hình tam giác đỏ -->
+                    <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(255, 0, 0, 0.6); clip-path: polygon(0 0, 100% 0, 50% 100%, 0% 100%);"></div>
+                    <!-- Phần nội dung văn bản -->
+                    <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: flex; flex-direction: column; justify-content: center; align-items: center; color: white; padding: 20px; text-align: center;">
+                        <MudText Typo="Typo.h5" Style="font-weight: bold; font-size: 1.5rem; margin-bottom: 10px;">Giày không dây</MudText>
+                        <MudLink Href="/cameras" Style="font-size: 1.1rem; font-weight: bold; color: white; text-decoration: none; padding-top: 10px;">MUA NGAY ➔</MudLink>
+                    </div>
+                </div>
+            </MudPaper>
+        </MudItem>
 
         <MudItem xs="12" sm="4">
             <MudPaper Style="position: relative; background-color: transparent; height: 300px; overflow: hidden; border-radius: 15px;">
                 <img src="/Image-Index/sliponvansgold.png" alt="Cameras Collection" style="width: 100%; height: 100%; object-fit: cover; filter: brightness(70%);" />
-                <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: flex; flex-direction: column; justify-content: center; align-items: center; color: white; background-color: rgba(255, 0, 0, 0.6); padding: 20px; text-align: center;">
-                    <MudText Typo="Typo.h5" Style="font-weight: bold; font-size: 1.5rem; margin-bottom: 10px;">Giày không dây</MudText>
-                    <MudLink Href="/cameras" Style="font-size: 1.1rem; font-weight: bold; color: white; text-decoration: none; padding-top: 10px;">MUA NGAY ➔</MudLink>
+                <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; overflow: hidden; border-radius: 15px;">
+                    <!-- Tạo hình tam giác đỏ -->
+                    <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(255, 0, 0, 0.6); clip-path: polygon(0 0, 100% 0, 50% 100%, 0% 100%);"></div>
+                    <!-- Phần nội dung văn bản -->
+                    <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: flex; flex-direction: column; justify-content: center; align-items: center; color: white; padding: 20px; text-align: center;">
+                        <MudText Typo="Typo.h5" Style="font-weight: bold; font-size: 1.5rem; margin-bottom: 10px;">Giày không dây</MudText>
+                        <MudLink Href="/cameras" Style="font-size: 1.1rem; font-weight: bold; color: white; text-decoration: none; padding-top: 10px;">MUA NGAY ➔</MudLink>
+                    </div>
                 </div>
             </MudPaper>
         </MudItem>
     </MudGrid>
 </MudContainer>
-<MudContainer MaxWidth="MaxWidth.ExtraLarge" Class="new-products-container">
+
+<MudContainer MaxWidth="MaxWidth.ExtraLarge" Class="new-products-container" Style="position: relative;">
     <MudGrid Spacing="0" AlignItems="Center">
         <MudItem xs="6">
             <MudText Typo="Typo.h4" Class="new-products-title">Sản phẩm mới</MudText>
@@ -98,40 +126,47 @@
         </MudItem>
     </MudGrid>
 
-    <MudGrid Spacing="3" Gutter="0">
-        <MudItem xs="3">
-            <div class="product-card">
-                <MudCard Class="product-card-content">
-                    <MudCardMedia Image="Image" Alt="Product Image" Class="product-image" />
-                    <MudCardContent Class="product-info">
-                        <MudText Typo="Typo.caption" Class="product-category">Loại</MudText>
-                        <MudText Typo="Typo.h6" Class="product-name">Tên</MudText>
-                        <MudText Typo="Typo.h5" Class="product-price">
-                            <span class="sale-price">Giá bán</span>
-                            <span class="original-price">Giá gốc</span>
-                        </MudText>
-                        <MudRating Value="Rating" ReadOnly="true" MaxValue="5" Class="product-rating" />
-                        <div class="product-actions">
-                            <MudIconButton Icon="@Icons.Material.Filled.FavoriteBorder" Color="Color.Secondary" />
-                            <MudIconButton Icon="@Icons.Material.Filled.CompareArrows" Color="Color.Secondary" />
-                            <MudIconButton Icon="@Icons.Material.Filled.Visibility" Color="Color.Secondary" />
-                        </div>
-                    </MudCardContent>
-                </MudCard>
-                <MudButton Variant="Variant.Filled" Class="add-to-cart-btn">THÊM VÀO GIỎ</MudButton>
-            </div>
-            <div class="navigation-buttons">
-                <MudIconButton Icon="@Icons.Material.Filled.ChevronLeft" Class="circle-button" Color="Color.Primary" />
-                <MudIconButton Icon="@Icons.Material.Filled.ChevronRight" Class="circle-button" Color="Color.Primary" />
-            </div>
-        </MudItem>
+    <!-- MudGrid chứa sản phẩm, thêm padding-bottom để tạo khoảng trống cho navigation buttons -->
+    <MudGrid Spacing="3" Gutter="0" Style="margin-top: 20px; padding-bottom: 80px; display: flex; flex-wrap: wrap;">
+        @foreach (var product in GetCurrentPageProducts())
+        {
+            <MudItem xs="3">
+                <div class="product-card">
+                    <MudCard Class="product-card-content">
+                        <MudCardMedia Image="Image" Alt="Product Image" Class="product-image" />
+                        <MudCardContent Class="product-info">
+                            <MudText Typo="Typo.caption" Class="product-category">@product.Category.Name</MudText>
+                            <MudText Typo="Typo.h6" Class="product-name">@product.Name</MudText>
+                            <MudText Typo="Typo.h5" Class="product-price">
+                                <span class="sale-price">@product.Price</span>
+                                <span class="original-price">Giá gốc</span>
+                            </MudText>
+                            <MudRating Value="Rating" ReadOnly="true" MaxValue="5" Class="product-rating" />
+                            <div class="product-actions">
+                                <MudIconButton Icon="@Icons.Material.Filled.FavoriteBorder" Color="Color.Secondary" />
+                                <MudIconButton Icon="@Icons.Material.Filled.CompareArrows" Color="Color.Secondary" />
+                                <MudIconButton Icon="@Icons.Material.Filled.Visibility" Color="Color.Secondary" />
+                            </div>
+                        </MudCardContent>
+                    </MudCard>
+                    <MudButton Variant="Variant.Filled" Class="add-to-cart-btn">THÊM VÀO GIỎ</MudButton>
+                </div>
+            </MudItem>
+        }
     </MudGrid>
+
+    <!-- Nút phân trang ở góc phải dưới cùng -->
+    <div class="navigation-buttons">
+        <MudIconButton Icon="@Icons.Material.Filled.ChevronLeft" Class="circle-button" OnClick="PreviousPage" Disabled="@(currentPage == 0)" Color="Color.Primary" />
+        <MudIconButton Icon="@Icons.Material.Filled.ChevronRight" Class="circle-button" OnClick="NextPage" Disabled="@((currentPage + 1) * itemsPerPage >= products.Count)" Color="Color.Primary" />
+    </div>
 </MudContainer>
+
 <MudContainer MaxWidth="MaxWidth.ExtraLarge" Class="hot-deal-container">
     <MudGrid Justify="Justify.Center" AlignItems="AlignItems.Center" Spacing="3">
         <!-- Phần hình ảnh sản phẩm bên trái -->
         <MudItem xs="4">
-            <img src="/Image-Index/giaycothap.jpg" alt="Laptop" class="product-image" />
+            <img src="/Image-Index/Jordan.png" alt="Laptop" class="product-image" />
         </MudItem>
 
         <!-- Phần nội dung bên phải -->
@@ -161,11 +196,11 @@
             <MudButton Variant="Variant.Filled" Color="Color.Primary" Class="shop-now-button">MUA NGAY</MudButton>
         </MudItem><!-- Phần hình ảnh sản phẩm bên phải -->
         <MudItem xs="4">
-            <img src="/Image-Index/sliponvansgold.png" alt="Headphones" class="product-image" />
+            <img src="/Image-Index/kn.jpg" alt="Headphones" class="product-image" />
         </MudItem>
     </MudGrid>
 </MudContainer>
-<MudContainer MaxWidth="MaxWidth.ExtraLarge" Class="new-products-container">
+<MudContainer MaxWidth="MaxWidth.ExtraLarge" Class="new-products-container" Style="position: relative;">
     <MudGrid Spacing="0" AlignItems="Center">
         <MudItem xs="6">
             <MudText Typo="Typo.h4" Class="new-products-title">Sản phẩm bán chạy</MudText>
@@ -180,38 +215,45 @@
         </MudItem>
     </MudGrid>
 
-    <MudGrid Spacing="3" Gutter="0">
-        <MudItem xs="3">
-            <div class="product-card">
-                <MudCard Class="product-card-content">
-                    <MudCardMedia Image="Image" Alt="Product Image" Class="product-image" />
-                    <MudCardContent Class="product-info">
-                        <MudText Typo="Typo.caption" Class="product-category">Loại</MudText>
-                        <MudText Typo="Typo.h6" Class="product-name">Tên</MudText>
-                        <MudText Typo="Typo.h5" Class="product-price">
-                            <span class="sale-price">Giá bán</span>
-                            <span class="original-price">Giá gốc</span>
-                        </MudText>
-                        <MudRating Value="Rating" ReadOnly="true" MaxValue="5" Class="product-rating" />
-                        <div class="product-actions">
-                            <MudIconButton Icon="@Icons.Material.Filled.FavoriteBorder" Color="Color.Secondary" />
-                            <MudIconButton Icon="@Icons.Material.Filled.CompareArrows" Color="Color.Secondary" />
-                            <MudIconButton Icon="@Icons.Material.Filled.Visibility" Color="Color.Secondary" />
-                        </div>
-                    </MudCardContent>
-                </MudCard>
-                <MudButton Variant="Variant.Filled" Class="add-to-cart-btn">THÊM VÀO GIỎ</MudButton>
-            </div>
-            <div class="navigation-buttons">
-                <MudIconButton Icon="@Icons.Material.Filled.ChevronLeft" Class="circle-button" Color="Color.Primary" />
-                <MudIconButton Icon="@Icons.Material.Filled.ChevronRight" Class="circle-button" Color="Color.Primary" />
-            </div>
-        </MudItem>
+    <!-- MudGrid chứa sản phẩm, thêm padding-bottom để tạo khoảng trống cho navigation buttons -->
+    <MudGrid Spacing="3" Gutter="0" Style="margin-top: 20px; padding-bottom: 80px; display: flex; flex-wrap: wrap;">
+        @foreach (var product in GetCurrentPageProducts())
+        {
+            <MudItem xs="3">
+                <div class="product-card">
+                    <MudCard Class="product-card-content">
+                        <MudCardMedia Image="Image" Alt="Product Image" Class="product-image" />
+                        <MudCardContent Class="product-info">
+                            <MudText Typo="Typo.caption" Class="product-category">@product.Category.Name</MudText>
+                            <MudText Typo="Typo.h6" Class="product-name">@product.Name</MudText>
+                            <MudText Typo="Typo.h5" Class="product-price">
+                                <span class="sale-price">@product.Price</span>
+                                <span class="original-price">Giá gốc</span>
+                            </MudText>
+                            <MudRating Value="Rating" ReadOnly="true" MaxValue="5" Class="product-rating" />
+                            <div class="product-actions">
+                                <MudIconButton Icon="@Icons.Material.Filled.FavoriteBorder" Color="Color.Secondary" />
+                                <MudIconButton Icon="@Icons.Material.Filled.CompareArrows" Color="Color.Secondary" />
+                                <MudIconButton Icon="@Icons.Material.Filled.Visibility" Color="Color.Secondary" />
+                            </div>
+                        </MudCardContent>
+                    </MudCard>
+                    <MudButton Variant="Variant.Filled" Class="add-to-cart-btn">THÊM VÀO GIỎ</MudButton>
+                </div>
+            </MudItem>
+        }
     </MudGrid>
+
+    <!-- Nút phân trang ở góc phải dưới cùng -->
+    <div class="navigation-buttons">
+        <MudIconButton Icon="@Icons.Material.Filled.ChevronLeft" Class="circle-button" OnClick="PreviousPage" Disabled="@(currentPage == 0)" Color="Color.Primary" />
+        <MudIconButton Icon="@Icons.Material.Filled.ChevronRight" Class="circle-button" OnClick="NextPage" Disabled="@((currentPage + 1) * itemsPerPage >= products.Count)" Color="Color.Primary" />
+    </div>
 </MudContainer>
 
+
 <MudContainer MaxWidth="MaxWidth.ExtraLarge" Class="top-selling-container">
-    <MudText Typo="Typo.h4" Class="text-center">TOP SELLING</MudText>
+    <MudText Typo="Typo.h4" Class="text-center">SẢN PHẨM BÁN CHẠY NHẤT</MudText>
 
     <MudGrid Spacing="3" Justify="Justify.SpaceBetween" >
         @for (int i = 0; i < 6; i++)
@@ -219,10 +261,10 @@
             <MudItem xs="12" sm="6" md="4">
                 <MudPaper Class="product-card">
                     <MudImage Src="link_to_image.jpg" Alt="Product Image" class="product-Image1" />
-                    <MudText Typo="Typo.caption" Class="category-text">CATEGORY</MudText>
-                    <MudText Typo="Typo.subtitle1" Class="product-name">PRODUCT NAME GOES HERE</MudText>
-                    <MudText Typo="Typo.h6" Class="price-text" Color="Color.Error">$980.00</MudText>
-                    <MudText Typo="Typo.body2" Class="old-price">$990.00</MudText>
+                    <MudText Typo="Typo.caption" Class="category-text">DANH MỤC</MudText>
+                    <MudText Typo="Typo.subtitle1" Class="product-name">TÊN SẢN PHẨM</MudText>
+                    <MudText Typo="Typo.h6" Class="price-text" Color="Color.Error">980.00 VNĐ</MudText>
+                    <MudText Typo="Typo.body2" Class="old-price">990.00 VNĐ</MudText>
                 </MudPaper>
             </MudItem>
         }
@@ -254,8 +296,91 @@
     </MudIconButton>
 </MudContainer>
 
+<MudContainer Class="footer-container" MaxWidth="MaxWidth.False" Style="width: 100%; padding: 0; margin: 0;">
+    <MudGrid>
+        <MudItem xs="12" md="3">
+            <MudText Typo="Typo.h6" Class="footer-heading">THÔNG TIN CỦA CHÚNG TÔI</MudText>
+
+            <MudText Typo="Typo.body2" Class="footer-contact">
+                <MudIcon Icon="@Icons.Material.Filled.Place" Color="Color.Secondary" /> Trịnh Văn Bô
+            </MudText>
+            <MudText Typo="Typo.body2" Class="footer-contact">
+                <MudIcon Icon="@Icons.Material.Filled.Phone" Color="Color.Secondary" /> +0357906234
+            </MudText>
+            <MudText Typo="Typo.body2" Class="footer-contact">
+                <MudIcon Icon="@Icons.Material.Filled.Email" Color="Color.Secondary" /> manhlntph19847@fpt.edu.vn
+            </MudText>
+        </MudItem>
+
+        <MudItem xs="12" md="3">
+            <MudText Typo="Typo.h6" Class="footer-heading">GIỚI THIỆU</MudText>
+            <MudText Typo="Typo.body2">Trang chủ</MudText>
+            <MudText Typo="Typo.body2">Giới thiệu</MudText>
+            <MudText Typo="Typo.body2">Sản phẩm</MudText>
+        </MudItem>
+
+        <MudItem xs="12" md="3">
+            <MudText Typo="Typo.h6" Class="footer-heading">DANH MỤC</MudText>
+            <MudText Typo="Typo.body2">Giày Nam</MudText>
+            <MudText Typo="Typo.body2">Giày Nữ</MudText>
+            <MudText Typo="Typo.body2">Khuyến Mãi</MudText>
+            <MudText Typo="Typo.body2">Hướng dẫn chọn giày</MudText>
+        </MudItem>
+
+        <MudItem xs="12" md="3">
+            <MudText Typo="Typo.h6" Class="footer-heading">HỖ TRỢ</MudText>
+            <MudText Typo="Typo.body2">Đối tác</MudText>
+            <MudText Typo="Typo.body2">Tuyển dụng</MudText>
+        </MudItem>
+    </MudGrid>
+
+    <MudDivider Class="footer-divider" />
+
+    <MudText Class="footer-copyright" Align="Align.Center">
+        ©2024 Bản quyền thuộc về SNEAKER 141 | Mẫu này thực hiện bởi ❤️ Tiến Mạnh
+    </MudText>
+</MudContainer>
+
 
 <style>
+    
+    .footer-container {
+        background-color: #333;
+        color: #fff;
+        width: 100%;
+        padding: 16px 0; /* Khoảng cách trên và dưới của footer */
+        
+        margin-top:20px;    
+    }
+
+    .footer-heading {
+        color:white;
+        font-weight: bold;
+        margin-bottom: 8px;
+    }
+
+    .footer-contact {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+
+    .footer-divider {
+        margin-top: 16px;
+        margin-bottom: 16px;
+    }
+
+    .footer-copyright {
+        padding: 8px 0;
+        font-size: 0.875rem;
+    }
+
+
+    .newsletter-signup .MudButton {
+        padding: 8px 16px;
+        font-size: 0.9rem;
+        margin-left: 8px;
+    }
     .newsletter-button {
         min-width: 120px; /* Đặt chiều rộng tối thiểu cho nút */
         border-radius: 0;
@@ -263,6 +388,10 @@
     .newsletter-input {
         flex: 1; /* Chiếm không gian còn lại */
         margin-right: -1px; /* Khoảng cách giữa ô input và nút */
+        width: 100%; /* Make input field take the width of the container */
+        max-width: 200px; /* Set a fixed max-width for the input field */
+        padding: 8px;
+        font-size: 0.9rem;
     }
     .input-group {
         display: flex; /* Sử dụng flexbox để căn chỉnh các phần tử */
@@ -321,17 +450,20 @@
     }
 
     .newsletter-signup {
-        margin: 30px 0;
+        max-width: 300px; /* Set max-width to match the text width */
+        margin: auto;
         text-align: center;
     }
 
     .newsletter-title {
+        font-size: 1rem;
         margin-bottom: 10px;
     }
 
     .social-icons {
         margin-top: 20px;
         text-align: center;
+        margin-bottom: 30px;
     }
 
         .social-icons .MudIconButton {
@@ -416,13 +548,14 @@
         display: flex;
         align-items: center;
         justify-content: center;
+        margin-left: 10px;
     }
     .navigation-buttons {
         position: absolute;
-        bottom: 20px;
-        right: 20px;
+        bottom: 20px; /* Khoảng cách từ dưới cùng của container */
+        right: 20px; /* Khoảng cách từ bên phải của container */
         display: flex;
-        gap: 10px;
+        gap: 10px; /* Khoảng cách giữa hai nút */
     }
     .mud-nav {
         display: flex;
@@ -545,7 +678,7 @@
         font-weight: bold;
         border-radius: 0;
     }
-</style>*@
+</style>
 
 
 <MudLayout>
@@ -614,9 +747,54 @@
 </MudLayout>
 
 
-
-
-
 @code {
+    private List<Category> categories;
+    private List<Products> products;
+    private int currentPage = 0; // Trang hiện tại
+    private const int itemsPerPage = 8; // Số sản phẩm trên mỗi trang
 
+    protected override void OnInitialized()
+    {
+        categories = new List<Category>
+        {
+            new Category { Id = Guid.NewGuid(), Name = "Giày thể thao", Description = "Các loại giày thể thao" },
+            new Category { Id = Guid.NewGuid(), Name = "Giày công sở", Description = "Giày cho văn phòng" },
+            new Category { Id = Guid.NewGuid(), Name = "Giày thời trang", Description = "Giày theo phong cách" },
+        };
+
+        products = new List<Products>
+        {
+            new Products { Name = "Giày converse Classic", Price = 1500000, Category = categories[0] },
+            new Products { Name = "Giày Vans Old Skool", Price = 500000, Category = categories[0] },
+            new Products { Name = "Giày Vans Slip On", Price = 100000, Category = categories[1] },
+            new Products { Name = "Giày Nike Air Force 1", Price = 2500000, Category = categories[2] },
+            new Products { Name = "Giày Balance", Price = 1500000, Category = categories[2] },
+            new Products { Name = "Giày Snake Gucci", Price = 1500000, Category = categories[1] },
+            new Products { Name = "Giày Balance", Price = 1500000, Category = categories[2] },
+            new Products { Name = "Giày Snake Gucci", Price = 1500000, Category = categories[1] },
+            new Products { Name = "Giày Balance", Price = 1500000, Category = categories[2] },
+            new Products { Name = "Giày Snake Gucci", Price = 1500000, Category = categories[1] },
+        };
+
+    }
+    private List<Products> GetCurrentPageProducts()
+    {
+        return products.Skip(currentPage * itemsPerPage).Take(itemsPerPage).ToList();
+    }
+
+    private void NextPage()
+    {
+        if ((currentPage + 1) * itemsPerPage < products.Count)
+        {
+            currentPage++;
+        }
+    }
+
+    private void PreviousPage()
+    {
+        if (currentPage > 0)
+        {
+            currentPage--;
+        }
+    }
 }

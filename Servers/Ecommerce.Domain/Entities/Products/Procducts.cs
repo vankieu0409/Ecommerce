@@ -6,7 +6,6 @@ namespace Ecommerce.Domain.Entities.Products
     {
         public Guid IdCategory { get; set; }
         public string Name { get; set; } // Tên của giày
-
         public string? Description { get; set; } // Mô tả của giày
         public Guid IdBrand { get; set; } // Thương hiệu của giày
         public Guid IdModel { get; set; } // Mẫu mã của giày
