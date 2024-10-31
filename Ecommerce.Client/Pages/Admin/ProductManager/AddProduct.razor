@@ -1,0 +1,145 @@
+@page "/Admin/Product/Add"
+@inject IProductService _productService
+@using Ecommerce.Client.Model
+@using Ecommerce.Domain.Entities.Products
+@inject NavigationManager NavigationManager
+@layout LayoutAdmin
+
+<MudCard>
+    <MudCardHeader>
+        <MudText Typo="Typo.h6">Add New Product</MudText>
+    </MudCardHeader>
+    <MudCardContent>
+        <MudGrid>
+            <MudItem xs="12" sm="4">
+                <MudText Typo="Typo.body1">Name</MudText> <!-- Nhãn cho trường nhập liệu -->
+                <MudTextField @bind-Value="newProductDto.Name" Variant="Variant.Outlined" Class="rounded" />
+            </MudItem>
+            <MudItem xs="12" sm="4">
+                <MudText Typo="Typo.body1">Price</MudText> <!-- Nhãn cho trường nhập liệu -->
+                <MudTextField @bind-Value="newProductDto.Price" Variant="Variant.Outlined" Class="rounded" />
+            </MudItem>
+            <MudItem xs="12" sm="4">
+                <MudText Typo="Typo.body1">SKU</MudText> <!-- Nhãn cho trường nhập liệu -->
+                <MudTextField @bind-Value="newProductDto.SKU" Variant="Variant.Outlined" Class="rounded" />
+            </MudItem>
+            <MudItem xs="12">
+                <MudText Typo="Typo.body1">Description</MudText> <!-- Nhãn cho trường nhập liệu -->
+                <MudTextField @bind-Value="newProductDto.Description" Variant="Variant.Outlined" Class="rounded" />
+            </MudItem>
+            <MudItem xs="12" md="6">
+                <MudText Typo="Typo.body1">Category ID</MudText> <!-- Nhãn cho trường nhập liệu -->
+                <MudSelect @bind-Value="newProductDto.Category" Variant="Variant.Outlined" Class="rounded">
+
+                    @foreach (var item in categories)
+                    {
+                        <MudSelectItem Value="@item.Id">@item.Name</MudSelectItem>
+                    }
+                </MudSelect>
+            </MudItem>
+            <MudItem xs="12" md="6">
+                <MudText Typo="Typo.body1">Brand ID</MudText> <!-- Nhãn cho trường nhập liệu -->
+                <MudSelect @bind-Value="newProductDto.Brand" Variant="Variant.Outlined" Class="rounded">
+                    
+                    @foreach (var item in brands)
+                    {
+                        <MudSelectItem Value="@item.Id">@item.BrandName</MudSelectItem>
+                    }
+                </MudSelect>
+            </MudItem>
+            <MudItem xs="12" md="6">
+                <MudText Typo="Typo.body1">Model ID</MudText> <!-- Nhãn cho trường nhập liệu -->
+                <MudSelect @bind-Value="newProductDto.Model" Variant="Variant.Outlined" Class="rounded">
+
+                    @foreach (var item in models)
+                    {
+                        <MudSelectItem Value="@item.Id">@item.ModelType</MudSelectItem>
+                    }
+                </MudSelect>
+            </MudItem>
+            <MudItem xs="12" md="6">
+                <MudText Typo="Typo.body1">Material ID</MudText> <!-- Nhãn cho trường nhập liệu -->
+                <MudSelect @bind-Value="newProductDto.Material" Variant="Variant.Outlined" Class="rounded">
+
+                    @foreach (var item in materials)
+                    {
+                        <MudSelectItem Value="@item.Id">@item.MaterialType</MudSelectItem>
+                    }
+                </MudSelect>
+            </MudItem>
+            <MudItem xs="12" md="6">
+                <MudText Typo="Typo.body1">Gender ID</MudText> <!-- Nhãn cho trường nhập liệu -->
+                <MudTextField @bind-Value="newProductDto.Gender" Variant="Variant.Outlined" Class="rounded" />
+            </MudItem>
+            <MudItem xs="12" md="6">
+                <MudText Typo="Typo.body1">Style ID</MudText> <!-- Nhãn cho trường nhập liệu -->
+                <MudSelect @bind-Value="newProductDto.Style" Variant="Variant.Outlined" Class="rounded">
+
+                    @foreach (var item in styles)
+                    {
+                        <MudSelectItem Value="@item.Id">@item.Style</MudSelectItem>
+                    }
+                </MudSelect>
+            </MudItem>
+            <MudItem xs="12" md="6">
+                <MudText Typo="Typo.body1">Sole Type ID</MudText> <!-- Nhãn cho trường nhập liệu -->
+                <MudSelect @bind-Value="newProductDto.SoleType" Variant="Variant.Outlined" Class="rounded">
+
+                    @foreach (var item in soletypes)
+                    {
+                        <MudSelectItem Value="@item.Id">@item.SoleType</MudSelectItem>
+                    }
+                </MudSelect>
+            </MudItem>
+        </MudGrid>
+        <MudGrid Justify="Justify.Center" Class="mt-4">
+            <MudItem>
+                <MudButton Color="Color.Primary" Variant="Variant.Filled" OnClick="Submit">Add Product</MudButton>
+            </MudItem>
+        </MudGrid>
+    </MudCardContent>
+</MudCard>
+
+@code {
+    private AddProductDto newProductDto = new AddProductDto();
+    private List<Brand> brands = new List<Brand>();
+    private List<Category> categories = new List<Category>();
+    private List<ModelTypes> models = new List<ModelTypes>();
+    private List<Materials> materials = new List<Materials>();
+    private List<Styles> styles = new List<Styles>();
+    private List<SoleTypes> soletypes = new List<SoleTypes>();
+
+    protected override async Task OnInitializedAsync()
+    {
+        brands = await _productService.GetAllBrands();
+        categories = await _productService.GetAllCategorys();
+        models = await _productService.GetAllModels();
+        materials = await _productService.GetAllMaterials();
+        styles = await _productService.GetAllStyles();
+        soletypes = await _productService.GetAllSoleTypes();
+    }
+
+    private async Task Submit()
+    {
+        if (string.IsNullOrWhiteSpace(newProductDto.Name) || newProductDto.Price <= 0)
+        {
+            // Hiển thị thông báo lỗi cho người dùng
+            Console.WriteLine("Invalid product data.");
+            return;
+        }
+
+        try
+        {
+            var createdProduct = await _productService.CreateProduct(newProductDto);
+            // Navigate back to the product list or show a success message
+            // NavigationManager.NavigateTo("/Admin/Products/List", true);
+        }
+        catch (Exception ex)
+        {
+            // Hiển thị thông báo lỗi cho người dùng
+            Console.WriteLine($"Error adding product: {ex.Message}");
+        }
+    }
+
+
+} 

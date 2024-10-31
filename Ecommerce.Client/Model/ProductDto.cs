@@ -2,10 +2,12 @@
 
 public class ProductDto
 {
+
     public Guid Id { get; set; }
     public string Name { get; set; }
 
     public string Brand { get; set; }
+    public string Category { get; set; }
 
     public string Description { get; set; }
 
@@ -25,5 +27,7 @@ public class ProductDto
 
     public decimal? Weight { get; set; } // in grams
 
-    public string Season { get; set; } // e.g., "Summer", "Winter", "All-season"
+    //public string Season { get; set; } // e.g., "Summer", "Winter", "All-season"
+
+    public string SoleType { get; set; } // e.g., "Waterproof", 
 }

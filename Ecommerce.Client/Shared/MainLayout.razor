@@ -2,12 +2,13 @@
 @inherits LayoutComponentBase
 @using MudBlazor
 
+
 <MudThemeProvider />
 <MudPopoverProvider />
 <MudDialogProvider />
 <MudSnackbarProvider />
 <MudLayout>
-    <MudAppBar Elevation="1" Color="Color.Dark">
+    <MudAppBar Elevation="0" Color="Color.Dark">
         <MudContainer MaxWidth="MaxWidth.False" Style="padding: 0;">
             <!-- Top contact info -->
             <MudGrid Gutter="0" Style="background-color: #222; color: white; padding: 1.5rem; align-items: center;">
@@ -63,7 +64,9 @@
                     </div>
                     <MudText Style="margin-left: 0.5rem;">Giỏ hàng</MudText>
                 </MudItem>
+
             </MudGrid>
+
         </MudContainer>
     </MudAppBar>
 
@@ -79,3 +82,23 @@
 @code {
 
 }
+
+<style>
+
+
+
+            .mud-nav a.active {
+                color: red; /* Color for active link */
+                font-weight: bold;
+                border-bottom: 2px solid red; /* Underline active link */
+            }
+
+            .mud-nav a:hover {
+                color: black; /* Optional hover effect */
+            }
+
+            .mud-nav a:focus {
+                outline: none;
+            }
+
+</style>

@@ -1,6 +1,8 @@
 using Blazored.LocalStorage;
 
 using Ecommerce.Client;
+using Ecommerce.Client.Services.PrdService;
+using Ecommerce.Client.Services.Common;
 using Ecommerce.Client.Services.ProductService;
 
 using Microsoft.AspNetCore.Components.Web;
@@ -17,5 +19,6 @@ builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.
 builder.Services.AddBlazoredLocalStorage();
 builder.Services.AddMudServices();
 builder.Services.AddScoped<IProductService, ProductService>();
-
+builder.Services.AddScoped<ICommonService, CommonService>();
+builder.Services.AddScoped<IPrdService, PrdService>();
 await builder.Build().RunAsync();

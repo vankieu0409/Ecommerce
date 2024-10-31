@@ -9,6 +9,7 @@
 @using Ecommerce.Client
 @using Ecommerce.Client.Layout
 @using Ecommerce.Client.Layout.Admin
+@using Ecommerce.Client.Services.Common
 @using Ecommerce.Client.Services.ProductService
 @using Ecommerce.Client.Shared
 @using MudBlazor
@@ -16,5 +17,8 @@
 
 @inject IJSRuntime _js
 @inject IProductService _productService
+@inject HttpClient _httpClient
+@inject ICommonService _common
+
 
 

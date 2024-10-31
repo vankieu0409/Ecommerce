@@ -1,6 +1,7 @@
 ﻿
 
 using Ecommerce.Client.Model;
+using Ecommerce.Domain.Entities.Products;
 using Ecommerce.Shared.Common.Models;
 
 namespace Ecommerce.Client.Services.ProductService
@@ -23,5 +24,12 @@ namespace Ecommerce.Client.Services.ProductService
         //Task<ProductEntity> UpdateProduct(ProductEntity product);
         //Task DeleteProduct(Guid product);
         Task<PagedList<ProductDto>> GetAdminProducts(ProductFilter? query);
+        Task<AddProductDto> CreateProduct(AddProductDto addProductDto);
+        Task<List<Brand>> GetAllBrands();
+        Task<List<Category>> GetAllCategorys();
+        Task<List<ModelTypes>> GetAllModels();
+        Task<List<Materials>> GetAllMaterials();
+        Task<List<Styles>> GetAllStyles();
+        Task<List<SoleTypes>> GetAllSoleTypes();
     }
 }

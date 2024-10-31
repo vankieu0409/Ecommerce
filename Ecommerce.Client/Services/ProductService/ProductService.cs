@@ -1,6 +1,7 @@
 ﻿using System.Net.Http.Json;
 
 using Ecommerce.Client.Model;
+using Ecommerce.Domain.Entities.Products;
 using Ecommerce.Shared.Common.Models;
 
 namespace Ecommerce.Client.Services.ProductService
@@ -23,13 +24,56 @@ namespace Ecommerce.Client.Services.ProductService
 
         //public event Action ProductsChanged;
 
-        //public async Task<ProductEntity> CreateProduct(ProductEntity product)
-        //{
-        //    var result = await _http.PostAsJsonAsync("api/product", product);
-        //    var newProduct = (await result.Content
-        //        .ReadFromJsonAsync<ProductEntity>());
-        //    return newProduct;
-        //}
+        public async Task<AddProductDto> CreateProduct(AddProductDto addProductDto)
+        {
+            var result = await _http.PostAsJsonAsync("/add", addProductDto);
+            if (result.IsSuccessStatusCode)
+            {
+                var newProduct = await result.Content.ReadFromJsonAsync<AddProductDto>();
+                return newProduct;
+            }
+            else
+            {
+                var errorContent = await result.Content.ReadAsStringAsync();
+                throw new Exception($"Error creating product: {result.StatusCode} - {errorContent}");
+            }
+        }
+
+        public async Task<List<Brand>> GetAllBrands()
+        {
+            var result = await _http.GetFromJsonAsync<List<Brand>>("/brands");
+            return result;
+        }
+
+        public async Task<List<Category>> GetAllCategorys()
+        {
+            var result = await _http.GetFromJsonAsync<List<Category>>("/categorys");
+            return result;
+        }
+
+        public async Task<List<ModelTypes>> GetAllModels()
+        {
+            var result = await _http.GetFromJsonAsync<List<ModelTypes>>("/models");
+            return result;
+        }
+
+        public async Task<List<Materials>> GetAllMaterials()
+        {
+            var result = await _http.GetFromJsonAsync<List<Materials>>("/materials");
+            return result;
+        }
+
+        public async Task<List<Styles>> GetAllStyles()
+        {
+            var result = await _http.GetFromJsonAsync<List<Styles>>("/styles");
+            return result;
+        }
+
+        public async Task<List<SoleTypes>> GetAllSoleTypes()
+        {
+            var result = await _http.GetFromJsonAsync<List<SoleTypes>>("/soletypes");
+            return result;
+        }
 
         //public async Task DeleteProduct(Guid product)
         //{
@@ -40,10 +84,21 @@ namespace Ecommerce.Client.Services.ProductService
         {
             var url = query != null ? $"admin?PageIndex={query.PageIndex}&PageSize={query.PageSize}&PropFilter={Uri.EscapeDataString(query.PropFilter ?? "")}&SearchTerm={Uri.EscapeDataString(query.SearchTerm ?? "")}" : $"/admin";
 
-            var result = await _http.GetFromJsonAsync<PagedList<ProductDto>>($"api/Product/{url}");
+            try
+            {
+                var respone = await _http.GetFromJsonAsync<List<ProductDto>>($"{url}");
+                var result = new PagedList<ProductDto>(respone, 5, query.PageIndex, query.PageSize);
+
+
+                return result;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
             //var result = await _http.GetStringAsync($"api/Product/{url}");
             //var traRa = JsonSerializer.Deserialize<PagedList<ProductDto>>(result, new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
-            return result;
 
         }
 
