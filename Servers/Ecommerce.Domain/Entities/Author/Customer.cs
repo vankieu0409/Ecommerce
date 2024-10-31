@@ -11,7 +11,7 @@ public class Customer : FullAuditedEntity<Guid>
     public string FullName { get; set; }
     public string Email { get; set; }
     public string PasswordHash { get; set; }
-    public string Image { get; set; }
+    public string? Image { get; set; }
 
     //navigation
 

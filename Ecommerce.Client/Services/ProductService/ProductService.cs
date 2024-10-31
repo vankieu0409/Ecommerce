@@ -40,10 +40,21 @@ namespace Ecommerce.Client.Services.ProductService
         {
             var url = query != null ? $"admin?PageIndex={query.PageIndex}&PageSize={query.PageSize}&PropFilter={Uri.EscapeDataString(query.PropFilter ?? "")}&SearchTerm={Uri.EscapeDataString(query.SearchTerm ?? "")}" : $"/admin";
 
-            var result = await _http.GetFromJsonAsync<PagedList<ProductDto>>($"api/Product/{url}");
+            try
+            {
+                var respone = await _http.GetFromJsonAsync<List<ProductDto>>($"{url}");
+                var result = new PagedList<ProductDto>(respone, 5, query.PageIndex, query.PageSize);
+
+
+                return result;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
             //var result = await _http.GetStringAsync($"api/Product/{url}");
             //var traRa = JsonSerializer.Deserialize<PagedList<ProductDto>>(result, new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
-            return result;
 
         }
 

@@ -17,7 +17,7 @@ namespace Ecommerce.Infrastructure.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "8.0.6")
+                .HasAnnotation("ProductVersion", "8.0.10")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
@@ -66,7 +66,6 @@ namespace Ecommerce.Infrastructure.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("StreetAddress")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Ward")
@@ -325,6 +324,35 @@ namespace Ecommerce.Infrastructure.Migrations
                         .IsUnique();
 
                     b.ToTable("ROLES", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("fee63ca5-c4f4-448a-aa18-3fca3e06469c"),
+                            CreatedTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DeletedTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsDeleted = false,
+                            ModifiedTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "Admin"
+                        },
+                        new
+                        {
+                            Id = new Guid("93177c5b-7fd5-4708-8af1-11d0690014d7"),
+                            CreatedTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DeletedTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsDeleted = false,
+                            ModifiedTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "Customer"
+                        },
+                        new
+                        {
+                            Id = new Guid("dc6e1bfc-644d-4262-8134-e0b2e25cc2ec"),
+                            CreatedTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DeletedTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsDeleted = false,
+                            ModifiedTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "Employee"
+                        });
                 });
 
             modelBuilder.Entity("Ecommerce.Domain.Entities.Orders.Order", b =>
@@ -337,7 +365,7 @@ namespace Ecommerce.Infrastructure.Migrations
                     b.Property<DateTime>("CreationDate")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2024, 10, 19, 17, 49, 53, 428, DateTimeKind.Local).AddTicks(6372));
+                        .HasDefaultValue(new DateTime(2024, 10, 29, 13, 22, 41, 710, DateTimeKind.Local).AddTicks(8241));
 
                     b.Property<Guid>("CustomerId")
                         .HasColumnType("uniqueidentifier");
@@ -475,7 +503,7 @@ namespace Ecommerce.Infrastructure.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("3ddac203-0728-4d73-8a26-a74093ee6b25"),
+                            Id = new Guid("ccfa0cb6-06b7-4fd5-8046-6c5e953b8772"),
                             BrandName = "Nike",
                             CreatedTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DeletedTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
@@ -485,7 +513,7 @@ namespace Ecommerce.Infrastructure.Migrations
                         },
                         new
                         {
-                            Id = new Guid("725fa419-67f8-44b9-91bc-0209592ae1ee"),
+                            Id = new Guid("4bd5ce53-6378-4cb7-b4fb-b6327244283c"),
                             BrandName = "Adidas",
                             CreatedTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DeletedTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
@@ -495,7 +523,7 @@ namespace Ecommerce.Infrastructure.Migrations
                         },
                         new
                         {
-                            Id = new Guid("3d0ebb56-28fb-4f23-92fb-4d81ee6e4ae8"),
+                            Id = new Guid("cb5993bd-d51f-4883-9b37-1d4da9793f07"),
                             BrandName = "Puma",
                             CreatedTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DeletedTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
@@ -549,7 +577,7 @@ namespace Ecommerce.Infrastructure.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("8c2db157-acfe-4efc-965f-a5bc657eca54"),
+                            Id = new Guid("af9b5cad-d36e-4d66-a670-34d31b64798c"),
                             CreatedTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DeletedTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "Athletic and casual sneakers",
@@ -600,7 +628,7 @@ namespace Ecommerce.Infrastructure.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("6c51c2ea-571d-4600-8551-738eccf5bb56"),
+                            Id = new Guid("1729c6d7-576d-40cb-a37f-fd6e78921311"),
                             Color = "White",
                             CreatedTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DeletedTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
@@ -609,7 +637,7 @@ namespace Ecommerce.Infrastructure.Migrations
                         },
                         new
                         {
-                            Id = new Guid("36144f8a-e44e-4b85-b48c-e1192d1148ba"),
+                            Id = new Guid("a289bd60-924b-4ad3-b927-955a20bfa8c0"),
                             Color = "Black",
                             CreatedTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DeletedTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
@@ -618,7 +646,7 @@ namespace Ecommerce.Infrastructure.Migrations
                         },
                         new
                         {
-                            Id = new Guid("ba777883-24c9-460c-ad56-e321f2168067"),
+                            Id = new Guid("9a3b603f-6462-49b1-b52c-741be1e62e6e"),
                             Color = "Red",
                             CreatedTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DeletedTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
@@ -720,7 +748,7 @@ namespace Ecommerce.Infrastructure.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("9d5da7c1-0259-405b-acd5-ef90e730c2bf"),
+                            Id = new Guid("379c58a5-909e-4175-8cd7-a1833d4b2d5b"),
                             CreatedTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DeletedTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Detail = "High-quality, durable leather material for premium footwear.",
@@ -730,7 +758,7 @@ namespace Ecommerce.Infrastructure.Migrations
                         },
                         new
                         {
-                            Id = new Guid("81237747-a31f-491e-88d2-d1b533e46639"),
+                            Id = new Guid("90d0383c-d1e9-4e7f-8ed8-e539ba22c801"),
                             CreatedTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DeletedTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Detail = "Lightweight, breathable synthetic material for athletic shoes.",
@@ -785,7 +813,7 @@ namespace Ecommerce.Infrastructure.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("b26935cf-5459-41b6-8a22-9440763d5ac2"),
+                            Id = new Guid("11dc6a69-0c19-4fa9-a01c-8b14671bc807"),
                             CreatedTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DeletedTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Detail = "Sneakers that sit below the ankle, offering flexibility and versatility.",
@@ -882,17 +910,17 @@ namespace Ecommerce.Infrastructure.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("425dfc70-2b0b-437b-82ef-4654558277dc"),
+                            Id = new Guid("6ac9ef35-4e0c-41f8-81ad-9305190657b4"),
                             CreatedTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DeletedTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "Iconic Nike sneaker with excellent cushioning.",
-                            IdBrand = new Guid("3ddac203-0728-4d73-8a26-a74093ee6b25"),
-                            IdCategory = new Guid("8c2db157-acfe-4efc-965f-a5bc657eca54"),
-                            IdGender = new Guid("4e97f0e2-94e2-4829-8d4f-7220c7272605"),
-                            IdMaterial = new Guid("81237747-a31f-491e-88d2-d1b533e46639"),
-                            IdModel = new Guid("b26935cf-5459-41b6-8a22-9440763d5ac2"),
-                            IdSoleType = new Guid("08571190-dd95-4987-a485-fd9d86762c02"),
-                            IdStyle = new Guid("a0b405a3-41e4-4de9-9d9a-b82d22ebc6de"),
+                            IdBrand = new Guid("ccfa0cb6-06b7-4fd5-8046-6c5e953b8772"),
+                            IdCategory = new Guid("af9b5cad-d36e-4d66-a670-34d31b64798c"),
+                            IdGender = new Guid("b52ae3b5-64af-46b6-81cf-5941ebc5d7b1"),
+                            IdMaterial = new Guid("90d0383c-d1e9-4e7f-8ed8-e539ba22c801"),
+                            IdModel = new Guid("11dc6a69-0c19-4fa9-a01c-8b14671bc807"),
+                            IdSoleType = new Guid("e05d7666-2bcc-44bc-a212-23fad463b8bf"),
+                            IdStyle = new Guid("4b2311bd-0428-46c9-aaa7-3332ec5aea8d"),
                             IsDeleted = false,
                             ModifiedTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Air Max 90",
@@ -902,17 +930,17 @@ namespace Ecommerce.Infrastructure.Migrations
                         },
                         new
                         {
-                            Id = new Guid("297b7860-03e7-4a9e-8e9f-8fe630972dea"),
+                            Id = new Guid("674bc11f-d787-4ca3-9f45-e84aee26ee24"),
                             CreatedTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DeletedTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "Classic Adidas sneaker with shell toe.",
-                            IdBrand = new Guid("725fa419-67f8-44b9-91bc-0209592ae1ee"),
-                            IdCategory = new Guid("8c2db157-acfe-4efc-965f-a5bc657eca54"),
-                            IdGender = new Guid("d6dc2d30-ee68-4ff2-b424-dc418d0ed104"),
-                            IdMaterial = new Guid("9d5da7c1-0259-405b-acd5-ef90e730c2bf"),
-                            IdModel = new Guid("b26935cf-5459-41b6-8a22-9440763d5ac2"),
-                            IdSoleType = new Guid("08571190-dd95-4987-a485-fd9d86762c02"),
-                            IdStyle = new Guid("a0b405a3-41e4-4de9-9d9a-b82d22ebc6de"),
+                            IdBrand = new Guid("4bd5ce53-6378-4cb7-b4fb-b6327244283c"),
+                            IdCategory = new Guid("af9b5cad-d36e-4d66-a670-34d31b64798c"),
+                            IdGender = new Guid("ffb8bb94-dd66-4afb-89b6-822c7b95739a"),
+                            IdMaterial = new Guid("379c58a5-909e-4175-8cd7-a1833d4b2d5b"),
+                            IdModel = new Guid("11dc6a69-0c19-4fa9-a01c-8b14671bc807"),
+                            IdSoleType = new Guid("e05d7666-2bcc-44bc-a212-23fad463b8bf"),
+                            IdStyle = new Guid("4b2311bd-0428-46c9-aaa7-3332ec5aea8d"),
                             IsDeleted = false,
                             ModifiedTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Superstar",
@@ -922,17 +950,17 @@ namespace Ecommerce.Infrastructure.Migrations
                         },
                         new
                         {
-                            Id = new Guid("cdbdc976-f106-4fde-b700-51bf0278c2e9"),
+                            Id = new Guid("a6568ad5-26e0-4a89-81b9-6fb2046dd60f"),
                             CreatedTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DeletedTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "Timeless Puma sneaker with suede upper.",
-                            IdBrand = new Guid("3d0ebb56-28fb-4f23-92fb-4d81ee6e4ae8"),
-                            IdCategory = new Guid("8c2db157-acfe-4efc-965f-a5bc657eca54"),
-                            IdGender = new Guid("7b7d1210-8c76-4f58-aaeb-99076d4644de"),
-                            IdMaterial = new Guid("9d5da7c1-0259-405b-acd5-ef90e730c2bf"),
-                            IdModel = new Guid("b26935cf-5459-41b6-8a22-9440763d5ac2"),
-                            IdSoleType = new Guid("08571190-dd95-4987-a485-fd9d86762c02"),
-                            IdStyle = new Guid("a0b405a3-41e4-4de9-9d9a-b82d22ebc6de"),
+                            IdBrand = new Guid("cb5993bd-d51f-4883-9b37-1d4da9793f07"),
+                            IdCategory = new Guid("af9b5cad-d36e-4d66-a670-34d31b64798c"),
+                            IdGender = new Guid("c419994f-3e46-48b9-86a6-0cb71b3e2c34"),
+                            IdMaterial = new Guid("379c58a5-909e-4175-8cd7-a1833d4b2d5b"),
+                            IdModel = new Guid("11dc6a69-0c19-4fa9-a01c-8b14671bc807"),
+                            IdSoleType = new Guid("e05d7666-2bcc-44bc-a212-23fad463b8bf"),
+                            IdStyle = new Guid("4b2311bd-0428-46c9-aaa7-3332ec5aea8d"),
                             IsDeleted = false,
                             ModifiedTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Suede Classic",
@@ -983,7 +1011,7 @@ namespace Ecommerce.Infrastructure.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("1c5fb290-a24b-4ae0-bcb5-830a5ac6e579"),
+                            Id = new Guid("7df5d998-aaac-4708-8121-a62a00e57c8e"),
                             CreatedTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DeletedTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsDeleted = false,
@@ -992,7 +1020,7 @@ namespace Ecommerce.Infrastructure.Migrations
                         },
                         new
                         {
-                            Id = new Guid("3ce50011-d5f7-4f7f-b702-cd9e01d0a386"),
+                            Id = new Guid("494bb6f3-b8d7-488a-b870-e84fb15a764d"),
                             CreatedTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DeletedTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsDeleted = false,
@@ -1001,7 +1029,7 @@ namespace Ecommerce.Infrastructure.Migrations
                         },
                         new
                         {
-                            Id = new Guid("3b7f57d5-7262-4ae4-8cbd-d498fda0a004"),
+                            Id = new Guid("f7f534a3-17a5-48ce-b847-67fa9bc0c965"),
                             CreatedTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DeletedTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsDeleted = false,
@@ -1055,7 +1083,7 @@ namespace Ecommerce.Infrastructure.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("08571190-dd95-4987-a485-fd9d86762c02"),
+                            Id = new Guid("e05d7666-2bcc-44bc-a212-23fad463b8bf"),
                             CreatedTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DeletedTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Detail = "A thin, level sole providing close contact with the ground.",
@@ -1110,7 +1138,7 @@ namespace Ecommerce.Infrastructure.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("a0b405a3-41e4-4de9-9d9a-b82d22ebc6de"),
+                            Id = new Guid("4b2311bd-0428-46c9-aaa7-3332ec5aea8d"),
                             CreatedTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DeletedTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Detail = "Performance-oriented sneakers designed for sports and physical activities.",
@@ -1173,108 +1201,108 @@ namespace Ecommerce.Infrastructure.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("28896ee9-1473-44ae-ab8c-bb907d654849"),
+                            Id = new Guid("7d9bde05-aa8c-40f8-b844-96511f17247f"),
                             CreatedTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DeletedTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            IdColor = new Guid("6c51c2ea-571d-4600-8551-738eccf5bb56"),
-                            IdProduct = new Guid("425dfc70-2b0b-437b-82ef-4654558277dc"),
-                            IdSize = new Guid("1c5fb290-a24b-4ae0-bcb5-830a5ac6e579"),
+                            IdColor = new Guid("1729c6d7-576d-40cb-a37f-fd6e78921311"),
+                            IdProduct = new Guid("6ac9ef35-4e0c-41f8-81ad-9305190657b4"),
+                            IdSize = new Guid("7df5d998-aaac-4708-8121-a62a00e57c8e"),
                             IsDeleted = false,
                             ModifiedTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Quantity = 100
                         },
                         new
                         {
-                            Id = new Guid("8ea055de-950d-4eba-82cd-e8709a3c63b3"),
+                            Id = new Guid("e09a53f4-a24c-42fc-86d9-ec0e75f9783a"),
                             CreatedTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DeletedTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            IdColor = new Guid("36144f8a-e44e-4b85-b48c-e1192d1148ba"),
-                            IdProduct = new Guid("425dfc70-2b0b-437b-82ef-4654558277dc"),
-                            IdSize = new Guid("3ce50011-d5f7-4f7f-b702-cd9e01d0a386"),
+                            IdColor = new Guid("a289bd60-924b-4ad3-b927-955a20bfa8c0"),
+                            IdProduct = new Guid("6ac9ef35-4e0c-41f8-81ad-9305190657b4"),
+                            IdSize = new Guid("494bb6f3-b8d7-488a-b870-e84fb15a764d"),
                             IsDeleted = false,
                             ModifiedTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Quantity = 100
                         },
                         new
                         {
-                            Id = new Guid("6fa29be8-e38e-4bc7-841f-2a345e70f764"),
+                            Id = new Guid("23eb59bc-1391-4b85-bf50-58c8cf7fd40b"),
                             CreatedTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DeletedTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            IdColor = new Guid("ba777883-24c9-460c-ad56-e321f2168067"),
-                            IdProduct = new Guid("425dfc70-2b0b-437b-82ef-4654558277dc"),
-                            IdSize = new Guid("3b7f57d5-7262-4ae4-8cbd-d498fda0a004"),
+                            IdColor = new Guid("9a3b603f-6462-49b1-b52c-741be1e62e6e"),
+                            IdProduct = new Guid("6ac9ef35-4e0c-41f8-81ad-9305190657b4"),
+                            IdSize = new Guid("f7f534a3-17a5-48ce-b847-67fa9bc0c965"),
                             IsDeleted = false,
                             ModifiedTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Quantity = 100
                         },
                         new
                         {
-                            Id = new Guid("e92abbbd-8ba8-4b7e-9697-2184cf2f88db"),
+                            Id = new Guid("6029fe45-8aaa-49c1-a718-f6ce73bacaee"),
                             CreatedTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DeletedTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            IdColor = new Guid("6c51c2ea-571d-4600-8551-738eccf5bb56"),
-                            IdProduct = new Guid("297b7860-03e7-4a9e-8e9f-8fe630972dea"),
-                            IdSize = new Guid("1c5fb290-a24b-4ae0-bcb5-830a5ac6e579"),
+                            IdColor = new Guid("1729c6d7-576d-40cb-a37f-fd6e78921311"),
+                            IdProduct = new Guid("674bc11f-d787-4ca3-9f45-e84aee26ee24"),
+                            IdSize = new Guid("7df5d998-aaac-4708-8121-a62a00e57c8e"),
                             IsDeleted = false,
                             ModifiedTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Quantity = 100
                         },
                         new
                         {
-                            Id = new Guid("dc77eca8-4aab-43a8-a2c5-7b6cc219296f"),
+                            Id = new Guid("8d6c3de8-a97e-4e59-967e-01b75fdb766b"),
                             CreatedTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DeletedTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            IdColor = new Guid("36144f8a-e44e-4b85-b48c-e1192d1148ba"),
-                            IdProduct = new Guid("297b7860-03e7-4a9e-8e9f-8fe630972dea"),
-                            IdSize = new Guid("3ce50011-d5f7-4f7f-b702-cd9e01d0a386"),
+                            IdColor = new Guid("a289bd60-924b-4ad3-b927-955a20bfa8c0"),
+                            IdProduct = new Guid("674bc11f-d787-4ca3-9f45-e84aee26ee24"),
+                            IdSize = new Guid("494bb6f3-b8d7-488a-b870-e84fb15a764d"),
                             IsDeleted = false,
                             ModifiedTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Quantity = 100
                         },
                         new
                         {
-                            Id = new Guid("2487b4d6-96a9-419b-acbd-f626a181ebed"),
+                            Id = new Guid("d0332927-a1db-451a-9bb1-dda790d89c7d"),
                             CreatedTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DeletedTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            IdColor = new Guid("ba777883-24c9-460c-ad56-e321f2168067"),
-                            IdProduct = new Guid("297b7860-03e7-4a9e-8e9f-8fe630972dea"),
-                            IdSize = new Guid("3b7f57d5-7262-4ae4-8cbd-d498fda0a004"),
+                            IdColor = new Guid("9a3b603f-6462-49b1-b52c-741be1e62e6e"),
+                            IdProduct = new Guid("674bc11f-d787-4ca3-9f45-e84aee26ee24"),
+                            IdSize = new Guid("f7f534a3-17a5-48ce-b847-67fa9bc0c965"),
                             IsDeleted = false,
                             ModifiedTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Quantity = 100
                         },
                         new
                         {
-                            Id = new Guid("43a59ef2-599d-498a-8830-0ec9c8378967"),
+                            Id = new Guid("e20d1dc1-4ce4-4310-9964-5cefcea49071"),
                             CreatedTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DeletedTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            IdColor = new Guid("6c51c2ea-571d-4600-8551-738eccf5bb56"),
-                            IdProduct = new Guid("cdbdc976-f106-4fde-b700-51bf0278c2e9"),
-                            IdSize = new Guid("1c5fb290-a24b-4ae0-bcb5-830a5ac6e579"),
+                            IdColor = new Guid("1729c6d7-576d-40cb-a37f-fd6e78921311"),
+                            IdProduct = new Guid("a6568ad5-26e0-4a89-81b9-6fb2046dd60f"),
+                            IdSize = new Guid("7df5d998-aaac-4708-8121-a62a00e57c8e"),
                             IsDeleted = false,
                             ModifiedTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Quantity = 100
                         },
                         new
                         {
-                            Id = new Guid("8800b876-ca03-4289-850c-e3302a83fe2c"),
+                            Id = new Guid("694a4dba-745d-413b-94d2-ccfc445ebc49"),
                             CreatedTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DeletedTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            IdColor = new Guid("36144f8a-e44e-4b85-b48c-e1192d1148ba"),
-                            IdProduct = new Guid("cdbdc976-f106-4fde-b700-51bf0278c2e9"),
-                            IdSize = new Guid("3ce50011-d5f7-4f7f-b702-cd9e01d0a386"),
+                            IdColor = new Guid("a289bd60-924b-4ad3-b927-955a20bfa8c0"),
+                            IdProduct = new Guid("a6568ad5-26e0-4a89-81b9-6fb2046dd60f"),
+                            IdSize = new Guid("494bb6f3-b8d7-488a-b870-e84fb15a764d"),
                             IsDeleted = false,
                             ModifiedTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Quantity = 100
                         },
                         new
                         {
-                            Id = new Guid("1aab51cc-5f94-4e66-81ce-a88046ef15dd"),
+                            Id = new Guid("cb822462-d58e-4589-9c98-2104e9da50e6"),
                             CreatedTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DeletedTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            IdColor = new Guid("ba777883-24c9-460c-ad56-e321f2168067"),
-                            IdProduct = new Guid("cdbdc976-f106-4fde-b700-51bf0278c2e9"),
-                            IdSize = new Guid("3b7f57d5-7262-4ae4-8cbd-d498fda0a004"),
+                            IdColor = new Guid("9a3b603f-6462-49b1-b52c-741be1e62e6e"),
+                            IdProduct = new Guid("a6568ad5-26e0-4a89-81b9-6fb2046dd60f"),
+                            IdSize = new Guid("f7f534a3-17a5-48ce-b847-67fa9bc0c965"),
                             IsDeleted = false,
                             ModifiedTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Quantity = 100

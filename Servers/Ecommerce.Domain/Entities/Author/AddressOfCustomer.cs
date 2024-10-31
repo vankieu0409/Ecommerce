@@ -8,7 +8,7 @@ public class AddressOfCustomer : FullAuditedEntity<Guid>
     /// <summary>
     /// Tên đường hoặc phố. Bắt buộc và có độ dài tối đa là 100 ký tự.
     /// </summary>
-    public string StreetAddress { get; set; }
+    public string? StreetAddress { get; set; }
 
     /// <summary>
     /// Phường hoặc xã.

@@ -10,6 +10,17 @@ public static class ModelBuilderExtensions
 {
     public static void Seed(this ModelBuilder modelBuilder)
     {
+        var roles = Enum.GetValues(typeof(Role));
+
+        foreach (var role in roles)
+        {
+            modelBuilder.Entity<RoleEntity>().HasData(new RoleEntity
+            {
+                Id = Guid.NewGuid(),
+                Name = role.ToString()
+            });
+        }
+
         // Seed Categories
         var categories = new[]
         {

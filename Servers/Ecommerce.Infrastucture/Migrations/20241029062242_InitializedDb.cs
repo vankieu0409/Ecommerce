@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Ecommerce.Infrastructure.Migrations
 {
     /// <inheritdoc />
-    public partial class InitializedDBSeed : Migration
+    public partial class InitializedDb : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -352,7 +352,7 @@ namespace Ecommerce.Infrastructure.Migrations
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     Address = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    StreetAddress = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    StreetAddress = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Ward = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     District = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     City = table.Column<string>(type: "nvarchar(max)", nullable: false),
@@ -386,7 +386,7 @@ namespace Ecommerce.Infrastructure.Migrations
                     Payments = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     Refund = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     PaymentDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    CreationDate = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValue: new DateTime(2024, 10, 17, 17, 0, 53, 1, DateTimeKind.Local).AddTicks(5403)),
+                    CreationDate = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValue: new DateTime(2024, 10, 29, 13, 22, 41, 710, DateTimeKind.Local).AddTicks(8241)),
                     Status = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Voucher = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     TotalAmount = table.Column<decimal>(type: "decimal(18,2)", nullable: false)
@@ -522,24 +522,24 @@ namespace Ecommerce.Infrastructure.Migrations
                 columns: new[] { "Id", "BrandName", "CreatedBy", "CreatedTime", "DeletedBy", "DeletedTime", "Detail", "IsDeleted", "ModifiedBy", "ModifiedTime" },
                 values: new object[,]
                 {
-                    { new Guid("6d07a84f-da5e-4813-88a7-440c930ff9f2"), "Nike", null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "American multinational corporation that designs, develops, and sells athletic footwear, apparel, and accessories.", false, null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified) },
-                    { new Guid("8c5f8a8b-746a-44b2-b8c6-81a6fea6c812"), "Puma", null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "German multinational corporation that designs and manufactures athletic and casual footwear, apparel and accessories.", false, null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified) },
-                    { new Guid("e11efab9-5554-4818-8b3a-a3153f65f442"), "Adidas", null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "German multinational corporation that designs and manufactures shoes, clothing and accessories.", false, null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified) }
+                    { new Guid("4bd5ce53-6378-4cb7-b4fb-b6327244283c"), "Adidas", null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "German multinational corporation that designs and manufactures shoes, clothing and accessories.", false, null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified) },
+                    { new Guid("cb5993bd-d51f-4883-9b37-1d4da9793f07"), "Puma", null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "German multinational corporation that designs and manufactures athletic and casual footwear, apparel and accessories.", false, null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified) },
+                    { new Guid("ccfa0cb6-06b7-4fd5-8046-6c5e953b8772"), "Nike", null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "American multinational corporation that designs, develops, and sells athletic footwear, apparel, and accessories.", false, null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified) }
                 });
 
             migrationBuilder.InsertData(
                 table: "CATEGORY",
                 columns: new[] { "Id", "CreatedBy", "CreatedTime", "DeletedBy", "DeletedTime", "Description", "IsDeleted", "ModifiedBy", "ModifiedTime", "Name" },
-                values: new object[] { new Guid("ef0d9c58-46a6-405b-a58a-87786ca89e5d"), null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Athletic and casual sneakers", false, null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Sneakers" });
+                values: new object[] { new Guid("af9b5cad-d36e-4d66-a670-34d31b64798c"), null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Athletic and casual sneakers", false, null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Sneakers" });
 
             migrationBuilder.InsertData(
                 table: "COLOR",
                 columns: new[] { "Id", "Color", "CreatedBy", "CreatedTime", "DeletedBy", "DeletedTime", "IsDeleted", "ModifiedBy", "ModifiedTime" },
                 values: new object[,]
                 {
-                    { new Guid("57e98e77-4298-4028-9a3d-e54a118a9ed7"), "White", null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), false, null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified) },
-                    { new Guid("880db8b7-b2ef-46e2-8aca-e48d5477f729"), "Red", null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), false, null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified) },
-                    { new Guid("ca9aa08a-1b2d-41f6-97e8-ee0f3d6ccc18"), "Black", null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), false, null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified) }
+                    { new Guid("1729c6d7-576d-40cb-a37f-fd6e78921311"), "White", null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), false, null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified) },
+                    { new Guid("9a3b603f-6462-49b1-b52c-741be1e62e6e"), "Red", null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), false, null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified) },
+                    { new Guid("a289bd60-924b-4ad3-b927-955a20bfa8c0"), "Black", null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), false, null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified) }
                 });
 
             migrationBuilder.InsertData(
@@ -547,43 +547,53 @@ namespace Ecommerce.Infrastructure.Migrations
                 columns: new[] { "Id", "CreatedBy", "CreatedTime", "DeletedBy", "DeletedTime", "Detail", "IsDeleted", "MaterialType", "ModifiedBy", "ModifiedTime" },
                 values: new object[,]
                 {
-                    { new Guid("08ca7bcf-addc-461f-b407-3de3ae138b87"), null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Lightweight, breathable synthetic material for athletic shoes.", false, "Synthetic", null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified) },
-                    { new Guid("b17bf4cc-a5f8-43c7-bcd1-d383dc421df2"), null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "High-quality, durable leather material for premium footwear.", false, "Leather", null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified) }
+                    { new Guid("379c58a5-909e-4175-8cd7-a1833d4b2d5b"), null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "High-quality, durable leather material for premium footwear.", false, "Leather", null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified) },
+                    { new Guid("90d0383c-d1e9-4e7f-8ed8-e539ba22c801"), null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Lightweight, breathable synthetic material for athletic shoes.", false, "Synthetic", null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified) }
                 });
 
             migrationBuilder.InsertData(
                 table: "MODELTYPE",
                 columns: new[] { "Id", "CreatedBy", "CreatedTime", "DeletedBy", "DeletedTime", "Detail", "IsDeleted", "ModelType", "ModifiedBy", "ModifiedTime" },
-                values: new object[] { new Guid("a5ce9ec3-2757-48ac-ba1e-269584dd276e"), null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Sneakers that sit below the ankle, offering flexibility and versatility.", false, "Low-top", null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified) });
+                values: new object[] { new Guid("11dc6a69-0c19-4fa9-a01c-8b14671bc807"), null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Sneakers that sit below the ankle, offering flexibility and versatility.", false, "Low-top", null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified) });
+
+            migrationBuilder.InsertData(
+                table: "ROLES",
+                columns: new[] { "Id", "CreatedBy", "CreatedTime", "DeletedBy", "DeletedTime", "ModifiedBy", "ModifiedTime", "Name" },
+                values: new object[,]
+                {
+                    { new Guid("93177c5b-7fd5-4708-8af1-11d0690014d7"), null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Customer" },
+                    { new Guid("dc6e1bfc-644d-4262-8134-e0b2e25cc2ec"), null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Employee" },
+                    { new Guid("fee63ca5-c4f4-448a-aa18-3fca3e06469c"), null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Admin" }
+                });
 
             migrationBuilder.InsertData(
                 table: "SIZE",
                 columns: new[] { "Id", "CreatedBy", "CreatedTime", "DeletedBy", "DeletedTime", "IsDeleted", "ModifiedBy", "ModifiedTime", "Size" },
                 values: new object[,]
                 {
-                    { new Guid("2b2e50a0-6fb2-40b7-b660-315b300d48bd"), null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), false, null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "US 9 / EU 42" },
-                    { new Guid("9fb06243-06ab-4e61-ac4d-0a78a6545347"), null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), false, null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "US 10 / EU 43" },
-                    { new Guid("c1c2358d-e669-45b0-ab49-b5558978f4c2"), null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), false, null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "US 8 / EU 41" }
+                    { new Guid("494bb6f3-b8d7-488a-b870-e84fb15a764d"), null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), false, null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "US 9 / EU 42" },
+                    { new Guid("7df5d998-aaac-4708-8121-a62a00e57c8e"), null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), false, null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "US 8 / EU 41" },
+                    { new Guid("f7f534a3-17a5-48ce-b847-67fa9bc0c965"), null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), false, null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "US 10 / EU 43" }
                 });
 
             migrationBuilder.InsertData(
                 table: "SOLETYPE",
                 columns: new[] { "Id", "CreatedBy", "CreatedTime", "DeletedBy", "DeletedTime", "Detail", "IsDeleted", "ModifiedBy", "ModifiedTime", "SoleType" },
-                values: new object[] { new Guid("0720f4f0-304b-40c4-9d5e-c02bca032794"), null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "A thin, level sole providing close contact with the ground.", false, null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Flat" });
+                values: new object[] { new Guid("e05d7666-2bcc-44bc-a212-23fad463b8bf"), null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "A thin, level sole providing close contact with the ground.", false, null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Flat" });
 
             migrationBuilder.InsertData(
                 table: "STYLES",
                 columns: new[] { "Id", "CreatedBy", "CreatedTime", "DeletedBy", "DeletedTime", "Detail", "IsDeleted", "ModifiedBy", "ModifiedTime", "Style" },
-                values: new object[] { new Guid("fec9b1ab-f7e5-423f-8932-caa81b19cf7c"), null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Performance-oriented sneakers designed for sports and physical activities.", false, null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Athletic" });
+                values: new object[] { new Guid("4b2311bd-0428-46c9-aaa7-3332ec5aea8d"), null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Performance-oriented sneakers designed for sports and physical activities.", false, null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Athletic" });
 
             migrationBuilder.InsertData(
                 table: "PRODUCTS",
                 columns: new[] { "Id", "CreatedBy", "CreatedTime", "DeletedBy", "DeletedTime", "Description", "IdBrand", "IdCategory", "IdGender", "IdMaterial", "IdModel", "IdSoleType", "IdStyle", "IsDeleted", "ModifiedBy", "ModifiedTime", "Name", "Price", "ReleaseDate", "SKU" },
                 values: new object[,]
                 {
-                    { new Guid("3d3bd16c-b27f-4399-a499-0654438609bb"), null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Timeless Puma sneaker with suede upper.", new Guid("8c5f8a8b-746a-44b2-b8c6-81a6fea6c812"), new Guid("ef0d9c58-46a6-405b-a58a-87786ca89e5d"), new Guid("df91e3d9-a113-4145-ba39-6787a6a98218"), new Guid("b17bf4cc-a5f8-43c7-bcd1-d383dc421df2"), new Guid("a5ce9ec3-2757-48ac-ba1e-269584dd276e"), new Guid("0720f4f0-304b-40c4-9d5e-c02bca032794"), new Guid("fec9b1ab-f7e5-423f-8932-caa81b19cf7c"), false, null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Suede Classic", 65.00m, new DateTime(2023, 3, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "SC-001" },
-                    { new Guid("8843bcc1-2ff3-4ff6-a495-8c542a047ddb"), null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Classic Adidas sneaker with shell toe.", new Guid("e11efab9-5554-4818-8b3a-a3153f65f442"), new Guid("ef0d9c58-46a6-405b-a58a-87786ca89e5d"), new Guid("5eefb6fb-56b9-4f68-92f2-f325b8304d57"), new Guid("b17bf4cc-a5f8-43c7-bcd1-d383dc421df2"), new Guid("a5ce9ec3-2757-48ac-ba1e-269584dd276e"), new Guid("0720f4f0-304b-40c4-9d5e-c02bca032794"), new Guid("fec9b1ab-f7e5-423f-8932-caa81b19cf7c"), false, null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Superstar", 80.00m, new DateTime(2023, 2, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "SS-001" },
-                    { new Guid("b1c1c9aa-af8d-4360-a4b4-b648487f0ab0"), null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Iconic Nike sneaker with excellent cushioning.", new Guid("6d07a84f-da5e-4813-88a7-440c930ff9f2"), new Guid("ef0d9c58-46a6-405b-a58a-87786ca89e5d"), new Guid("43009fc4-9d8c-4d02-91fb-129c45b09680"), new Guid("08ca7bcf-addc-461f-b407-3de3ae138b87"), new Guid("a5ce9ec3-2757-48ac-ba1e-269584dd276e"), new Guid("0720f4f0-304b-40c4-9d5e-c02bca032794"), new Guid("fec9b1ab-f7e5-423f-8932-caa81b19cf7c"), false, null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Air Max 90", 120.00m, new DateTime(2023, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "AM90-001" }
+                    { new Guid("674bc11f-d787-4ca3-9f45-e84aee26ee24"), null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Classic Adidas sneaker with shell toe.", new Guid("4bd5ce53-6378-4cb7-b4fb-b6327244283c"), new Guid("af9b5cad-d36e-4d66-a670-34d31b64798c"), new Guid("ffb8bb94-dd66-4afb-89b6-822c7b95739a"), new Guid("379c58a5-909e-4175-8cd7-a1833d4b2d5b"), new Guid("11dc6a69-0c19-4fa9-a01c-8b14671bc807"), new Guid("e05d7666-2bcc-44bc-a212-23fad463b8bf"), new Guid("4b2311bd-0428-46c9-aaa7-3332ec5aea8d"), false, null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Superstar", 80.00m, new DateTime(2023, 2, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "SS-001" },
+                    { new Guid("6ac9ef35-4e0c-41f8-81ad-9305190657b4"), null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Iconic Nike sneaker with excellent cushioning.", new Guid("ccfa0cb6-06b7-4fd5-8046-6c5e953b8772"), new Guid("af9b5cad-d36e-4d66-a670-34d31b64798c"), new Guid("b52ae3b5-64af-46b6-81cf-5941ebc5d7b1"), new Guid("90d0383c-d1e9-4e7f-8ed8-e539ba22c801"), new Guid("11dc6a69-0c19-4fa9-a01c-8b14671bc807"), new Guid("e05d7666-2bcc-44bc-a212-23fad463b8bf"), new Guid("4b2311bd-0428-46c9-aaa7-3332ec5aea8d"), false, null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Air Max 90", 120.00m, new DateTime(2023, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "AM90-001" },
+                    { new Guid("a6568ad5-26e0-4a89-81b9-6fb2046dd60f"), null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Timeless Puma sneaker with suede upper.", new Guid("cb5993bd-d51f-4883-9b37-1d4da9793f07"), new Guid("af9b5cad-d36e-4d66-a670-34d31b64798c"), new Guid("c419994f-3e46-48b9-86a6-0cb71b3e2c34"), new Guid("379c58a5-909e-4175-8cd7-a1833d4b2d5b"), new Guid("11dc6a69-0c19-4fa9-a01c-8b14671bc807"), new Guid("e05d7666-2bcc-44bc-a212-23fad463b8bf"), new Guid("4b2311bd-0428-46c9-aaa7-3332ec5aea8d"), false, null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Suede Classic", 65.00m, new DateTime(2023, 3, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "SC-001" }
                 });
 
             migrationBuilder.InsertData(
@@ -591,15 +601,15 @@ namespace Ecommerce.Infrastructure.Migrations
                 columns: new[] { "Id", "CreatedBy", "CreatedTime", "DeletedBy", "DeletedTime", "IdColor", "IdProduct", "IdSize", "IsDeleted", "ModifiedBy", "ModifiedTime", "Quantity" },
                 values: new object[,]
                 {
-                    { new Guid("155d73de-35d2-4e8d-bc3f-7891fffc46ce"), null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new Guid("880db8b7-b2ef-46e2-8aca-e48d5477f729"), new Guid("8843bcc1-2ff3-4ff6-a495-8c542a047ddb"), new Guid("9fb06243-06ab-4e61-ac4d-0a78a6545347"), false, null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 100 },
-                    { new Guid("1da8a26d-2662-434d-92c4-ab9ac10ad117"), null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new Guid("ca9aa08a-1b2d-41f6-97e8-ee0f3d6ccc18"), new Guid("3d3bd16c-b27f-4399-a499-0654438609bb"), new Guid("2b2e50a0-6fb2-40b7-b660-315b300d48bd"), false, null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 100 },
-                    { new Guid("3670d2b6-5573-4380-9beb-8645716d1d33"), null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new Guid("57e98e77-4298-4028-9a3d-e54a118a9ed7"), new Guid("b1c1c9aa-af8d-4360-a4b4-b648487f0ab0"), new Guid("c1c2358d-e669-45b0-ab49-b5558978f4c2"), false, null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 100 },
-                    { new Guid("5c422f52-d9d0-4307-a09d-70b37413bf7a"), null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new Guid("880db8b7-b2ef-46e2-8aca-e48d5477f729"), new Guid("b1c1c9aa-af8d-4360-a4b4-b648487f0ab0"), new Guid("9fb06243-06ab-4e61-ac4d-0a78a6545347"), false, null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 100 },
-                    { new Guid("69c307a2-89fc-4a81-b8b0-34e59024dccc"), null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new Guid("ca9aa08a-1b2d-41f6-97e8-ee0f3d6ccc18"), new Guid("b1c1c9aa-af8d-4360-a4b4-b648487f0ab0"), new Guid("2b2e50a0-6fb2-40b7-b660-315b300d48bd"), false, null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 100 },
-                    { new Guid("8e479cc9-31a2-4fa5-a588-1dd55f66a927"), null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new Guid("ca9aa08a-1b2d-41f6-97e8-ee0f3d6ccc18"), new Guid("8843bcc1-2ff3-4ff6-a495-8c542a047ddb"), new Guid("2b2e50a0-6fb2-40b7-b660-315b300d48bd"), false, null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 100 },
-                    { new Guid("a28f6483-3a82-4f24-b315-127e49794a8a"), null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new Guid("880db8b7-b2ef-46e2-8aca-e48d5477f729"), new Guid("3d3bd16c-b27f-4399-a499-0654438609bb"), new Guid("9fb06243-06ab-4e61-ac4d-0a78a6545347"), false, null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 100 },
-                    { new Guid("a342cd47-7d0b-4f14-a778-0c695b2ff529"), null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new Guid("57e98e77-4298-4028-9a3d-e54a118a9ed7"), new Guid("8843bcc1-2ff3-4ff6-a495-8c542a047ddb"), new Guid("c1c2358d-e669-45b0-ab49-b5558978f4c2"), false, null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 100 },
-                    { new Guid("f4b403a1-9ed7-40fa-9148-7b6e84d3fa13"), null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new Guid("57e98e77-4298-4028-9a3d-e54a118a9ed7"), new Guid("3d3bd16c-b27f-4399-a499-0654438609bb"), new Guid("c1c2358d-e669-45b0-ab49-b5558978f4c2"), false, null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 100 }
+                    { new Guid("23eb59bc-1391-4b85-bf50-58c8cf7fd40b"), null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new Guid("9a3b603f-6462-49b1-b52c-741be1e62e6e"), new Guid("6ac9ef35-4e0c-41f8-81ad-9305190657b4"), new Guid("f7f534a3-17a5-48ce-b847-67fa9bc0c965"), false, null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 100 },
+                    { new Guid("6029fe45-8aaa-49c1-a718-f6ce73bacaee"), null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new Guid("1729c6d7-576d-40cb-a37f-fd6e78921311"), new Guid("674bc11f-d787-4ca3-9f45-e84aee26ee24"), new Guid("7df5d998-aaac-4708-8121-a62a00e57c8e"), false, null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 100 },
+                    { new Guid("694a4dba-745d-413b-94d2-ccfc445ebc49"), null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new Guid("a289bd60-924b-4ad3-b927-955a20bfa8c0"), new Guid("a6568ad5-26e0-4a89-81b9-6fb2046dd60f"), new Guid("494bb6f3-b8d7-488a-b870-e84fb15a764d"), false, null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 100 },
+                    { new Guid("7d9bde05-aa8c-40f8-b844-96511f17247f"), null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new Guid("1729c6d7-576d-40cb-a37f-fd6e78921311"), new Guid("6ac9ef35-4e0c-41f8-81ad-9305190657b4"), new Guid("7df5d998-aaac-4708-8121-a62a00e57c8e"), false, null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 100 },
+                    { new Guid("8d6c3de8-a97e-4e59-967e-01b75fdb766b"), null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new Guid("a289bd60-924b-4ad3-b927-955a20bfa8c0"), new Guid("674bc11f-d787-4ca3-9f45-e84aee26ee24"), new Guid("494bb6f3-b8d7-488a-b870-e84fb15a764d"), false, null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 100 },
+                    { new Guid("cb822462-d58e-4589-9c98-2104e9da50e6"), null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new Guid("9a3b603f-6462-49b1-b52c-741be1e62e6e"), new Guid("a6568ad5-26e0-4a89-81b9-6fb2046dd60f"), new Guid("f7f534a3-17a5-48ce-b847-67fa9bc0c965"), false, null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 100 },
+                    { new Guid("d0332927-a1db-451a-9bb1-dda790d89c7d"), null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new Guid("9a3b603f-6462-49b1-b52c-741be1e62e6e"), new Guid("674bc11f-d787-4ca3-9f45-e84aee26ee24"), new Guid("f7f534a3-17a5-48ce-b847-67fa9bc0c965"), false, null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 100 },
+                    { new Guid("e09a53f4-a24c-42fc-86d9-ec0e75f9783a"), null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new Guid("a289bd60-924b-4ad3-b927-955a20bfa8c0"), new Guid("6ac9ef35-4e0c-41f8-81ad-9305190657b4"), new Guid("494bb6f3-b8d7-488a-b870-e84fb15a764d"), false, null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 100 },
+                    { new Guid("e20d1dc1-4ce4-4310-9964-5cefcea49071"), null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new Guid("1729c6d7-576d-40cb-a37f-fd6e78921311"), new Guid("a6568ad5-26e0-4a89-81b9-6fb2046dd60f"), new Guid("7df5d998-aaac-4708-8121-a62a00e57c8e"), false, null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 100 }
                 });
 
             migrationBuilder.CreateIndex(
