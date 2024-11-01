@@ -37,6 +37,11 @@ public partial class ListProduct : ComponentBase
         dialogVisible = true;
     }
 
+    private void NavigateToUpdate(Guid productId)
+    {
+        NavigationManager.NavigateTo($"/Admin/Product/Update/{productId}");
+    }
+
     private void Cancel()
     {
         dialogVisible = false;
@@ -53,8 +58,10 @@ public partial class ListProduct : ComponentBase
         // Implement edit logic
     }
 
-    private void DeleteProductDto(ProductDto ProductDto)
+    private async Task DeleteProductDto(ProductDto productDto)
     {
-        productDtos.Remove(ProductDto);
+        /*await _productService.DeleteProduct(productDto.Id); */// Gọi phương thức xóa sản phẩm
+        productDtos.Remove(productDto);
+        // cập nhật dữ liệu trong database
     }
 }

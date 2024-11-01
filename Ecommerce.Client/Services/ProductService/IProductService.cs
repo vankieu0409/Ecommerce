@@ -25,6 +25,9 @@ namespace Ecommerce.Client.Services.ProductService
         //Task DeleteProduct(Guid product);
         Task<PagedList<ProductDto>> GetAdminProducts(ProductFilter? query);
         Task<AddProductDto> CreateProduct(AddProductDto addProductDto);
+        Task<AddProductDto> GetProductById(Guid id);
+        Task UpdateProduct(AddProductDto productDto);
+        Task DeleteProduct(Guid productId);
         Task<List<Brand>> GetAllBrands();
         Task<List<Category>> GetAllCategorys();
         Task<List<ModelTypes>> GetAllModels();

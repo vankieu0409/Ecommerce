@@ -39,6 +39,32 @@ namespace Ecommerce.Client.Services.ProductService
             }
         }
 
+        public async Task<AddProductDto> GetProductById(Guid id)
+        {
+            var result = await _http.GetFromJsonAsync<AddProductDto>($"/{id}");
+            return result;
+        }
+
+        public async Task UpdateProduct(AddProductDto productDto)
+        {
+            var result = await _http.PutAsJsonAsync($"/update/{productDto.Id}", productDto); // Gọi API cập nhật sản phẩm
+            if (!result.IsSuccessStatusCode)
+            {
+                var errorContent = await result.Content.ReadAsStringAsync();
+                throw new Exception($"Error updating product: {result.StatusCode} - {errorContent}");
+            }
+        }
+
+        public async Task DeleteProduct(Guid productId)
+        {
+            var result = await _http.DeleteAsync($"/delete/{productId}"); // Gọi API xóa sản phẩm
+            if (!result.IsSuccessStatusCode)
+            {
+                var errorContent = await result.Content.ReadAsStringAsync();
+                throw new Exception($"Error deleting product: {result.StatusCode} - {errorContent}");
+            }
+        }
+
         public async Task<List<Brand>> GetAllBrands()
         {
             var result = await _http.GetFromJsonAsync<List<Brand>>("/brands");

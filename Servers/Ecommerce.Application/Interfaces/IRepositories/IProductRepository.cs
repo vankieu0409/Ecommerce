@@ -5,4 +5,5 @@ namespace Ecommerce.Application.Interfaces.IRepositories;
 
 public interface IProductRepository : IRepositoryAsync<Products>
 {
+    Task<Products> GetByIdAsync(Guid id);
 }

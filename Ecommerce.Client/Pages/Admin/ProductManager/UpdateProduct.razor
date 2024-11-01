@@ -1,0 +1,184 @@
+﻿@page "/Admin/Product/Update/{id}"
+@inject IProductService _productService
+@using Ecommerce.Client.Model
+@using Ecommerce.Domain.Entities.Products
+@inject NavigationManager NavigationManager
+@layout LayoutAdmin
+
+<MudCard>
+    <MudCardHeader>
+        <MudText Typo="Typo.h6">Update Product</MudText>
+    </MudCardHeader>
+    <MudCardContent>
+        <MudGrid>
+            <MudItem xs="12" sm="4">
+                <MudText Typo="Typo.body1">Name</MudText>
+                <MudTextField @bind-Value="productDto.Name" Variant="Variant.Outlined" Class="rounded" />
+            </MudItem>
+            <MudItem xs="12" sm="4">
+                <MudText Typo="Typo.body1">Price</MudText>
+                <MudTextField @bind-Value="productDto.Price" Variant="Variant.Outlined" Class="rounded" />
+            </MudItem>
+            <MudItem xs="12" sm="4">
+                <MudText Typo="Typo.body1">SKU</MudText>
+                <MudTextField @bind-Value="productDto.SKU" Variant="Variant.Outlined" Class="rounded" />
+            </MudItem>
+            <MudItem xs="12">
+                <MudText Typo="Typo.body1">Description</MudText>
+                <MudTextField @bind-Value="productDto.Description" Variant="Variant.Outlined" Class="rounded" />
+            </MudItem>
+            <MudItem xs="12" md="6">
+                <MudText Typo="Typo.body1">Category ID</MudText>
+                <MudSelect @bind-Value="productDto.Category" Variant="Variant.Outlined" Class="rounded">
+                    @foreach (var item in categories)
+                    {
+                        <MudSelectItem Value="@item.Id">@item.Name</MudSelectItem> <!-- Chuyển đổi Id thành chuỗi -->
+                    }
+                </MudSelect>
+            </MudItem>
+            <MudItem xs="12" md="6">
+                <MudText Typo="Typo.body1">Brand ID</MudText>
+                <MudSelect @bind-Value="productDto.Brand" Variant="Variant.Outlined" Class="rounded">
+                    @foreach (var item in brands)
+                    {
+                        <MudSelectItem Value="@item.Id">@item.BrandName</MudSelectItem>
+                    }
+                </MudSelect>
+            </MudItem>
+            <MudItem xs="12" md="6">
+                <MudText Typo="Typo.body1">Model ID</MudText>
+                <MudSelect @bind-Value="productDto.Model" Variant="Variant.Outlined" Class="rounded">
+                    @foreach (var item in models)
+                    {
+                        <MudSelectItem Value="@item.Id">@item.ModelType</MudSelectItem>
+                    }
+                </MudSelect>
+            </MudItem>
+            <MudItem xs="12" md="6">
+                <MudText Typo="Typo.body1">Material ID</MudText>
+                <MudSelect @bind-Value="productDto.Material" Variant="Variant.Outlined" Class="rounded">
+                    @foreach (var item in materials)
+                    {
+                        <MudSelectItem Value="@item.Id">@item.MaterialType</MudSelectItem>
+                    }
+                </MudSelect>
+            </MudItem>
+            <MudItem xs="12" md="6">
+                <MudText Typo="Typo.body1">Gender ID</MudText>
+                <MudTextField @bind-Value="productDto.Gender" Variant="Variant.Outlined" Class="rounded" />
+            </MudItem>
+            <MudItem xs="12" md="6">
+                <MudText Typo="Typo.body1">Style ID</MudText>
+                <MudSelect @bind-Value="productDto.Style" Variant="Variant.Outlined" Class="rounded">
+                    @foreach (var item in styles)
+                    {
+                        <MudSelectItem Value="@item.Id">@item.Style</MudSelectItem>
+                    }
+                </MudSelect>
+            </MudItem>
+            <MudItem xs="12" md="6">
+                <MudText Typo="Typo.body1">Sole Type ID</MudText>
+                <MudSelect @bind-Value="productDto.SoleType" Variant="Variant.Outlined" Class="rounded">
+                    @foreach (var item in soletypes)
+                    {
+                        <MudSelectItem Value="@item.Id">@item.SoleType</MudSelectItem>
+                    }
+                </MudSelect>
+            </MudItem>
+        </MudGrid>
+        <MudGrid Justify="Justify.Center" Class="mt-4">
+            <MudItem>
+                <MudButton Color="Color.Primary" Variant="Variant.Filled" OnClick="Submit">Update Product</MudButton>
+            </MudItem>
+        </MudGrid>
+    </MudCardContent>
+</MudCard>
+
+@code {
+    [Parameter] public string Id { get; set; } // ID của sản phẩm cần cập nhật
+    private AddProductDto productDto = new AddProductDto();
+    private List<Brand> brands = new List<Brand>();
+    private List<Category> categories = new List<Category>();
+    private List<ModelTypes> models = new List<ModelTypes>();
+    private List<Materials> materials = new List<Materials>();
+    private List<Styles> styles = new List<Styles>();
+    private List<SoleTypes> soletypes = new List<SoleTypes>();
+
+    protected override async Task OnInitializedAsync()
+    {
+        // Lấy thông tin sản phẩm từ API
+        productDto = await _productService.GetProductById(Guid.Parse(Id));
+        brands = await _productService.GetAllBrands();
+        categories = await _productService.GetAllCategorys();
+        models = await _productService.GetAllModels();
+        materials = await _productService.GetAllMaterials();
+        styles = await _productService.GetAllStyles();
+        soletypes = await _productService.GetAllSoleTypes();
+    }
+
+    private async Task Submit()
+    {
+        if (string.IsNullOrWhiteSpace(productDto.Name) || productDto.Price <= 0)
+        {
+            // Hiển thị thông báo lỗi cho người dùng
+            Console.WriteLine("Invalid product data.");
+            return;
+        }
+
+        try
+        {
+            await _productService.UpdateProduct(productDto);
+            // Navigate back to the product list or show a success message
+            NavigationManager.NavigateTo("/Admin/Products", true);
+        }
+        catch (Exception ex)
+        {
+            // Hiển thị thông báo lỗi cho người dùng
+            Console.WriteLine($"Error updating product: {ex.Message}");
+        }
+        
+        
+            // if (string.IsNullOrWhiteSpace(productDto.Name) || productDto.Price <= 0)
+            // {
+            //     // Hiển thị thông báo lỗi cho người dùng
+            //     Console.WriteLine("Dữ liệu sản phẩm không hợp lệ.");
+            //     return;
+            // }
+
+            // try
+            // {
+            //     // Tìm ID dựa trên tên
+            //     var categoryId = categories.FirstOrDefault(c => c.Name == productDto.Category)?.Id ?? Guid.Empty;
+            //     var brandId = brands.FirstOrDefault(b => b.BrandName == productDto.Brand)?.Id ?? Guid.Empty;
+            //     var modelId = models.FirstOrDefault(m => m.ModelType == productDto.ModelType)?.Id ?? Guid.Empty;
+            //     var materialId = materials.FirstOrDefault(m => m.MaterialType == productDto.Material)?.Id ?? Guid.Empty;
+            //     var styleId = styles.FirstOrDefault(s => s.Style == productDto.Style)?.Id ?? Guid.Empty;
+            //     var soleTypeId = soletypes.FirstOrDefault(s => s.SoleType == productDto.SoleType)?.Id ?? Guid.Empty;
+
+            //     // Chuyển đổi ProductDto thành AddProductDto
+            //     var addProductDto = new AddProductDto
+            //         {
+            //             Id = productDto.Id,
+            //             Name = productDto.Name,
+            //             Price = productDto.Price,
+            //             SKU = productDto.SKU,
+            //             Description = productDto.Description,
+            //             Category = categoryId, // Sử dụng ID tìm được
+            //             Brand = brandId, // Sử dụng ID tìm được
+            //             Model = modelId, // Sử dụng ID tìm được
+            //             Material = materialId, // Sử dụng ID tìm được
+            //             Style = styleId, // Sử dụng ID tìm được
+            //             SoleType = soleTypeId // Sử dụng ID tìm được
+            //         };
+
+            //     await _productService.UpdateProduct(addProductDto);
+            //     // Chuyển hướng về danh sách sản phẩm hoặc hiển thị thông báo thành công
+            //     NavigationManager.NavigateTo("/Admin/Products", true);
+            // }
+            // catch (Exception ex)
+            // {
+            //     // Hiển thị thông báo lỗi cho người dùng
+            //     Console.WriteLine($"Lỗi khi cập nhật sản phẩm: {ex.Message}");
+            // }
+    }
+}

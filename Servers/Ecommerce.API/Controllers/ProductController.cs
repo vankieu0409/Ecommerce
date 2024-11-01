@@ -97,6 +97,68 @@ namespace Ecommerce.API.Controllers
         }
 
         [HttpGet]
+        [Route("/{id}")]
+        public async Task<IActionResult> GetProductById(Guid id)
+        {
+            try
+            {
+                var product = await _productService.GetProductById(id); // Gọi phương thức từ service
+                return Ok(product);
+            }
+            catch (KeyNotFoundException)
+            {
+                return NotFound("Product not found");
+            }
+            catch (Exception e)
+            {
+                return StatusCode(500, $"Internal server error: {e.Message}");
+            }
+        }
+
+        [HttpPut]
+        [Route("/update/{id}")]
+        public async Task<IActionResult> UpdateProduct(Guid id, [FromBody] AddProductDto productDto)
+        {
+            if (id != productDto.Id)
+            {
+                return BadRequest("Product ID mismatch");
+            }
+
+            try
+            {
+                var updatedProduct = await _productService.UpdateProduct(productDto); // Gọi phương thức cập nhật từ ProductService
+                return Ok(updatedProduct);
+            }
+            catch (KeyNotFoundException)
+            {
+                return NotFound("Product not found");
+            }
+            catch (Exception e)
+            {
+                return StatusCode(500, $"Internal server error: {e.Message}");
+            }
+        }
+
+        [HttpDelete]
+        [Route("/delete/{id}")]
+        public async Task<IActionResult> DeleteProduct(Guid id)
+        {
+            try
+            {
+                await _productService.DeleteProduct(id); // Gọi phương thức xóa từ ProductService
+                return Ok("Product deleted successfully");
+            }
+            catch (KeyNotFoundException)
+            {
+                return NotFound("Product not found");
+            }
+            catch (Exception e)
+            {
+                return StatusCode(500, $"Internal server error: {e.Message}");
+            }
+        }
+
+        [HttpGet]
         [Route("/brands")]
         public async Task<IActionResult> GetBrands()
         {

@@ -15,5 +15,10 @@ public class ProductRepository : RepositoryAsync<Products>, IProductRepository
     {
         _dbContext = dbContext ?? throw new AggregateException(nameof(dbContext));
         logger.LogInformation("\nProductRepository initialized.\n");
+
+    }
+    public async Task<Products> GetByIdAsync(Guid id)
+    {
+        return await Entities.FindAsync(id); // Sử dụng DbSet để tìm sản phẩm theo ID
     }
 }
