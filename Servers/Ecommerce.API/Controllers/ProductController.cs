@@ -70,29 +70,33 @@ namespace Ecommerce.API.Controllers
 
         // DELETE: api/Product/5
         [HttpDelete("id")]
-        public IActionResult Delete(Guid id)
+        public async Task<IActionResult> Delete(Guid id)
         {
-            var product = _context.Products.Find(id);
-            if (product == null)
+            try
             {
-                return NotFound();
+                await _productService.DeleteProduct(id); // Gọi phương thức xóa từ ProductService
+                return Ok("Product deleted successfully");
             }
-            _context.Products.Remove(product);
-            _context.SaveChanges();
-
-            return Ok("Xóa sản phẩm thành công");
+            catch (KeyNotFoundException)
+            {
+                return NotFound("Product not found");
+            }
+            catch (Exception e)
+            {
+                return StatusCode(500, $"Internal server error: {e.Message}");
+            }
         }
 
         [HttpPost]
         [Route("/add")]
-        public async Task<IActionResult> AddProduct(AddProductDto addProductDto)
+        public async Task<IActionResult> AddProduct(ProductDto productDto)
         {
-            if (addProductDto == null)
+            if (productDto == null)
             {
                 return BadRequest("Product data is null.");
             }
 
-            var result = await _productService.AddProduct(addProductDto);
+            var result = await _productService.AddProduct(productDto);
             return CreatedAtAction(nameof(Get), new { id = result.Id }, result);
         }
 
@@ -117,7 +121,7 @@ namespace Ecommerce.API.Controllers
 
         [HttpPut]
         [Route("/update/{id}")]
-        public async Task<IActionResult> UpdateProduct(Guid id, [FromBody] AddProductDto productDto)
+        public async Task<IActionResult> UpdateProduct(Guid id, [FromBody] ProductDto productDto)
         {
             if (id != productDto.Id)
             {

@@ -7,9 +7,9 @@ namespace Ecommerce.Application.Interfaces.IServices;
 public interface IProductService
 {
     public Task<PagedList<ProductDto>> GetAllProductAdmin(RequestParams request);
-    public Task<AddProductDto> AddProduct(AddProductDto addProductDto);
-    public Task<AddProductDto> GetProductById(Guid id);
-    public Task<AddProductDto> UpdateProduct(AddProductDto productDto);
+    public Task<ProductDto> AddProduct(ProductDto productDto);
+    public Task<ProductDto> GetProductById(Guid id);
+    public Task<ProductDto> UpdateProduct(ProductDto productDto);
     public Task DeleteProduct(Guid productId);
     public Task<IEnumerable<Brand>> GetAllBrandsAsync();
     public Task<IEnumerable<Category>> GetAllCategorysAsync();

@@ -60,8 +60,7 @@ public partial class ListProduct : ComponentBase
 
     private async Task DeleteProductDto(ProductDto productDto)
     {
-        /*await _productService.DeleteProduct(productDto.Id); */// Gọi phương thức xóa sản phẩm
-        productDtos.Remove(productDto);
-        // cập nhật dữ liệu trong database
+        await _productService.DeleteProduct(productDto.Id); // Gọi phương thức xóa sản phẩm
+        productDtos.Remove(productDto); // Cập nhật danh sách sản phẩm
     }
 }

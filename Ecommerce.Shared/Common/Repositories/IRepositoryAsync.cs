@@ -24,6 +24,7 @@ public interface IRepositoryAsync<TEntity> : IDisposable where TEntity : class, 
         CancellationToken cancellationToken = default(CancellationToken));
 
     Task<TEntity> RemoveAsync(TEntity entity, CancellationToken cancellationToken = default(CancellationToken));
+    Task<TEntity> RemoveAsyn(TEntity entity, CancellationToken cancellationToken = default(CancellationToken));
 
     Task<IEnumerable<TEntity>> RemoveRangeAsync(
         IEnumerable<TEntity> entities,

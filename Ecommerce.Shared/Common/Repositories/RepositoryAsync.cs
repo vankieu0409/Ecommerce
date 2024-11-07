@@ -86,6 +86,15 @@ public class RepositoryAsync<TEntity> : IRepositoryAsync<TEntity>, IDisposable w
         return updatedEntity;
     }
 
+    public async Task<TEntity> RemoveAsyn(TEntity entity, CancellationToken cancellationToken = default(CancellationToken))
+    {
+        _logger.LogInformation("Removing entity of type {EntityType}", typeof(TEntity).Name);
+        this.Entities.Remove(entity);
+        await _dbContext.SaveChangesAsync(cancellationToken); // Đảm bảo gọi SaveChangesAsync
+        _logger.LogInformation("Entity removed successfully");
+        return entity;
+    }
+
     public async Task<IEnumerable<TEntity>> RemoveRangeAsync(
       IEnumerable<TEntity> entities,
       CancellationToken cancellationToken = default(CancellationToken))

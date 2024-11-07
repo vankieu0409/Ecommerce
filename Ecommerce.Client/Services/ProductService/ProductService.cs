@@ -24,12 +24,12 @@ namespace Ecommerce.Client.Services.ProductService
 
         //public event Action ProductsChanged;
 
-        public async Task<AddProductDto> CreateProduct(AddProductDto addProductDto)
+        public async Task<ProductDto> CreateProduct(ProductDto productDto)
         {
-            var result = await _http.PostAsJsonAsync("/add", addProductDto);
+            var result = await _http.PostAsJsonAsync("/add", productDto);
             if (result.IsSuccessStatusCode)
             {
-                var newProduct = await result.Content.ReadFromJsonAsync<AddProductDto>();
+                var newProduct = await result.Content.ReadFromJsonAsync<ProductDto>();
                 return newProduct;
             }
             else
@@ -39,13 +39,13 @@ namespace Ecommerce.Client.Services.ProductService
             }
         }
 
-        public async Task<AddProductDto> GetProductById(Guid id)
+        public async Task<ProductDto> GetProductById(Guid id)
         {
-            var result = await _http.GetFromJsonAsync<AddProductDto>($"/{id}");
+            var result = await _http.GetFromJsonAsync<ProductDto>($"/{id}");
             return result;
         }
 
-        public async Task UpdateProduct(AddProductDto productDto)
+        public async Task UpdateProduct(ProductDto productDto)
         {
             var result = await _http.PutAsJsonAsync($"/update/{productDto.Id}", productDto); // Gọi API cập nhật sản phẩm
             if (!result.IsSuccessStatusCode)

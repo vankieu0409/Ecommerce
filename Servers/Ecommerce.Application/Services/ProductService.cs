@@ -69,7 +69,7 @@ public class ProductService : IProductService
         }
     }
 
-    public async Task<AddProductDto> AddProduct(AddProductDto productDto)
+    public async Task<ProductDto> AddProduct(ProductDto productDto)
     {
         try
         {
@@ -77,16 +77,16 @@ public class ProductService : IProductService
             {
                 Name = productDto.Name,
                 Description = productDto.Description,
-                IdCategory = productDto.Category,
+                IdCategory = productDto.IdCategory,
                 Price = productDto.Price,
                 SKU = productDto.SKU,
-                IdBrand = productDto.Brand,
-                IdModel = productDto.Model,
-                IdMaterial = productDto.Material,
-                IdGender = productDto.Gender,
-                IdStyle = productDto.Style,
-                IdSoleType = productDto.SoleType,
-                ReleaseDate = productDto.ReleaseDate,
+                IdBrand = productDto.IdBrand,
+                IdModel = productDto.IdModel,
+                IdMaterial = productDto.IdMaterial,
+                IdGender = productDto.IdGender,
+                IdStyle = productDto.IdStyle,
+                IdSoleType = productDto.IdSoleType,
+                //ReleaseDate = productDto.ReleaseDate,
                 // Set other properties as needed
             };
 
@@ -102,7 +102,7 @@ public class ProductService : IProductService
         }
     }
 
-    public async Task<AddProductDto> GetProductById(Guid id)
+    public async Task<ProductDto> GetProductById(Guid id)
     {
         var product = await _productRepository.GetByIdAsync(id); // Gọi phương thức từ repository
         if (product == null)
@@ -121,26 +121,32 @@ public class ProductService : IProductService
                 ).Where(p => p.Id == id).ToList();
 
         // Chuyển đổi Product thành AddProductDto
-        var productDto = new AddProductDto
+        var productDto = new ProductDto
         {
             Id = product.Id,
             Name = product.Name,
             Description = product.Description,
             Price = product.Price,
             SKU = product.SKU,
-            Category = productsList.FirstOrDefault()?.Category?.Id ?? Guid.Empty, // Gán ID của Category
-            Brand = productsList.FirstOrDefault()?.Brand?.Id ?? Guid.Empty, // Gán ID của Brand
-            Material = productsList.FirstOrDefault()?.Material?.Id ?? Guid.Empty, // Gán ID của Material
-            Model = productsList.FirstOrDefault()?.ModelType?.Id ?? Guid.Empty, // Gán ID của ModelType
-            SoleType = productsList.FirstOrDefault()?.SoleType?.Id ?? Guid.Empty, // Gán ID của SoleType
-            Style = productsList.FirstOrDefault()?.Style?.Id ?? Guid.Empty // Gán ID của Style
-                                                                           // Thêm các thuộc tính khác nếu cần
+            IdGender = product.IdGender,
+            IdCategory = productsList.FirstOrDefault()?.Category?.Id ?? Guid.Empty, // Gán Id của Category
+            Category = productsList.FirstOrDefault()?.Category?.Name ?? "", // Gán name của Category
+            IdBrand = productsList.FirstOrDefault()?.Brand?.Id ?? Guid.Empty, // Gán ID của Brand
+            Brand = productsList.FirstOrDefault()?.Brand?.BrandName ?? "", // Gán tên của Brand
+            IdMaterial = productsList.FirstOrDefault()?.Material?.Id ?? Guid.Empty, // Gán ID của Material
+            Material = productsList.FirstOrDefault()?.Material?.MaterialType ?? "", // Gán tên của Material
+            IdModel = productsList.FirstOrDefault()?.ModelType?.Id ?? Guid.Empty, // Gán ID của ModelType
+            ModelType = productsList.FirstOrDefault()?.ModelType?.ModelType ?? "", // Gán tên của ModelType
+            IdSoleType = productsList.FirstOrDefault()?.SoleType?.Id ?? Guid.Empty, // Gán ID của SoleType
+            SoleType = productsList.FirstOrDefault()?.SoleType?.SoleType ?? "", // Gán tên của SoleType
+            Style = productsList.FirstOrDefault()?.Style?.Style ?? "",
+            IdStyle = productsList.FirstOrDefault()?.Style?.Id ?? Guid.Empty
         };
 
         return productDto;
     }
 
-    public async Task<AddProductDto> UpdateProduct(AddProductDto productDto)
+    public async Task<ProductDto> UpdateProduct(ProductDto productDto)
     {
         var product = await _productRepository.GetByIdAsync(productDto.Id); // Lấy sản phẩm theo ID
         if (product == null)
@@ -151,15 +157,15 @@ public class ProductService : IProductService
         // Cập nhật các thuộc tính của sản phẩm
         product.Name = productDto.Name;
         product.Description = productDto.Description;
-        product.IdCategory = productDto.Category;
+        product.IdCategory = productDto.IdCategory;
         product.Price = productDto.Price;
         product.SKU = productDto.SKU;
-        product.IdBrand = productDto.Brand;
-        product.IdModel = productDto.Model;
-        product.IdMaterial = productDto.Material;
-        product.IdGender = productDto.Gender;
-        product.IdStyle = productDto.Style;
-        product.IdSoleType = productDto.SoleType;
+        product.IdBrand = productDto.IdBrand;
+        product.IdModel = productDto.IdModel;
+        product.IdMaterial = productDto.IdMaterial;
+        product.IdGender = productDto.IdGender;
+        product.IdStyle = productDto.IdStyle;
+        product.IdSoleType = productDto.IdSoleType;
 
         await _productRepository.UpdateAsync(product); // Gọi phương thức cập nhật từ repository
         await _productRepository.SaveChangesAsync(); // Lưu thay đổi
@@ -174,7 +180,7 @@ public class ProductService : IProductService
         {
             throw new KeyNotFoundException("Product not found");
         }
-        await _productRepository.RemoveAsync(product); // Gọi phương thức xóa
+        await _productRepository.RemoveAsyn(product); // Gọi phương thức xóa
         await _productRepository.SaveChangesAsync(); // Lưu thay đổi
     }
 

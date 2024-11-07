@@ -29,61 +29,110 @@
             </MudItem>
             <MudItem xs="12" md="6">
                 <MudText Typo="Typo.body1">Category ID</MudText>
-                <MudSelect @bind-Value="productDto.Category" Variant="Variant.Outlined" Class="rounded">
-                    @foreach (var item in categories)
-                    {
-                        <MudSelectItem Value="@item.Id">@item.Name</MudSelectItem> <!-- Chuyển đổi Id thành chuỗi -->
-                    }
-                </MudSelect>
+                @if (categories == null || !categories.Any())
+                {
+                    <p>Loading categories...</p> <!-- Hoặc có thể sử dụng một spinner -->
+                }
+                else
+                {
+                    <MudSelect @bind-Value="productDto.IdCategory" Variant="Variant.Outlined" Class="rounded">
+                        @foreach (var item in categories)
+                        {
+                            <MudSelectItem Value="@item.Id">@item.Name</MudSelectItem> <!-- Hiển thị tên của Category -->
+                        }
+                    </MudSelect>
+                }
             </MudItem>
             <MudItem xs="12" md="6">
                 <MudText Typo="Typo.body1">Brand ID</MudText>
-                <MudSelect @bind-Value="productDto.Brand" Variant="Variant.Outlined" Class="rounded">
+                @if (brands == null || !brands.Any())
+                {
+                    <p>Loading brands...</p> <!-- Hoặc có thể sử dụng một spinner -->
+                }
+                else
+                {
+                <MudSelect @bind-Value="productDto.IdBrand" Variant="Variant.Outlined" Class="rounded">
                     @foreach (var item in brands)
                     {
                         <MudSelectItem Value="@item.Id">@item.BrandName</MudSelectItem>
                     }
                 </MudSelect>
+                }
             </MudItem>
             <MudItem xs="12" md="6">
                 <MudText Typo="Typo.body1">Model ID</MudText>
-                <MudSelect @bind-Value="productDto.Model" Variant="Variant.Outlined" Class="rounded">
+                @if (brands == null || !brands.Any())
+                {
+                    <p>Loading brands...</p> <!-- Hoặc có thể sử dụng một spinner -->
+                }
+                else
+                {
+                <MudSelect @bind-Value="productDto.IdModel" Variant="Variant.Outlined" Class="rounded">
                     @foreach (var item in models)
                     {
                         <MudSelectItem Value="@item.Id">@item.ModelType</MudSelectItem>
                     }
                 </MudSelect>
+                }
             </MudItem>
             <MudItem xs="12" md="6">
                 <MudText Typo="Typo.body1">Material ID</MudText>
-                <MudSelect @bind-Value="productDto.Material" Variant="Variant.Outlined" Class="rounded">
+                @if (brands == null || !brands.Any())
+                {
+                    <p>Loading brands...</p> <!-- Hoặc có thể sử dụng một spinner -->
+                }
+                else
+                {
+                <MudSelect @bind-Value="productDto.IdMaterial" Variant="Variant.Outlined" Class="rounded">
                     @foreach (var item in materials)
                     {
                         <MudSelectItem Value="@item.Id">@item.MaterialType</MudSelectItem>
                     }
                 </MudSelect>
+                }
             </MudItem>
             <MudItem xs="12" md="6">
                 <MudText Typo="Typo.body1">Gender ID</MudText>
-                <MudTextField @bind-Value="productDto.Gender" Variant="Variant.Outlined" Class="rounded" />
+                @if (brands == null || !brands.Any())
+                {
+                    <p>Loading brands...</p> <!-- Hoặc có thể sử dụng một spinner -->
+                }
+                else
+                {
+                <MudTextField @bind-Value="productDto.IdGender" Variant="Variant.Outlined" Class="rounded" />
+                }
             </MudItem>
             <MudItem xs="12" md="6">
                 <MudText Typo="Typo.body1">Style ID</MudText>
-                <MudSelect @bind-Value="productDto.Style" Variant="Variant.Outlined" Class="rounded">
+                @if (brands == null || !brands.Any())
+                {
+                    <p>Loading brands...</p> <!-- Hoặc có thể sử dụng một spinner -->
+                }
+                else
+                {
+                <MudSelect @bind-Value="productDto.IdStyle" Variant="Variant.Outlined" Class="rounded">
                     @foreach (var item in styles)
                     {
                         <MudSelectItem Value="@item.Id">@item.Style</MudSelectItem>
                     }
                 </MudSelect>
+                }
             </MudItem>
             <MudItem xs="12" md="6">
                 <MudText Typo="Typo.body1">Sole Type ID</MudText>
-                <MudSelect @bind-Value="productDto.SoleType" Variant="Variant.Outlined" Class="rounded">
+                @if (brands == null || !brands.Any())
+                {
+                    <p>Loading brands...</p> <!-- Hoặc có thể sử dụng một spinner -->
+                }
+                else
+                {
+                <MudSelect @bind-Value="productDto.IdSoleType" Variant="Variant.Outlined" Class="rounded">
                     @foreach (var item in soletypes)
                     {
                         <MudSelectItem Value="@item.Id">@item.SoleType</MudSelectItem>
                     }
                 </MudSelect>
+                }
             </MudItem>
         </MudGrid>
         <MudGrid Justify="Justify.Center" Class="mt-4">
@@ -96,7 +145,7 @@
 
 @code {
     [Parameter] public string Id { get; set; } // ID của sản phẩm cần cập nhật
-    private AddProductDto productDto = new AddProductDto();
+    private ProductDto productDto = new ProductDto();
     private List<Brand> brands = new List<Brand>();
     private List<Category> categories = new List<Category>();
     private List<ModelTypes> models = new List<ModelTypes>();

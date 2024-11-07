@@ -29,7 +29,7 @@
             </MudItem>
             <MudItem xs="12" md="6">
                 <MudText Typo="Typo.body1">Category ID</MudText> <!-- Nhãn cho trường nhập liệu -->
-                <MudSelect @bind-Value="newProductDto.Category" Variant="Variant.Outlined" Class="rounded">
+                <MudSelect @bind-Value="newProductDto.IdCategory" Variant="Variant.Outlined" Class="rounded">
 
                     @foreach (var item in categories)
                     {
@@ -39,7 +39,7 @@
             </MudItem>
             <MudItem xs="12" md="6">
                 <MudText Typo="Typo.body1">Brand ID</MudText> <!-- Nhãn cho trường nhập liệu -->
-                <MudSelect @bind-Value="newProductDto.Brand" Variant="Variant.Outlined" Class="rounded">
+                <MudSelect @bind-Value="newProductDto.IdBrand" Variant="Variant.Outlined" Class="rounded">
                     
                     @foreach (var item in brands)
                     {
@@ -49,7 +49,7 @@
             </MudItem>
             <MudItem xs="12" md="6">
                 <MudText Typo="Typo.body1">Model ID</MudText> <!-- Nhãn cho trường nhập liệu -->
-                <MudSelect @bind-Value="newProductDto.Model" Variant="Variant.Outlined" Class="rounded">
+                <MudSelect @bind-Value="newProductDto.IdModel" Variant="Variant.Outlined" Class="rounded">
 
                     @foreach (var item in models)
                     {
@@ -59,7 +59,7 @@
             </MudItem>
             <MudItem xs="12" md="6">
                 <MudText Typo="Typo.body1">Material ID</MudText> <!-- Nhãn cho trường nhập liệu -->
-                <MudSelect @bind-Value="newProductDto.Material" Variant="Variant.Outlined" Class="rounded">
+                <MudSelect @bind-Value="newProductDto.IdMaterial" Variant="Variant.Outlined" Class="rounded">
 
                     @foreach (var item in materials)
                     {
@@ -69,11 +69,11 @@
             </MudItem>
             <MudItem xs="12" md="6">
                 <MudText Typo="Typo.body1">Gender ID</MudText> <!-- Nhãn cho trường nhập liệu -->
-                <MudTextField @bind-Value="newProductDto.Gender" Variant="Variant.Outlined" Class="rounded" />
+                <MudTextField @bind-Value="newProductDto.IdGender" Variant="Variant.Outlined" Class="rounded" />
             </MudItem>
             <MudItem xs="12" md="6">
                 <MudText Typo="Typo.body1">Style ID</MudText> <!-- Nhãn cho trường nhập liệu -->
-                <MudSelect @bind-Value="newProductDto.Style" Variant="Variant.Outlined" Class="rounded">
+                <MudSelect @bind-Value="newProductDto.IdStyle" Variant="Variant.Outlined" Class="rounded">
 
                     @foreach (var item in styles)
                     {
@@ -83,7 +83,7 @@
             </MudItem>
             <MudItem xs="12" md="6">
                 <MudText Typo="Typo.body1">Sole Type ID</MudText> <!-- Nhãn cho trường nhập liệu -->
-                <MudSelect @bind-Value="newProductDto.SoleType" Variant="Variant.Outlined" Class="rounded">
+                <MudSelect @bind-Value="newProductDto.IdSoleType" Variant="Variant.Outlined" Class="rounded">
 
                     @foreach (var item in soletypes)
                     {
@@ -101,7 +101,7 @@
 </MudCard>
 
 @code {
-    private AddProductDto newProductDto = new AddProductDto();
+    private ProductDto newProductDto = new ProductDto();
     private List<Brand> brands = new List<Brand>();
     private List<Category> categories = new List<Category>();
     private List<ModelTypes> models = new List<ModelTypes>();
@@ -131,6 +131,7 @@
         try
         {
             var createdProduct = await _productService.CreateProduct(newProductDto);
+            NavigationManager.NavigateTo("/Admin/Products", true);
             // Navigate back to the product list or show a success message
             // NavigationManager.NavigateTo("/Admin/Products/List", true);
         }
